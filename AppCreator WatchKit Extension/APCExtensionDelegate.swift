@@ -12,6 +12,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate
 {
     func applicationDidFinishLaunching()
     {
+        
     }
 
     func applicationDidBecomeActive()

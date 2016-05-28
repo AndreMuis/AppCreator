@@ -1,16 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qEF-x8-Rvf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
-        <scene sceneID="aou-V4-d1y">
+        <!--Template Interface Controller-->
+        <scene sceneID="Tj3-5j-L2s">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="AppCreator_WatchKit_App" customModuleProvider="target"/>
+                <controller id="qEF-x8-Rvf" customClass="APCTemplateInterfaceController" customModule="AppCreator_WatchKit_Extension">
+                    <items>
+                        <label width="136" height="20.5" alignment="left" text="Label" id="16Z-Oy-ea9" userLabel="label1"/>
+                        <imageView alignment="left" image="pattern" id="0bs-Hw-OtD" userLabel="image1"/>
+                        <button width="1" height="20.5" alignment="left" title="Button" id="PLN-dp-CI6" userLabel="button1"/>
+                        <table alignment="left" id="AUu-k6-ual" userLabel="table1">
+                            <items>
+                                <tableRow identifier="TableRowController1" selectable="NO" id="tvN-xb-6Zi">
+                                    <group key="rootItem" width="1" height="22.5" alignment="left" id="kqr-tZ-8PL">
+                                        <items>
+                                            <label alignment="left" text="Row" id="47z-SK-Uid"/>
+                                        </items>
+                                    </group>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <label width="136" height="20.5" alignment="left" text="Label" id="voj-yR-30z" userLabel="label2"/>
+                        <imageView alignment="left" image="pattern" id="UMs-Zx-X22" userLabel="image2"/>
+                        <button width="1" height="20.5" alignment="left" title="Button" id="dy2-y9-3Wn" userLabel="button2"/>
+                        <table alignment="left" id="XzF-M9-hls" userLabel="table2">
+                            <items>
+                                <tableRow identifier="TableRowController1" selectable="NO" id="pyu-CT-kLC">
+                                    <group key="rootItem" width="1" height="22.5" alignment="left" id="jkh-OD-3Hr">
+                                        <items>
+                                            <label alignment="left" text="Row" id="xhh-Qa-npe"/>
+                                        </items>
+                                    </group>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <label width="136" height="20.5" alignment="left" text="Label" id="B1f-Pc-ldi" userLabel="label3"/>
+                        <imageView alignment="left" image="pattern" id="P9w-Ve-D8C" userLabel="image3"/>
+                        <button width="1" height="20.5" alignment="left" title="Button" id="Y9i-cY-jgf" userLabel="button3"/>
+                        <table alignment="left" id="Hxa-I2-WK9" userLabel="table3">
+                            <items>
+                                <tableRow identifier="TableRowController1" selectable="NO" id="QAQ-o3-Myk">
+                                    <group key="rootItem" width="1" height="22.5" alignment="left" id="uBF-aE-S5A">
+                                        <items>
+                                            <label alignment="left" text="Row" id="gUz-WD-q8p"/>
+                                        </items>
+                                    </group>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="button1" destination="PLN-dp-CI6" id="XcW-bA-AKI"/>
+                        <outlet property="button2" destination="dy2-y9-3Wn" id="aQe-wA-eUK"/>
+                        <outlet property="button3" destination="Y9i-cY-jgf" id="GcB-XT-04D"/>
+                        <outlet property="image1" destination="0bs-Hw-OtD" id="bmO-hr-TjK"/>
+                        <outlet property="image2" destination="UMs-Zx-X22" id="vfU-GQ-S5r"/>
+                        <outlet property="image3" destination="P9w-Ve-D8C" id="B5G-bj-5vg"/>
+                        <outlet property="label1" destination="16Z-Oy-ea9" id="bpl-qy-DS2"/>
+                        <outlet property="label2" destination="voj-yR-30z" id="zxs-mY-4cY"/>
+                        <outlet property="label3" destination="B1f-Pc-ldi" id="SrC-eK-3yw"/>
+                        <outlet property="table1" destination="AUu-k6-ual" id="Vnq-xs-Kkc"/>
+                        <outlet property="table2" destination="XzF-M9-hls" id="MA8-Pe-fFi"/>
+                        <outlet property="table3" destination="Hxa-I2-WK9" id="xrf-bB-xb2"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="179"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -31,9 +90,9 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="AppCreator_WatchKit_App" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="APCNotificationController"/>
             </objects>
-            <point key="canvasLocation" x="468" y="643"/>
+            <point key="canvasLocation" x="504" y="643"/>
         </scene>
     </scenes>
 </document>

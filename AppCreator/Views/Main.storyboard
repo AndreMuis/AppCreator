@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vn2-gN-Wwc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Jky-zC-wxn">
+            <objects>
+                <navigationController id="Vn2-gN-Wwc" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="vMa-Um-dhk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ck3-Vr-u4K" kind="relationship" relationship="rootViewController" id="enQ-kE-1vT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lqB-kv-Zw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="393" y="46"/>
+        </scene>
+        <!--Screens-->
+        <scene sceneID="SAA-6a-Q0g">
+            <objects>
+                <viewController id="ck3-Vr-u4K" customClass="APCScreenListViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6gs-fM-Ukv"/>
+                        <viewControllerLayoutGuide type="bottom" id="b8C-pX-65F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ATC-7V-g5p">
+                        <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7VD-Vk-uEw">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="548"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YgQ-gt-9EV">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ck3-Vr-u4K" id="NJr-AR-OoI"/>
+                                    <outlet property="delegate" destination="ck3-Vr-u4K" id="9u8-hq-IZZ"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beE-I3-LLi" userLabel="addScreenButton">
+                                <rect key="frame" x="20" y="573" width="80" height="30"/>
+                                <state key="normal" title="Add Screen"/>
+                                <connections>
+                                    <action selector="addScreenButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="LNB-hD-3BZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Screens" id="Dzo-wN-Vp0"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="collectionView" destination="7VD-Vk-uEw" id="3yT-SD-4Ea"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HTD-eE-yWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="937.5" y="45.5"/>
+        </scene>
+        <!--Design View Controller-->
+        <scene sceneID="BdX-gf-OAB">
+            <objects>
+                <viewController storyboardIdentifier="APCDesignViewController" id="NSi-Iv-7fG" customClass="APCDesignViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KO7-4a-NXF"/>
+                        <viewControllerLayoutGuide type="bottom" id="I6E-b0-EA1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lLI-yD-JDy">
+                        <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E72-l3-HnK" userLabel="deleteScreenButton">
+                                <rect key="frame" x="20" y="573" width="97" height="30"/>
+                                <state key="normal" title="Delete Screen"/>
+                                <connections>
+                                    <action selector="deleteScreenButtonTapped:" destination="NSi-Iv-7fG" eventType="touchUpInside" id="ERN-zI-BcQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qpz-jf-92h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1528.5" y="45.5"/>
+        </scene>
+    </scenes>
+</document>

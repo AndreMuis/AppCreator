@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
-protocol APCScreenListDelegate
+protocol APCScreenListDelegate : class
 {
     func screenList(screenList : APCScreenList, didRemoveScreen screen : APCScreen)
 }

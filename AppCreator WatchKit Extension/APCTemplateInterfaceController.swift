@@ -51,11 +51,15 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
         
     }
 
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void)
+    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void)
     {
-        let alertAction = WKAlertAction.init(title: "title", style: WKAlertActionStyle.Cancel, handler: {})
+        NSKeyedUnarchiver.setClass(APCButton.self, forClassName: "APCButton")
+        let button = NSKeyedUnarchiver.unarchiveObjectWithData(messageData) as? APCButton
         
-        self.presentAlertControllerWithTitle("title", message: "message", preferredStyle: WKAlertControllerStyle.Alert, actions: [alertAction])
+        let message = "\(button!.id) \(button!.title)"
+        
+        let alertAction = WKAlertAction.init(title: "OK", style: WKAlertActionStyle.Cancel, handler: {})
+        self.presentAlertControllerWithTitle("title", message: message, preferredStyle: WKAlertControllerStyle.Alert, actions: [alertAction])
     }
     
     override func didDeactivate()

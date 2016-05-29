@@ -8,13 +8,15 @@
 
 import UIKit
 
-struct APCScreen : Equatable
+class APCScreen : Equatable
 {
     let id : Int
+    var interfaceObjectList : APCInterfaceObjectList
     
     init(id : Int)
     {
         self.id = id
+        self.interfaceObjectList = APCInterfaceObjectList()
     }
 }
 

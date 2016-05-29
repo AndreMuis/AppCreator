@@ -81,9 +81,24 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-xN-n8G">
+                                <rect key="frame" x="67" y="46" width="240" height="208"/>
+                                <connections>
+                                    <segue destination="FkQ-Mx-WXu" kind="embed" id="1Fv-7y-Iue"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77e-Rd-aPa" userLabel="addButton">
+                                <rect key="frame" x="20" y="512" width="78" height="30"/>
+                                <state key="normal" title="Add Button"/>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="NSi-Iv-7fG" eventType="touchUpInside" id="V5Z-sS-KMJ"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E72-l3-HnK" userLabel="deleteScreenButton">
                                 <rect key="frame" x="20" y="573" width="97" height="30"/>
-                                <state key="normal" title="Delete Screen"/>
+                                <state key="normal" title="Delete Screen">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="deleteScreenButtonTapped:" destination="NSi-Iv-7fG" eventType="touchUpInside" id="ERN-zI-BcQ"/>
                                 </connections>
@@ -98,6 +113,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpz-jf-92h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1528.5" y="45.5"/>
+        </scene>
+        <!--Screen View Controller-->
+        <scene sceneID="51F-r1-grN">
+            <objects>
+                <viewController id="FkQ-Mx-WXu" customClass="APCScreenViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b38-MJ-SjK"/>
+                        <viewControllerLayoutGuide type="bottom" id="meQ-jk-a2D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ua1-pm-jIq">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="208"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RJ0-xK-ym5" userLabel="tableView">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="208"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="FkQ-Mx-WXu" id="Zr5-Lg-SQi"/>
+                                    <outlet property="delegate" destination="FkQ-Mx-WXu" id="kPf-jk-MwD"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="RJ0-xK-ym5" id="3cU-Ri-7pd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7EO-zB-96z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2007" y="46"/>
         </scene>
     </scenes>
 </document>

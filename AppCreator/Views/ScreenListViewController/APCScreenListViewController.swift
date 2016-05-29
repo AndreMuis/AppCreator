@@ -17,27 +17,25 @@ class APCScreenListViewController: UIViewController,
 {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let cellReuseIdentifier : String
+    var cellReuseIdentifier : String
     
-    let session : WCSession
+    var screenList : APCScreenList
+    var session : WCSession
     
     required init?(coder aDecoder: NSCoder)
     {
         self.cellReuseIdentifier = "APCScreenCollectionViewCell"
         
+        self.screenList = APCScreenList()
         self.session = WCSession.defaultSession()
-        
+    
         super.init(coder: aDecoder)
-
-        APCScreenList.shared.delegate = self
         
-        APCScreenList.shared.add(screen: APCScreenList.shared.createScreen())
-        APCScreenList.shared.add(screen: APCScreenList.shared.createScreen())
-        APCScreenList.shared.add(screen: APCScreenList.shared.createScreen())
-        APCScreenList.shared.add(screen: APCScreenList.shared.createScreen())
-        APCScreenList.shared.add(screen: APCScreenList.shared.createScreen())
-        
-        
+        self.screenList.add(screen: self.screenList.createScreen())
+        self.screenList.add(screen: self.screenList.createScreen())
+        self.screenList.add(screen: self.screenList.createScreen())
+        self.screenList.add(screen: self.screenList.createScreen())
+        self.screenList.add(screen: self.screenList.createScreen())
     }
     
     override func viewDidLoad()
@@ -57,6 +55,7 @@ class APCScreenListViewController: UIViewController,
             layout.minimumLineSpacing = 20.0
         }
         
+        self.screenList.delegate = self
         
         if WCSession.isSupported()
         {
@@ -64,8 +63,6 @@ class APCScreenListViewController: UIViewController,
             self.session.activateSession()
         }
     }
-    
-
     
     // MARK: APCScreenListDelegate
     
@@ -83,14 +80,14 @@ class APCScreenListViewController: UIViewController,
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return APCScreenList.shared.count
+        return self.screenList.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.cellReuseIdentifier, forIndexPath: indexPath) as! APCScreenCollectionViewCell
 
-        if let screen : APCScreen = APCScreenList.shared[indexPath.row]
+        if let screen : APCScreen = self.screenList[indexPath.row]
         {
             cell.refresh(screen: screen)
         }
@@ -102,9 +99,10 @@ class APCScreenListViewController: UIViewController,
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        if let screen = APCScreenList.shared[indexPath.row],
+        if let screen = self.screenList[indexPath.row],
             viewController = self.storyboard?.instantiateViewControllerWithIdentifier("APCDesignViewController") as? APCDesignViewController
         {
+            viewController.screenList = screenList
             viewController.screen = screen
             
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -115,14 +113,20 @@ class APCScreenListViewController: UIViewController,
     
     @IBAction func addScreenButtonTapped(sender: AnyObject)
     {
-        APCScreenList.shared.add(screen: APCScreenList.shared.createScreen())
+        self.screenList.add(screen: self.screenList.createScreen())
 
         self.collectionView.reloadData()
         
         
         print("reachable = \(self.session.reachable)")
         
-        self.session.sendMessage(["key" : "value"], replyHandler:
+        
+        let button : APCButton = (self.screenList[0]!.interfaceObjectList[0] as? APCButton)!
+        
+        NSKeyedArchiver.setClassName("APCButton", forClass: APCButton.self)
+        let data = NSKeyedArchiver.archivedDataWithRootObject(button)
+        
+        self.session.sendMessageData(data, replyHandler:
         { (reply) in
             print(reply)
         })

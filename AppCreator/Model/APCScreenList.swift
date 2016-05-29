@@ -6,15 +6,11 @@
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
-import UIKit
-
 class APCScreenList
 {
-    private var screens : [APCScreen]
-    
-    internal var delegate : APCScreenListDelegate?
+    internal weak var delegate : APCScreenListDelegate?
 
-    internal static let shared : APCScreenList = APCScreenList()
+    private var screens : [APCScreen]
     
     init()
     {

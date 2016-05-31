@@ -8,12 +8,18 @@
 
 import Foundation
 
-class APCButton : NSObject, APCInterfaceObject
+class APCButton : NSObject, NSCoding, APCInterfaceObject
 {
-    let id : Int
-    let title : String
+    let id : NSUUID
+    dynamic var title : String
     
-    init(id : Int, title : String)
+    init(title : String)
+    {
+        self.id = NSUUID()
+        self.title = title
+    }
+
+    init(id : NSUUID, title : String)
     {
         self.id = id
         self.title = title
@@ -21,7 +27,7 @@ class APCButton : NSObject, APCInterfaceObject
     
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let id = decoder.decodeObjectForKey("id") as? Int,
+        guard let id = decoder.decodeObjectForKey("id") as? NSUUID,
             let title = decoder.decodeObjectForKey("title") as? String
             else
         {
@@ -35,6 +41,15 @@ class APCButton : NSObject, APCInterfaceObject
     {
         coder.encodeObject(self.id, forKey: "id")
         coder.encodeObject(self.title, forKey: "title")
+    }
+    
+    func archivedData() -> NSData
+    {
+        NSKeyedArchiver.setClassName("APCButton", forClass: APCButton.self)
+        
+        let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(self)
+        
+        return data
     }
 }
 

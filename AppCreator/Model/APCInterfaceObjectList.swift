@@ -6,13 +6,56 @@
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
-class APCInterfaceObjectList
+import Foundation
+
+class APCInterfaceObjectList : NSObject, NSCoding
 {
-    private var objects : [APCInterfaceObject]
+    private dynamic var objects : NSMutableArray
     
-    init()
+    static let emptyList : APCInterfaceObjectList = APCInterfaceObjectList()
+    
+    override init()
     {
-        self.objects = [APCInterfaceObject]()
+        self.objects = NSMutableArray()
+    }
+    
+    required convenience init?(coder decoder: NSCoder)
+    {
+        guard let objects = decoder.decodeObjectForKey("objects") as? NSMutableArray
+            else
+        {
+            return nil
+        }
+        
+        self.init()
+        self.objects = objects
+    }
+    
+    func encodeWithCoder(coder: NSCoder)
+    {
+        coder.encodeObject(self.objects, forKey: "objects")
+    }
+
+    func archivedData() -> NSData
+    {
+        NSKeyedArchiver.setClassName("APCInterfaceObjectList", forClass: APCInterfaceObjectList.self)
+        NSKeyedArchiver.setClassName("APCButton", forClass: APCButton.self)
+        
+        let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(self)
+        
+        return data
+    }
+    
+    private var context = 0
+    
+    func addObserver(observer : NSObject)
+    {
+        self.addObserver(observer, forKeyPath: "objects", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+    }
+    
+    func removeObserver(observer : NSObject)
+    {
+        self.removeObserver(observer, forKeyPath: "objects")
     }
     
     var count : Int
@@ -28,7 +71,7 @@ class APCInterfaceObjectList
             
             if 0..<self.objects.count ~= index
             {
-                object = self.objects[index]
+                object = self.objects[index] as? APCInterfaceObject
             }
             
             return object
@@ -37,14 +80,34 @@ class APCInterfaceObjectList
     
     func add(object object : APCInterfaceObject)
     {
-        self.objects.append(object)
+        let childrenProxy = mutableArrayValueForKey("objects")
+        childrenProxy.addObject(object)
+    }
+
+    func move(objectAtIndex fromIndex : Int, toIndex: Int) -> Bool
+    {
+        if 0 ..< self.objects.count ~= fromIndex && 0 ..< self.objects.count ~= toIndex
+        {
+            let object = self.objects[fromIndex]
+            
+            self.objects.removeObjectAtIndex(fromIndex)
+            
+            self.objects.insertObject(object, atIndex: toIndex)
+            
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
     
-    func remove(object object : APCInterfaceObject) -> Bool
+    func remove(objectAtIndex index : Int) -> Bool
     {
-        if let first : APCInterfaceObject = self.objects.filter({$0.id == object.id}).first
+        if 0 ..< self.objects.count ~= index
         {
-            self.objects = self.objects.filter({$0.id != first.id})
+            let childrenProxy = mutableArrayValueForKey("objects")
+            childrenProxy.removeObjectAtIndex(index)
             
             return true
         }

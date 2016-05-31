@@ -7,42 +7,42 @@
 //
 
 import UIKit
-import WatchConnectivity
 
 class APCScreenListViewController: UIViewController,
     UICollectionViewDataSource,
     UICollectionViewDelegate,
-    APCScreenListDelegate,
-    WCSessionDelegate
+    APCScreenListDelegate
 {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var screenNameTextField: UITextField!
     
     var cellReuseIdentifier : String
     
     var screenList : APCScreenList
-    var session : WCSession
+    var session : APCSession
     
     required init?(coder aDecoder: NSCoder)
     {
-        self.cellReuseIdentifier = "APCScreenCollectionViewCell"
+        self.cellReuseIdentifier = String(APCScreenCollectionViewCell.self)
         
         self.screenList = APCScreenList()
-        self.session = WCSession.defaultSession()
+        self.session = APCSession()
     
         super.init(coder: aDecoder)
         
-        self.screenList.add(screen: self.screenList.createScreen())
-        self.screenList.add(screen: self.screenList.createScreen())
-        self.screenList.add(screen: self.screenList.createScreen())
-        self.screenList.add(screen: self.screenList.createScreen())
-        self.screenList.add(screen: self.screenList.createScreen())
+        self.screenList.add(screen: APCScreen(name: "Screen 1"))
+        self.screenList.add(screen: APCScreen(name: "Screen 2"))
+        self.screenList.add(screen: APCScreen(name: "Screen 3"))
+        self.screenList.add(screen: APCScreen(name: "Screen 4"))
+        self.screenList.add(screen: APCScreen(name: "Screen 5"))
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.collectionView.backgroundColor = UIColor.whiteColor()
+        self.collectionView.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+        self.collectionView.showsVerticalScrollIndicator = false
         
         self.collectionView.registerNib(APCScreenCollectionViewCell.nib, forCellWithReuseIdentifier: self.cellReuseIdentifier)
         
@@ -55,17 +55,41 @@ class APCScreenListViewController: UIViewController,
             layout.minimumLineSpacing = 20.0
         }
         
+        self.collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(APCObjectListViewController.handleLongPress)))
+
         self.screenList.delegate = self
         
-        if WCSession.isSupported()
+        self.session.activate()
+    }
+    
+    func handleLongPress(gesture: UILongPressGestureRecognizer)
+    {
+        switch(gesture.state)
         {
-            self.session.delegate = self
-            self.session.activateSession()
+        case UIGestureRecognizerState.Began:
+            if let selectedIndexPath = self.collectionView!.indexPathForItemAtPoint(gesture.locationInView(self.collectionView))
+            {
+                self.collectionView.beginInteractiveMovementForItemAtIndexPath(selectedIndexPath)
+            }
+            
+        case UIGestureRecognizerState.Changed:
+            self.collectionView.updateInteractiveMovementTargetPosition(gesture.locationInView(gesture.view!))
+            
+        case UIGestureRecognizerState.Ended:
+            self.collectionView.endInteractiveMovement()
+            
+        default:
+            self.collectionView.cancelInteractiveMovement()
         }
     }
     
-    // MARK: APCScreenListDelegate
+    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
+    {
+        self.screenList.move(objectAtIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
+    }
     
+    // MARK: APCScreenListDelegate
+
     func screenList(screenList: APCScreenList, didRemoveScreen screen: APCScreen)
     {
         self.collectionView.reloadData()
@@ -99,39 +123,62 @@ class APCScreenListViewController: UIViewController,
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        if let screen = self.screenList[indexPath.row],
-            viewController = self.storyboard?.instantiateViewControllerWithIdentifier("APCDesignViewController") as? APCDesignViewController
+        if let screen : APCScreen = self.screenList[indexPath.row]
         {
-            viewController.screenList = screenList
-            viewController.screen = screen
-            
-            self.navigationController?.pushViewController(viewController, animated: true)
+            self.screenNameTextField.text = screen.name
         }
     }
 
     // MARK:
     
-    @IBAction func addScreenButtonTapped(sender: AnyObject)
+    @IBAction func addButtonTapped(sender: AnyObject)
     {
-        self.screenList.add(screen: self.screenList.createScreen())
+        self.screenList.add(screen: APCScreen(name: self.screenNameTextField.text!))
 
-        self.collectionView.reloadData()
+        let indexPath : NSIndexPath = NSIndexPath(forRow: self.screenList.count - 1, inSection: 0)
         
+        self.collectionView.insertItemsAtIndexPaths([indexPath])
+    }
+    
+    @IBAction func saveButtonTapped(sender: AnyObject)
+    {
+        if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
+        {
+            let indexPath = indexPaths[0]
+
+            if let screen : APCScreen = self.screenList[indexPath.row]
+            {
+                screen.name = self.screenNameTextField.text!
+            }
+        }
+    }
+    
+    @IBAction func designButtonTapped(sender: AnyObject)
+    {
+        if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
+        {
+            let indexPath = indexPaths[0]
         
-        print("reachable = \(self.session.reachable)")
-        
-        
-        let button : APCButton = (self.screenList[0]!.interfaceObjectList[0] as? APCButton)!
-        
-        NSKeyedArchiver.setClassName("APCButton", forClass: APCButton.self)
-        let data = NSKeyedArchiver.archivedDataWithRootObject(button)
-        
-        self.session.sendMessageData(data, replyHandler:
-        { (reply) in
-            print(reply)
-        })
-        { (error) in
-            print(error)
+            if let screen = self.screenList[indexPath.row],
+                viewController = self.storyboard?.instantiateViewControllerWithIdentifier("APCScreenViewController") as? APCScreenViewController
+            {
+                viewController.session = self.session
+                viewController.screen = screen
+             
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+    
+    @IBAction func deleteButtonTapped(sender: AnyObject)
+    {
+        if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
+        {
+            let indexPath = indexPaths[0]
+            
+            self.screenList.remove(objectAtIndex: indexPath.row)
+            
+            self.collectionView.deleteItemsAtIndexPaths([indexPath])
         }
     }
 }

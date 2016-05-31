@@ -12,20 +12,7 @@ import WatchConnectivity
 
 class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
 {
-    @IBOutlet var label1: WKInterfaceLabel!
-    @IBOutlet var image1: WKInterfaceImage!
-    @IBOutlet var button1: WKInterfaceButton!
-    @IBOutlet var table1: WKInterfaceTable!
-    
-    @IBOutlet var label2: WKInterfaceLabel!
-    @IBOutlet var image2: WKInterfaceImage!
-    @IBOutlet var button2: WKInterfaceButton!
-    @IBOutlet var table2: WKInterfaceTable!
-    
-    @IBOutlet var label3: WKInterfaceLabel!
-    @IBOutlet var image3: WKInterfaceImage!
-    @IBOutlet var button3: WKInterfaceButton!
-    @IBOutlet var table3: WKInterfaceTable!
+    @IBOutlet var table : WKInterfaceTable!
     
     let session : WCSession
 
@@ -48,18 +35,93 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
             self.session.delegate = self
             self.session.activateSession()
         }
-        
     }
 
-    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void)
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void)
     {
+        NSKeyedUnarchiver.setClass(APCInterfaceObjectList.self, forClassName: "APCInterfaceObjectList")
         NSKeyedUnarchiver.setClass(APCButton.self, forClassName: "APCButton")
-        let button = NSKeyedUnarchiver.unarchiveObjectWithData(messageData) as? APCButton
+
+        let actionAsString : String = message["action"] as! String
+        let action : APCInterfaceObjectListAction = APCInterfaceObjectListAction(rawValue: actionAsString)!
         
-        let message = "\(button!.id) \(button!.title)"
-        
-        let alertAction = WKAlertAction.init(title: "OK", style: WKAlertActionStyle.Cancel, handler: {})
-        self.presentAlertControllerWithTitle("title", message: message, preferredStyle: WKAlertControllerStyle.Alert, actions: [alertAction])
+        switch action
+        {
+        case APCInterfaceObjectListAction.Refresh:
+            let listData : NSData = message["listData"] as! NSData
+            let list = NSKeyedUnarchiver.unarchiveObjectWithData(listData) as? APCInterfaceObjectList
+
+            var rowTypes : [String] = [String]()
+            
+            for index in 0 ..< list!.count
+            {
+                let interfaceObject = list![index]!
+                
+                if interfaceObject is APCButton
+                {
+                    rowTypes.append("APCButtonTableRowController")
+                }
+            }
+            
+            self.table.setRowTypes(rowTypes)
+            
+            for index in 0 ..< list!.count
+            {
+                let interfaceObject = list![index]!
+                
+                if let button = interfaceObject as? APCButton,
+                    let rowController = self.table.rowControllerAtIndex(index) as? APCButtonTableRowController
+                {
+                    rowController.button.setTitle(button.title)
+                }
+            }
+
+            break
+            
+        case APCInterfaceObjectListAction.Clear:
+            self.table.setNumberOfRows(0, withRowType: "")
+
+            break
+            
+        case APCInterfaceObjectListAction.Insert:
+            let objectData : NSData = message["objectData"] as! NSData
+            let button = NSKeyedUnarchiver.unarchiveObjectWithData(objectData) as? APCButton
+
+            let index : Int = message["index"] as! Int
+            
+            let indexSet : NSIndexSet = NSIndexSet(index: index)
+            
+            self.table.insertRowsAtIndexes(indexSet, withRowType: "APCButtonTableRowController")
+            
+            if let rowController = self.table.rowControllerAtIndex(index) as? APCButtonTableRowController
+            {
+                rowController.button.setTitle(button?.title)
+            }
+            
+            break
+            
+        case APCInterfaceObjectListAction.Modify:
+            let objectData : NSData = message["objectData"] as! NSData
+            let button = NSKeyedUnarchiver.unarchiveObjectWithData(objectData) as? APCButton
+            
+            let index : Int = message["index"] as! Int
+            
+            if let rowController = self.table.rowControllerAtIndex(index) as? APCButtonTableRowController
+            {
+                rowController.button.setTitle(button?.title)
+            }
+            
+            break
+            
+        case APCInterfaceObjectListAction.Delete:
+            let index : Int = message["index"] as! Int
+            
+            let indexSet : NSIndexSet = NSIndexSet(index: index)
+            
+            self.table.removeRowsAtIndexes(indexSet)
+
+            break
+        }
     }
     
     override func didDeactivate()
@@ -67,6 +129,10 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
         super.didDeactivate()
     }
 }
+
+
+
+
 
 
 

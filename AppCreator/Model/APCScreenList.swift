@@ -39,35 +39,34 @@ class APCScreenList
         }
     }
 
-    func createScreen() -> APCScreen
-    {
-        let screen : APCScreen
-        
-        if let last = self.screens.sort({$0.id < $1.id}).last
-        {
-            let nextId : Int = last.id + 1
-            screen = APCScreen(id: nextId)
-        }
-        else
-        {
-            screen = APCScreen(id: 1)
-        }
-        
-        return screen
-    }
-    
     func add(screen screen : APCScreen)
     {
         self.screens.append(screen)
     }
     
-    func remove(screen screen : APCScreen) -> Bool
+    func move(objectAtIndex fromIndex : Int, toIndex: Int) -> Bool
     {
-        if let index = self.screens.indexOf(screen)
+        if 0 ..< self.screens.count ~= fromIndex && 0 ..< self.screens.count ~= toIndex
+        {
+            let object = self.screens[fromIndex]
+            
+            self.screens.removeAtIndex(fromIndex)
+            
+            self.screens.insert(object, atIndex: toIndex)
+            
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    func remove(objectAtIndex index : Int) -> Bool
+    {
+        if 0 ..< self.screens.count ~= index
         {
             self.screens.removeAtIndex(index)
-            
-            self.delegate?.screenList(self, didRemoveScreen: screen)
             
             return true
         }

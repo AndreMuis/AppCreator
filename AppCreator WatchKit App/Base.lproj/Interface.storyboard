@@ -10,66 +10,47 @@
             <objects>
                 <controller id="qEF-x8-Rvf" customClass="APCTemplateInterfaceController" customModule="AppCreator_WatchKit_Extension">
                     <items>
-                        <label width="136" height="20.5" alignment="left" text="Label" id="16Z-Oy-ea9" userLabel="label1"/>
-                        <imageView alignment="left" image="pattern" id="0bs-Hw-OtD" userLabel="image1"/>
-                        <button width="1" height="20.5" alignment="left" title="Button" id="PLN-dp-CI6" userLabel="button1"/>
-                        <table alignment="left" id="AUu-k6-ual" userLabel="table1">
+                        <table alignment="left" id="HR4-2B-6xK" userLabel="table">
                             <items>
-                                <tableRow identifier="TableRowController1" selectable="NO" id="tvN-xb-6Zi">
-                                    <group key="rootItem" width="1" height="22.5" alignment="left" id="kqr-tZ-8PL">
+                                <tableRow identifier="APCButtonTableRowController" id="BLN-88-Rni" customClass="APCButtonTableRowController" customModule="AppCreator_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="XBG-yx-dES">
                                         <items>
-                                            <label alignment="left" text="Row" id="47z-SK-Uid"/>
+                                            <button width="1" alignment="left" title="Button" id="RQN-Us-5ED" userLabel="button"/>
                                         </items>
                                     </group>
+                                    <connections>
+                                        <outlet property="button" destination="RQN-Us-5ED" id="ZEn-gQ-DuU"/>
+                                    </connections>
                                 </tableRow>
-                            </items>
-                        </table>
-                        <label width="136" height="20.5" alignment="left" text="Label" id="voj-yR-30z" userLabel="label2"/>
-                        <imageView alignment="left" image="pattern" id="UMs-Zx-X22" userLabel="image2"/>
-                        <button width="1" height="20.5" alignment="left" title="Button" id="dy2-y9-3Wn" userLabel="button2"/>
-                        <table alignment="left" id="XzF-M9-hls" userLabel="table2">
-                            <items>
-                                <tableRow identifier="TableRowController1" selectable="NO" id="pyu-CT-kLC">
-                                    <group key="rootItem" width="1" height="22.5" alignment="left" id="jkh-OD-3Hr">
+                                <tableRow identifier="APCImageTableRowController" id="Pof-7I-nCW" customClass="APCImageTableRowController" customModule="AppCreator_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="asw-bN-WdJ">
                                         <items>
-                                            <label alignment="left" text="Row" id="xhh-Qa-npe"/>
+                                            <imageView alignment="left" id="x6p-Hh-hXB" userLabel="image"/>
                                         </items>
                                     </group>
+                                    <connections>
+                                        <outlet property="image" destination="x6p-Hh-hXB" id="mHk-UX-d5j"/>
+                                    </connections>
                                 </tableRow>
-                            </items>
-                        </table>
-                        <label width="136" height="20.5" alignment="left" text="Label" id="B1f-Pc-ldi" userLabel="label3"/>
-                        <imageView alignment="left" image="pattern" id="P9w-Ve-D8C" userLabel="image3"/>
-                        <button width="1" height="20.5" alignment="left" title="Button" id="Y9i-cY-jgf" userLabel="button3"/>
-                        <table alignment="left" id="Hxa-I2-WK9" userLabel="table3">
-                            <items>
-                                <tableRow identifier="TableRowController1" selectable="NO" id="QAQ-o3-Myk">
-                                    <group key="rootItem" width="1" height="22.5" alignment="left" id="uBF-aE-S5A">
+                                <tableRow identifier="APCLabelTableRowController" id="85m-Mv-hj5" customClass="APCLabelTableRowController" customModule="AppCreator_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="p1t-ek-eat">
                                         <items>
-                                            <label alignment="left" text="Row" id="gUz-WD-q8p"/>
+                                            <label alignment="left" text="Label" id="wNO-ru-3Jd" userLabel="label"/>
                                         </items>
                                     </group>
+                                    <connections>
+                                        <outlet property="label" destination="wNO-ru-3Jd" id="baL-yn-w1k"/>
+                                    </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
                     <connections>
-                        <outlet property="button1" destination="PLN-dp-CI6" id="XcW-bA-AKI"/>
-                        <outlet property="button2" destination="dy2-y9-3Wn" id="aQe-wA-eUK"/>
-                        <outlet property="button3" destination="Y9i-cY-jgf" id="GcB-XT-04D"/>
-                        <outlet property="image1" destination="0bs-Hw-OtD" id="bmO-hr-TjK"/>
-                        <outlet property="image2" destination="UMs-Zx-X22" id="vfU-GQ-S5r"/>
-                        <outlet property="image3" destination="P9w-Ve-D8C" id="B5G-bj-5vg"/>
-                        <outlet property="label1" destination="16Z-Oy-ea9" id="bpl-qy-DS2"/>
-                        <outlet property="label2" destination="voj-yR-30z" id="zxs-mY-4cY"/>
-                        <outlet property="label3" destination="B1f-Pc-ldi" id="SrC-eK-3yw"/>
-                        <outlet property="table1" destination="AUu-k6-ual" id="Vnq-xs-Kkc"/>
-                        <outlet property="table2" destination="XzF-M9-hls" id="MA8-Pe-fFi"/>
-                        <outlet property="table3" destination="Hxa-I2-WK9" id="xrf-bB-xb2"/>
+                        <outlet property="table" destination="HR4-2B-6xK" id="Jdp-KW-IXm"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="179"/>
+            <point key="canvasLocation" x="340" y="261"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

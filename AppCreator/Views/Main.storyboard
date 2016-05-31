@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7VD-Vk-uEw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YgQ-gt-9EV">
                                     <size key="itemSize" width="50" height="50"/>
@@ -49,11 +49,43 @@
                                     <outlet property="delegate" destination="ck3-Vr-u4K" id="9u8-hq-IZZ"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beE-I3-LLi" userLabel="addScreenButton">
-                                <rect key="frame" x="20" y="573" width="80" height="30"/>
-                                <state key="normal" title="Add Screen"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Screen Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33a-bL-wbK">
+                                <rect key="frame" x="20" y="528" width="108" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jQ-NJ-gU9" userLabel="screenNameTextField">
+                                <rect key="frame" x="136" y="524" width="186" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beE-I3-LLi" userLabel="addButton">
+                                <rect key="frame" x="20" y="573" width="28" height="30"/>
+                                <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="addScreenButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="LNB-hD-3BZ"/>
+                                    <action selector="addButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="7N4-CN-bEB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMv-gv-54T" userLabel="saveButton">
+                                <rect key="frame" x="110" y="573" width="34" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="mtQ-MW-i6N"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzO-Es-2i0" userLabel="designButton">
+                                <rect key="frame" x="206" y="573" width="48" height="30"/>
+                                <state key="normal" title="Design"/>
+                                <connections>
+                                    <action selector="designButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="Ge4-Ei-mSc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T2-el-x9g" userLabel="deleteButton">
+                                <rect key="frame" x="310" y="573" width="45" height="30"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="0XM-21-W7j"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -63,16 +95,17 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="collectionView" destination="7VD-Vk-uEw" id="3yT-SD-4Ea"/>
+                        <outlet property="screenNameTextField" destination="5jQ-NJ-gU9" id="oNi-03-rdD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTD-eE-yWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="937.5" y="45.5"/>
         </scene>
-        <!--Design View Controller-->
+        <!--Screen View Controller-->
         <scene sceneID="BdX-gf-OAB">
             <objects>
-                <viewController storyboardIdentifier="APCDesignViewController" id="NSi-Iv-7fG" customClass="APCDesignViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="APCScreenViewController" id="NSi-Iv-7fG" customClass="APCScreenViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KO7-4a-NXF"/>
                         <viewControllerLayoutGuide type="bottom" id="I6E-b0-EA1"/>
@@ -84,25 +117,15 @@
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-xN-n8G">
                                 <rect key="frame" x="67" y="46" width="240" height="208"/>
                                 <connections>
-                                    <segue destination="FkQ-Mx-WXu" kind="embed" id="1Fv-7y-Iue"/>
+                                    <segue destination="wJy-qO-nrh" kind="embed" id="NVk-td-SCN"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77e-Rd-aPa" userLabel="addButton">
-                                <rect key="frame" x="20" y="512" width="78" height="30"/>
-                                <state key="normal" title="Add Button"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9v-Tp-lW2">
+                                <rect key="frame" x="20" y="322" width="335" height="281"/>
                                 <connections>
-                                    <action selector="addButtonTapped:" destination="NSi-Iv-7fG" eventType="touchUpInside" id="V5Z-sS-KMJ"/>
+                                    <segue destination="7pP-fM-2AF" kind="embed" id="lfo-do-UsR"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E72-l3-HnK" userLabel="deleteScreenButton">
-                                <rect key="frame" x="20" y="573" width="97" height="30"/>
-                                <state key="normal" title="Delete Screen">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteScreenButtonTapped:" destination="NSi-Iv-7fG" eventType="touchUpInside" id="ERN-zI-BcQ"/>
-                                </connections>
-                            </button>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -114,36 +137,82 @@
             </objects>
             <point key="canvasLocation" x="1528.5" y="45.5"/>
         </scene>
-        <!--Screen View Controller-->
-        <scene sceneID="51F-r1-grN">
+        <!--Object List View Controller-->
+        <scene sceneID="4xr-WB-Ov5">
             <objects>
-                <viewController id="FkQ-Mx-WXu" customClass="APCScreenViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wJy-qO-nrh" customClass="APCObjectListViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="b38-MJ-SjK"/>
-                        <viewControllerLayoutGuide type="bottom" id="meQ-jk-a2D"/>
+                        <viewControllerLayoutGuide type="top" id="Xn1-3B-1Zq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mmr-X8-IND"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ua1-pm-jIq">
+                    <view key="view" contentMode="scaleToFill" id="bc1-C1-lFb">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="208"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RJ0-xK-ym5" userLabel="tableView">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="92Y-Kz-5ce" userLabel="collectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="208"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DfF-Lt-18J">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="FkQ-Mx-WXu" id="Zr5-Lg-SQi"/>
-                                    <outlet property="delegate" destination="FkQ-Mx-WXu" id="kPf-jk-MwD"/>
+                                    <outlet property="dataSource" destination="wJy-qO-nrh" id="SWT-xr-RST"/>
+                                    <outlet property="delegate" destination="wJy-qO-nrh" id="AHb-Jo-eKW"/>
                                 </connections>
-                            </tableView>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="92Y-Kz-5ce" secondAttribute="trailing" id="Roj-gy-K5M"/>
+                            <constraint firstItem="92Y-Kz-5ce" firstAttribute="top" secondItem="Xn1-3B-1Zq" secondAttribute="bottom" id="Xdg-mW-CaR"/>
+                            <constraint firstItem="Mmr-X8-IND" firstAttribute="top" secondItem="92Y-Kz-5ce" secondAttribute="bottom" id="Zqi-HP-ly1"/>
+                            <constraint firstItem="92Y-Kz-5ce" firstAttribute="leading" secondItem="bc1-C1-lFb" secondAttribute="leading" id="pEy-Z7-a1B"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="92Y-Kz-5ce" id="P1C-Ce-hwV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0bE-Ll-WSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1985" y="-118"/>
+        </scene>
+        <!--Objects View Controller-->
+        <scene sceneID="Eck-U2-hZe">
+            <objects>
+                <viewController id="7pP-fM-2AF" customClass="APCObjectsViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ru3-dI-Ezr">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="281"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Zqy-4U-nDI" userLabel="segmentedControl">
+                                <rect key="frame" x="36" y="20" width="262" height="29"/>
+                                <segments>
+                                    <segment title="Label"/>
+                                    <segment title="Image"/>
+                                    <segment title="Button"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlValueChanged:" destination="7pP-fM-2AF" eventType="valueChanged" id="tJ9-B4-pwe"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oj1-NN-jHk" userLabel="containerView">
+                                <rect key="frame" x="28" y="65" width="279" height="196"/>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="RJ0-xK-ym5" id="3cU-Ri-7pd"/>
+                        <outlet property="containerView" destination="oj1-NN-jHk" id="LT2-Gh-k6x"/>
+                        <outlet property="segmentedControl" destination="Zqy-4U-nDI" id="Mab-3D-NGu"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7EO-zB-96z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oSX-GV-Una" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2007" y="46"/>
+            <point key="canvasLocation" x="2007.5" y="262.5"/>
         </scene>
     </scenes>
 </document>

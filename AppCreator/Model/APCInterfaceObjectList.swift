@@ -36,16 +36,6 @@ class APCInterfaceObjectList : NSObject, NSCoding
         coder.encodeObject(self.objects, forKey: "objects")
     }
 
-    func archivedData() -> NSData
-    {
-        NSKeyedArchiver.setClassName("APCInterfaceObjectList", forClass: APCInterfaceObjectList.self)
-        NSKeyedArchiver.setClassName("APCButton", forClass: APCButton.self)
-        
-        let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(self)
-        
-        return data
-    }
-    
     private var context = 0
     
     func addObserver(observer : NSObject)
@@ -76,6 +66,11 @@ class APCInterfaceObjectList : NSObject, NSCoding
             
             return object
         }
+    }
+    
+    func indexOfObject(object : APCInterfaceObject) -> Int?
+    {
+        return self.objects.indexOfObject(object)
     }
     
     func add(object object : APCInterfaceObject)

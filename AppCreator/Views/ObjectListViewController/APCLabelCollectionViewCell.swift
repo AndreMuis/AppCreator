@@ -1,18 +1,18 @@
 //
-//  APCButtonCollectionViewCell.swift
+//  APCLabelCollectionViewCell.swift
 //  AppCreator
 //
-//  Created by Andre Muis on 5/28/16.
+//  Created by Andre Muis on 6/1/16.
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
 import UIKit
 
-class APCButtonCollectionViewCell : UICollectionViewCell
+class APCLabelCollectionViewCell: UICollectionViewCell
 {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var textLabel: UILabel!
     
-    var button : APCButton?
+    var label : APCLabel?
     
     static var nib : UINib
     {
@@ -20,17 +20,13 @@ class APCButtonCollectionViewCell : UICollectionViewCell
         
         return nib
     }
-    
+
     override func awakeFromNib()
     {
         super.awakeFromNib()
-
-        self.layer.cornerRadius = 10.0
-        self.layer.masksToBounds = true
-
-        self.titleLabel.backgroundColor = UIColor.clearColor()
-        self.titleLabel.textColor = UIColor.whiteColor()
-
+        
+        self.textLabel.textColor = UIColor.whiteColor()
+        
         let backgroundView : UIView = UIView()
         backgroundView.backgroundColor = UIColor(white: 0.3, alpha: 1.0)
         
@@ -44,33 +40,30 @@ class APCButtonCollectionViewCell : UICollectionViewCell
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
-        self.titleLabel.text = self.button!.title
+        self.textLabel.text = self.label!.text
     }
     
     override func prepareForReuse()
     {
-        self.button?.removeObserver(self, forKeyPath: "title")
+        self.label?.removeObserver(self, forKeyPath: "text")
     }
     
     private var context = 0
-
-    func refresh(button button : APCButton)
+    
+    func refresh(label label : APCLabel)
     {
-        self.titleLabel.text = button.title
+        self.label = label
 
-        self.button = button
+        self.textLabel.text = label.text
         
-        button.addObserver(self, forKeyPath: "title", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+        label.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
     }
     
     deinit
     {
-        self.button?.removeObserver(self, forKeyPath: "title")
+        self.label?.removeObserver(self, forKeyPath: "text")
     }
 }
-
-
-
 
 
 

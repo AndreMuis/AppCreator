@@ -8,28 +8,48 @@
 
 import UIKit
 
-class APCLabelViewController: UIViewController {
+class APCLabelViewController: UIViewController
+{
+    @IBOutlet weak var textTextField: UITextField!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var delegate : APCLabelViewControllerDelegate?
 
-        // Do any additional setup after loading the view.
+    var label : APCLabel?
+    {
+        didSet
+        {
+            self.textTextField.text = self.label!.text
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override init(nibName: String?, bundle: NSBundle?)
+    {
+        super.init(nibName: nibName, bundle: bundle)
+        
+        self.delegate = nil
     }
-    */
-
+    
+    @IBAction func addLabelTapped(sender: AnyObject)
+    {
+        let label = APCLabel(text: self.textTextField.text!)
+        
+        self.delegate?.labelViewController(self, addLabel: label)
+    }
+    
+    @IBAction func saveLabelTapped(sender: AnyObject)
+    {
+        self.label!.text = self.textTextField.text!
+        
+        self.delegate?.labelViewController(self, didModifyLabel: self.label!)
+    }
+    
+    @IBAction func deleteLabelTapped(sender: AnyObject)
+    {
+        self.delegate?.labelViewController(self, deleteLabel: self.label!)
+    }
 }

@@ -55,7 +55,7 @@ class APCSession : NSObject, WCSessionDelegate
         self.sendMessage(message)
     }
 
-    func insertInterfaceObject(object : APCButton, atIndex index : Int)
+    func insertInterfaceObject(object : APCInterfaceObject, atIndex index : Int)
     {
         let message : [String : AnyObject] =
             [
@@ -67,7 +67,7 @@ class APCSession : NSObject, WCSessionDelegate
         self.sendMessage(message)
     }
     
-    func modifyInterfaceObject(object : APCButton, atIndex index : Int)
+    func modifyInterfaceObject(object : APCInterfaceObject, atIndex index : Int)
     {
         let message : [String : AnyObject] =
             [
@@ -75,6 +75,13 @@ class APCSession : NSObject, WCSessionDelegate
                 "objectData" : object.archivedData(),
                 "index" : index
             ]
+        
+        if let image = object as? APCImage
+        {
+            print(image.filePathURL!)
+            
+            self.session.transferFile(image.filePathURL!, metadata: nil)
+        }
         
         self.sendMessage(message)
     }

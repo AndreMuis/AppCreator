@@ -41,6 +41,8 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
     {
         NSKeyedUnarchiver.setClass(APCInterfaceObjectList.self, forClassName: "APCInterfaceObjectList")
         NSKeyedUnarchiver.setClass(APCButton.self, forClassName: "APCButton")
+        NSKeyedUnarchiver.setClass(APCImage.self, forClassName: "APCImage")
+        NSKeyedUnarchiver.setClass(APCLabel.self, forClassName: "APCLabel")
 
         let actionAsString : String = message["action"] as! String
         let action : APCInterfaceObjectListAction = APCInterfaceObjectListAction(rawValue: actionAsString)!
@@ -61,6 +63,14 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
                 {
                     rowTypes.append("APCButtonTableRowController")
                 }
+                else if interfaceObject is APCImage
+                {
+                    rowTypes.append("APCImageTableRowController")
+                }
+                else if interfaceObject is APCLabel
+                {
+                    rowTypes.append("APCLabelTableRowController")
+                }
             }
             
             self.table.setRowTypes(rowTypes)
@@ -74,6 +84,16 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
                 {
                     rowController.button.setTitle(button.title)
                 }
+                else if let image = interfaceObject as? APCImage,
+                    let rowController = self.table.rowControllerAtIndex(index) as? APCImageTableRowController
+                {
+                    rowController.image.setImage(image.uiImage)
+                }
+                else if let label = interfaceObject as? APCLabel,
+                    let rowController = self.table.rowControllerAtIndex(index) as? APCLabelTableRowController
+                {
+                    rowController.label.setText(label.text)
+                }
             }
 
             break
@@ -85,30 +105,60 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
             
         case APCInterfaceObjectListAction.Insert:
             let objectData : NSData = message["objectData"] as! NSData
-            let button = NSKeyedUnarchiver.unarchiveObjectWithData(objectData) as? APCButton
+            let object = NSKeyedUnarchiver.unarchiveObjectWithData(objectData) as? APCInterfaceObject
 
             let index : Int = message["index"] as! Int
-            
             let indexSet : NSIndexSet = NSIndexSet(index: index)
             
-            self.table.insertRowsAtIndexes(indexSet, withRowType: "APCButtonTableRowController")
-            
-            if let rowController = self.table.rowControllerAtIndex(index) as? APCButtonTableRowController
+            if let button = object as? APCButton
             {
-                rowController.button.setTitle(button?.title)
+                self.table.insertRowsAtIndexes(indexSet, withRowType: "APCButtonTableRowController")
+                
+                if let rowController = self.table.rowControllerAtIndex(index) as? APCButtonTableRowController
+                {
+                    rowController.button.setTitle(button.title)
+                }
             }
-            
+            else if let image = object as? APCImage
+            {
+                self.table.insertRowsAtIndexes(indexSet, withRowType: "APCImageTableRowController")
+                
+                if let rowController = self.table.rowControllerAtIndex(index) as? APCImageTableRowController
+                {
+                    rowController.image.setImage(image.uiImage)
+                }
+            }
+            else if let label = object as? APCLabel
+            {
+                self.table.insertRowsAtIndexes(indexSet, withRowType: "APCLabelTableRowController")
+                
+                if let rowController = self.table.rowControllerAtIndex(index) as? APCLabelTableRowController
+                {
+                    rowController.label.setText(label.text)
+                }
+            }
+
             break
             
         case APCInterfaceObjectListAction.Modify:
             let objectData : NSData = message["objectData"] as! NSData
-            let button = NSKeyedUnarchiver.unarchiveObjectWithData(objectData) as? APCButton
+            let object = NSKeyedUnarchiver.unarchiveObjectWithData(objectData) as? APCInterfaceObject
             
             let index : Int = message["index"] as! Int
-            
-            if let rowController = self.table.rowControllerAtIndex(index) as? APCButtonTableRowController
+
+            if let button = object as? APCButton
             {
-                rowController.button.setTitle(button?.title)
+                if let rowController = self.table.rowControllerAtIndex(index) as? APCButtonTableRowController
+                {
+                    rowController.button.setTitle(button.title)
+                }
+            }
+            else if let label = object as? APCLabel
+            {
+                if let rowController = self.table.rowControllerAtIndex(index) as? APCLabelTableRowController
+                {
+                    rowController.label.setText(label.text)
+                }
             }
             
             break
@@ -121,6 +171,43 @@ class APCTemplateInterfaceController: WKInterfaceController, WCSessionDelegate
             self.table.removeRowsAtIndexes(indexSet)
 
             break
+        }
+    }
+    
+    func session(session: WCSession, didReceiveFile file: WCSessionFile)
+    {
+        let paths : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
+                                                                   NSSearchPathDomainMask.UserDomainMask,
+                                                                   true)
+        
+        let filePathURL : NSURL = NSURL(fileURLWithPath: "\(paths[0])/Image.png")
+
+        do
+        {
+            try NSFileManager.defaultManager().removeItemAtURL(filePathURL)
+        }
+        catch let error
+        {
+            print(error)
+        }
+        
+        do
+        {
+            try NSFileManager.defaultManager().copyItemAtURL(file.fileURL, toURL: filePathURL)
+        }
+        catch let error
+        {
+            print(error)
+        }
+        
+        let image = UIImage(data: NSData(contentsOfURL: filePathURL)!)
+        
+        for index in 0 ..< self.table.numberOfRows
+        {
+            if let rowController = self.table.rowControllerAtIndex(index) as? APCImageTableRowController
+            {
+                rowController.image.setImage(image)
+            }
         }
     }
     

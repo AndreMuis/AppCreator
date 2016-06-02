@@ -14,7 +14,6 @@ class APCScreenViewController: UIViewController, APCObjectListViewControllerDele
     
     var session : APCSession?
     var screen : APCScreen?
-    var selectedIndex : Int?
 
     required init?(coder aDecoder: NSCoder)
     {
@@ -24,7 +23,6 @@ class APCScreenViewController: UIViewController, APCObjectListViewControllerDele
         
         self.session = nil
         self.screen = nil
-        self.selectedIndex = nil
     }
     
     override func viewDidLoad()
@@ -32,14 +30,11 @@ class APCScreenViewController: UIViewController, APCObjectListViewControllerDele
         super.viewDidLoad()
         
         self.navigationItem.title = self.screen!.name
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
+
         self.session?.refreshInterfaceObjectList(self.screen!.interfaceObjectList)
     }
     
-    override func viewWillDisappear(animated: Bool)
+    deinit
     {
         self.session?.clearInterfaceObjectList()
     }
@@ -62,11 +57,9 @@ class APCScreenViewController: UIViewController, APCObjectListViewControllerDele
     
     func objectListViewController(viewController: APCObjectListViewController, didSelectInterfaceObjectAtIndex index: Int)
     {
-        if let button = self.screen?.interfaceObjectList[index] as? APCButton
+        if let object : APCInterfaceObject = self.screen?.interfaceObjectList[index]
         {
-            self.selectedIndex = index
-
-            self.objectsViewController?.interfaceObject = button
+            self.objectsViewController?.interfaceObject = object
         }
     }
     
@@ -76,12 +69,12 @@ class APCScreenViewController: UIViewController, APCObjectListViewControllerDele
         {
             self.session?.deleteInterfaceObject(atIndex: sourceIndex)
 
-            let button : APCButton = self.screen!.interfaceObjectList[destinationIndex] as! APCButton
-            self.session?.insertInterfaceObject(button, atIndex: destinationIndex)
+            let object : APCInterfaceObject = self.screen!.interfaceObjectList[destinationIndex]!
+            self.session?.insertInterfaceObject(object, atIndex: destinationIndex)
         }
     }
     
-    // MARK: APCObjectsViewControllerProtocol
+    // MARK: APCObjectsViewControllerDelegate
     
     func objectsViewController(viewController: APCObjectsViewController, appendInterfaceObject object: APCInterfaceObject)
     {
@@ -89,23 +82,26 @@ class APCScreenViewController: UIViewController, APCObjectListViewControllerDele
         {
             list.add(object: object)
          
-            self.session?.insertInterfaceObject(object as! APCButton, atIndex: list.count - 1)
+            self.session?.insertInterfaceObject(object, atIndex: list.count - 1)
         }
     }
 
     func objectsViewController(viewController: APCObjectsViewController, didModifyInterfaceObject object: APCInterfaceObject)
     {
-        if let button = self.screen?.interfaceObjectList[self.selectedIndex!] as? APCButton
+        if let index : Int = self.screen!.interfaceObjectList.indexOfObject(object)
         {
-            self.session?.modifyInterfaceObject(button, atIndex: self.selectedIndex!)
+            self.session?.modifyInterfaceObject(object, atIndex: index)
         }
     }
 
     func objectsViewController(viewController: APCObjectsViewController, deleteInterfaceObject object: APCInterfaceObject)
     {
-        if self.screen!.interfaceObjectList.remove(objectAtIndex: self.selectedIndex!) == true
+        if let list = self.screen?.interfaceObjectList,
+            let index : Int = self.screen!.interfaceObjectList.indexOfObject(object)
         {
-            self.session?.deleteInterfaceObject(atIndex: self.selectedIndex!)
+            list.remove(objectAtIndex: index)
+
+            self.session?.deleteInterfaceObject(atIndex: index)
         }
     }
 

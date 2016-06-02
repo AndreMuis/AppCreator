@@ -11,25 +11,35 @@ import Foundation
 class APCLabel: NSObject, APCInterfaceObject, NSCoding
 {
     let id : NSUUID
+    dynamic var text : String?
     
-    init(id : NSUUID)
+    init(text : String)
+    {
+        self.id = NSUUID()
+        self.text = text
+    }
+
+    init(id : NSUUID, text : String)
     {
         self.id = id
+        self.text = text
     }
     
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let id = decoder.decodeObjectForKey("id") as? NSUUID
+        guard let id = decoder.decodeObjectForKey("id") as? NSUUID,
+            let text = decoder.decodeObjectForKey("text") as? String
             else
         {
             return nil
         }
         
-        self.init(id: id)
+        self.init(id: id, text: text)
     }
     
     func encodeWithCoder(coder: NSCoder)
     {
         coder.encodeObject(self.id, forKey: "id")
+        coder.encodeObject(self.text, forKey: "text")
     }
 }

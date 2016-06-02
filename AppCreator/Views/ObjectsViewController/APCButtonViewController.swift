@@ -10,9 +10,7 @@ import UIKit
 
 class APCButtonViewController : UIViewController
 {
-    @IBOutlet weak var buttonTitleTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var titleTextField: UITextField!
     
     var delegate : APCButtonViewControllerDelegate?
     
@@ -20,10 +18,7 @@ class APCButtonViewController : UIViewController
     {
         didSet
         {
-            self.buttonTitleTextField.text = self.button!.title
-            
-            self.saveButton.enabled = true
-            self.deleteButton.enabled = true
+            self.titleTextField.text = self.button!.title
         }
     }
     
@@ -43,22 +38,19 @@ class APCButtonViewController : UIViewController
     {
         super.viewDidLoad()
         
-        self.buttonTitleTextField.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-        
-        self.saveButton.enabled = false
-        self.deleteButton.enabled = false
+        self.titleTextField.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
     }
     
     @IBAction func addButtonTapped(sender: AnyObject)
     {
-        let button = APCButton(title: self.buttonTitleTextField.text!)
+        let button = APCButton(title: self.titleTextField.text!)
         
         self.delegate?.buttonViewController(self, addButton: button)
     }
     
     @IBAction func saveButtonTapped(sender: AnyObject)
     {
-        button?.title = self.self.buttonTitleTextField.text!
+        self.button?.title = self.self.titleTextField.text!
         
         self.delegate?.buttonViewController(self, didModifyButton: self.button!)
     }

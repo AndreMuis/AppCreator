@@ -42,14 +42,17 @@ class APCButton : NSObject, NSCoding, APCInterfaceObject
         coder.encodeObject(self.id, forKey: "id")
         coder.encodeObject(self.title, forKey: "title")
     }
-    
-    func archivedData() -> NSData
-    {
-        NSKeyedArchiver.setClassName("APCButton", forClass: APCButton.self)
-        
-        let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(self)
-        
-        return data
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

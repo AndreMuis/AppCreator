@@ -6,15 +6,26 @@
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class APCImage: NSObject, APCInterfaceObject, NSCoding
 {
     let id : NSUUID
+    var filePathURL : NSURL?
+    dynamic var uiImage : UIImage?
     
-    init(id : NSUUID)
+    init(filePathURL : NSURL?)
+    {
+        self.id = NSUUID()
+        self.filePathURL = filePathURL
+        //self.uiImage = UIImage(contentsOfFile: filePathURL.absoluteString)
+    }
+    
+    init(id : NSUUID, filePathURL : NSURL?)
     {
         self.id = id
+        self.filePathURL = filePathURL
+        //self.uiImage = UIImage(contentsOfFile: filePathURL.absoluteString)
     }
     
     required convenience init?(coder decoder: NSCoder)
@@ -25,7 +36,7 @@ class APCImage: NSObject, APCInterfaceObject, NSCoding
             return nil
         }
         
-        self.init(id: id)
+        self.init(id: id, filePathURL: nil)
     }
     
     func encodeWithCoder(coder: NSCoder)

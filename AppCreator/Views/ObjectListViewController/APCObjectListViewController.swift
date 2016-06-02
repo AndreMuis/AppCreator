@@ -14,14 +14,20 @@ class APCObjectListViewController: UIViewController, UICollectionViewDataSource,
     
     var delegate : APCObjectListViewControllerDelegate?
     
-    let cellReuseIdentifier : String
+    let buttonCellReuseIdentifier : String
+    let imageCellReuseIdentifier : String
+    let labelCellReuseIdentifier : String
+
     var objectList : APCInterfaceObjectList?
     
     required init?(coder aDecoder: NSCoder)
     {
         self.delegate = nil
         
-        self.cellReuseIdentifier = APCButtonCollectionViewCell.self.description()
+        self.buttonCellReuseIdentifier = String(APCButtonCollectionViewCell.self)
+        self.imageCellReuseIdentifier = String(APCImageCollectionViewCell.self)
+        self.labelCellReuseIdentifier = String(APCLabelCollectionViewCell.self)
+
         self.objectList = nil
         
         super.init(coder: aDecoder)
@@ -36,7 +42,9 @@ class APCObjectListViewController: UIViewController, UICollectionViewDataSource,
         self.collectionView.backgroundColor = UIColor.blackColor()
         self.collectionView.showsVerticalScrollIndicator = false
 
-        self.collectionView.registerNib(APCButtonCollectionViewCell.nib, forCellWithReuseIdentifier: self.cellReuseIdentifier)
+        self.collectionView.registerNib(APCButtonCollectionViewCell.nib, forCellWithReuseIdentifier: self.buttonCellReuseIdentifier)
+        self.collectionView.registerNib(APCImageCollectionViewCell.nib, forCellWithReuseIdentifier: self.imageCellReuseIdentifier)
+        self.collectionView.registerNib(APCLabelCollectionViewCell.nib, forCellWithReuseIdentifier: self.labelCellReuseIdentifier)
         
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         {
@@ -127,15 +135,31 @@ class APCObjectListViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let someCell : UICollectionViewCell = self.collectionView!.dequeueReusableCellWithReuseIdentifier(self.cellReuseIdentifier, forIndexPath: indexPath)
+        var objectCell : UICollectionViewCell = UICollectionViewCell()
         
-        if let cell = someCell as? APCButtonCollectionViewCell,
-            let button = self.objectList?[indexPath.row] as? APCButton
+        if let object : APCInterfaceObject = self.objectList![indexPath.row]
         {
-            cell.refresh(button: button)
+            if let button = object as? APCButton,
+                let buttonCell = self.collectionView!.dequeueReusableCellWithReuseIdentifier(self.buttonCellReuseIdentifier, forIndexPath: indexPath) as? APCButtonCollectionViewCell
+            {
+                buttonCell.refresh(button: button)
+                objectCell = buttonCell
+            }
+            else if let image = object as? APCImage,
+                let imageCell = self.collectionView!.dequeueReusableCellWithReuseIdentifier(self.imageCellReuseIdentifier, forIndexPath: indexPath) as? APCImageCollectionViewCell
+            {
+                imageCell.refresh(image: image)
+                objectCell = imageCell
+            }
+            else if let label = object as? APCLabel,
+                let labelCell = self.collectionView!.dequeueReusableCellWithReuseIdentifier(self.labelCellReuseIdentifier, forIndexPath: indexPath) as? APCLabelCollectionViewCell
+            {
+                labelCell.refresh(label: label)
+                objectCell = labelCell
+            }
         }
         
-        return someCell
+        return objectCell
     }
     
     // MARK: UICollectionViewDelegate

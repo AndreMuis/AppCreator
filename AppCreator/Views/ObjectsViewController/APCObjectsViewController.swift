@@ -8,7 +8,11 @@
 
 import UIKit
 
-class APCObjectsViewController : UIViewController, APCButtonViewControllerDelegate
+class APCObjectsViewController :
+    UIViewController,
+    APCButtonViewControllerDelegate,
+    APCImageViewControllerDelegate,
+    APCLabelViewControllerDelegate
 {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var containerView: UIView!
@@ -26,7 +30,23 @@ class APCObjectsViewController : UIViewController, APCButtonViewControllerDelega
             if let button = self.interfaceObject as? APCButton
             {
                 self.buttonViewController.button = button
-                self.showObjectView(2)
+                
+                self.segmentedControl.selectedSegmentIndex = 2
+                self.showObjectView()
+            }
+            else if let image = self.interfaceObject as? APCImage
+            {
+                self.imageViewController.image = image
+
+                self.segmentedControl.selectedSegmentIndex = 1
+                self.showObjectView()
+            }
+            else if let label = self.interfaceObject as? APCLabel
+            {
+                self.labelViewController.label = label
+
+                self.segmentedControl.selectedSegmentIndex = 0
+                self.showObjectView()
             }
         }
     }
@@ -49,16 +69,15 @@ class APCObjectsViewController : UIViewController, APCButtonViewControllerDelega
         super.viewDidLoad()
         
         self.buttonViewController.delegate = self
-        //self.imageViewController.delegate = self
-        //self.labelViewController.delegate = self
+        self.imageViewController.delegate = self
+        self.labelViewController.delegate = self
 
         self.addObjectViewController(self.buttonViewController)
         self.addObjectViewController(self.imageViewController)
         self.addObjectViewController(self.labelViewController)
         
         self.segmentedControl.selectedSegmentIndex = 0
-
-        self.showObjectView(self.segmentedControl.selectedSegmentIndex)
+        self.showObjectView()
     }
 
     func addObjectViewController(viewController : UIViewController)
@@ -70,10 +89,10 @@ class APCObjectsViewController : UIViewController, APCButtonViewControllerDelega
     
     @IBAction func segmentedControlValueChanged(sender: AnyObject)
     {
-        self.showObjectView(self.segmentedControl.selectedSegmentIndex)
+        self.showObjectView()
     }
     
-    func showObjectView(selectedSegmentIndex : Int)
+    func showObjectView()
     {
         switch self.segmentedControl.selectedSegmentIndex
         {
@@ -106,6 +125,40 @@ class APCObjectsViewController : UIViewController, APCButtonViewControllerDelega
     func buttonViewController(viewController: APCButtonViewController, deleteButton button: APCButton)
     {
         self.delegate?.objectsViewController(self, deleteInterfaceObject: button)
+    }
+    
+    // MARK: APCImageViewControllerDelegate
+    
+    func imageViewController(viewController: APCImageViewController, addImage image: APCImage)
+    {
+        self.delegate?.objectsViewController(self, appendInterfaceObject: image)
+    }
+    
+    func imageViewController(viewController: APCImageViewController, didModifyImage image: APCImage)
+    {
+        self.delegate?.objectsViewController(self, didModifyInterfaceObject: image)
+    }
+    
+    func imageViewController(viewController: APCImageViewController, deleteImage image: APCImage)
+    {
+        self.delegate?.objectsViewController(self, deleteInterfaceObject: image)
+    }
+    
+    // MARK: APCLabelViewControllerDelegate
+    
+    func labelViewController(viewController: APCLabelViewController, addLabel label: APCLabel)
+    {
+        self.delegate?.objectsViewController(self, appendInterfaceObject: label)
+    }
+    
+    func labelViewController(viewController: APCLabelViewController, didModifyLabel label: APCLabel)
+    {
+        self.delegate?.objectsViewController(self, didModifyInterfaceObject: label)
+    }
+    
+    func labelViewController(viewController: APCLabelViewController, deleteLabel label: APCLabel)
+    {
+        self.delegate?.objectsViewController(self, deleteInterfaceObject: label)
     }
     
     // MARK:

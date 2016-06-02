@@ -6,9 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APCButtonViewController" customModule="AppCreator" customModuleProvider="target">
             <connections>
-                <outlet property="buttonTitleTextField" destination="jnj-Hl-zfV" id="G27-jz-wDC"/>
-                <outlet property="deleteButton" destination="28q-7B-XbI" id="hp7-ae-Aq5"/>
-                <outlet property="saveButton" destination="76C-mX-lTL" id="x4z-nC-xmi"/>
+                <outlet property="titleTextField" destination="jnj-Hl-zfV" id="ddy-5d-4F5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,45 +15,45 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df8-hD-bT0">
-                    <rect key="frame" x="18" y="28" width="38" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-Hl-zfV" userLabel="buttonTitleTextField">
-                    <rect key="frame" x="64" y="24" width="184" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xl-Z2-koQ" userLabel="addButton">
-                    <rect key="frame" x="26" y="82" width="78" height="30"/>
-                    <state key="normal" title="Add Button"/>
+                    <rect key="frame" x="46" y="93" width="30" height="30"/>
+                    <state key="normal" title="Add"/>
                     <connections>
                         <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="HJe-3Y-XjP"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76C-mX-lTL" userLabel="saveButton">
-                    <rect key="frame" x="117" y="82" width="83" height="30"/>
-                    <state key="normal" title="Save Button"/>
+                    <rect key="frame" x="138" y="93" width="34" height="30"/>
+                    <state key="normal" title="Save"/>
                     <connections>
                         <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="EWK-0b-dym"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28q-7B-XbI" userLabel="deleteButton">
-                    <rect key="frame" x="209" y="82" width="94" height="30"/>
-                    <state key="normal" title="Delete Button">
+                    <rect key="frame" x="230" y="93" width="45" height="30"/>
+                    <state key="normal" title="Delete">
                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="deleteButtonTapped:" destination="-1" eventType="touchUpInside" id="vqJ-lP-EOO"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df8-hD-bT0">
+                    <rect key="frame" x="28" y="31" width="38" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-Hl-zfV" userLabel="titleTextField">
+                    <rect key="frame" x="74" y="27" width="184" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="347" y="419"/>
+            <point key="canvasLocation" x="412" y="583"/>
         </view>
     </objects>
 </document>

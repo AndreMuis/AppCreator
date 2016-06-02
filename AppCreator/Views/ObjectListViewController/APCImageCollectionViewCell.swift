@@ -1,18 +1,18 @@
 //
-//  APCButtonCollectionViewCell.swift
+//  APCImageCollectionViewCell.swift
 //  AppCreator
 //
-//  Created by Andre Muis on 5/28/16.
+//  Created by Andre Muis on 6/1/16.
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
 import UIKit
 
-class APCButtonCollectionViewCell : UICollectionViewCell
+class APCImageCollectionViewCell: UICollectionViewCell
 {
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    var button : APCButton?
+    @IBOutlet weak var imageView: UIImageView!
+
+    var image : APCImage?
     
     static var nib : UINib
     {
@@ -20,17 +20,11 @@ class APCButtonCollectionViewCell : UICollectionViewCell
         
         return nib
     }
-    
+
     override func awakeFromNib()
     {
         super.awakeFromNib()
-
-        self.layer.cornerRadius = 10.0
-        self.layer.masksToBounds = true
-
-        self.titleLabel.backgroundColor = UIColor.clearColor()
-        self.titleLabel.textColor = UIColor.whiteColor()
-
+        
         let backgroundView : UIView = UIView()
         backgroundView.backgroundColor = UIColor(white: 0.3, alpha: 1.0)
         
@@ -44,30 +38,31 @@ class APCButtonCollectionViewCell : UICollectionViewCell
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
-        self.titleLabel.text = self.button!.title
+        self.imageView.image = self.image?.uiImage
     }
     
     override func prepareForReuse()
     {
-        self.button?.removeObserver(self, forKeyPath: "title")
+        self.image?.removeObserver(self, forKeyPath: "uiImage")
     }
     
     private var context = 0
-
-    func refresh(button button : APCButton)
+    
+    func refresh(image image : APCImage)
     {
-        self.titleLabel.text = button.title
-
-        self.button = button
+        self.image = image
         
-        button.addObserver(self, forKeyPath: "title", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+        self.imageView.image = image.uiImage
+        
+        image.addObserver(self, forKeyPath: "uiImage", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
     }
     
     deinit
     {
-        self.button?.removeObserver(self, forKeyPath: "title")
+        self.image?.removeObserver(self, forKeyPath: "uiImage")
     }
 }
+
 
 
 

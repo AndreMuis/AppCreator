@@ -14,9 +14,12 @@
 		2A0828CD1CF8A95000E5CD36 /* APCScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0828CC1CF8A95000E5CD36 /* APCScreen.swift */; };
 		2A0828CF1CF8AA1100E5CD36 /* APCScreenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0828CE1CF8AA1100E5CD36 /* APCScreenList.swift */; };
 		2A0828D11CF8C20000E5CD36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A0828D01CF8C20000E5CD36 /* Main.storyboard */; };
-		2A0828D71CF8EA7800E5CD36 /* APCScreenListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0828D61CF8EA7800E5CD36 /* APCScreenListDelegate.swift */; };
 		2A0F96301CFA1DDF002E70E6 /* APCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F962F1CFA1DDF002E70E6 /* APCButton.swift */; };
 		2A0F96351CFA1EFE002E70E6 /* APCInterfaceObjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F96341CFA1EFE002E70E6 /* APCInterfaceObjectList.swift */; };
+		2A28CF9E1D0328C700F98720 /* APCAlertViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A28CF9D1D0328C700F98720 /* APCAlertViewControllerPresentationController.swift */; };
+		2A28CFA01D032CEE00F98720 /* APCAlertViewControllerAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A28CF9F1D032CEE00F98720 /* APCAlertViewControllerAnimatedTransitioning.swift */; };
+		2A28CFA91D035A2D00F98720 /* APCAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A28CFA71D035A2D00F98720 /* APCAlertViewController.swift */; };
+		2A28CFAA1D035A2D00F98720 /* APCAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A28CFA81D035A2D00F98720 /* APCAlertViewController.xib */; };
 		2A30960E1CFB60D9006F7768 /* APCInterfaceObjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F96341CFA1EFE002E70E6 /* APCInterfaceObjectList.swift */; };
 		2A30960F1CFB60DD006F7768 /* APCScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0828CC1CF8A95000E5CD36 /* APCScreen.swift */; };
 		2A3096111CFB9248006F7768 /* APCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3096101CFB9248006F7768 /* APCLabel.swift */; };
@@ -33,34 +36,35 @@
 		2A7F2D3C1CF7B13500CB06F5 /* APCExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F2D3B1CF7B13500CB06F5 /* APCExtensionDelegate.swift */; };
 		2A7F2D3E1CF7B13500CB06F5 /* APCNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F2D3D1CF7B13500CB06F5 /* APCNotificationController.swift */; };
 		2A7F2D401CF7B13500CB06F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A7F2D3F1CF7B13500CB06F5 /* Assets.xcassets */; };
+		2A8A91BA1D00AB5F00913962 /* APCButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91B31D00AB5F00913962 /* APCButtonCollectionViewCell.swift */; };
+		2A8A91BB1D00AB5F00913962 /* APCButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91B41D00AB5F00913962 /* APCButtonCollectionViewCell.xib */; };
+		2A8A91BC1D00AB5F00913962 /* APCImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91B51D00AB5F00913962 /* APCImageCollectionViewCell.swift */; };
+		2A8A91BD1D00AB5F00913962 /* APCImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91B61D00AB5F00913962 /* APCImageCollectionViewCell.xib */; };
+		2A8A91BE1D00AB5F00913962 /* APCInterfaceObjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91B71D00AB5F00913962 /* APCInterfaceObjectListViewController.swift */; };
+		2A8A91BF1D00AB5F00913962 /* APCLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91B81D00AB5F00913962 /* APCLabelCollectionViewCell.swift */; };
+		2A8A91C01D00AB5F00913962 /* APCLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91B91D00AB5F00913962 /* APCLabelCollectionViewCell.xib */; };
+		2A8A91C81D00AB6A00913962 /* APCButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91C11D00AB6A00913962 /* APCButtonViewController.swift */; };
+		2A8A91C91D00AB6A00913962 /* APCButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91C21D00AB6A00913962 /* APCButtonViewController.xib */; };
+		2A8A91CA1D00AB6A00913962 /* APCImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91C31D00AB6A00913962 /* APCImageViewController.swift */; };
+		2A8A91CB1D00AB6A00913962 /* APCImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91C41D00AB6A00913962 /* APCImageViewController.xib */; };
+		2A8A91CC1D00AB6A00913962 /* APCLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91C51D00AB6A00913962 /* APCLabelViewController.swift */; };
+		2A8A91CD1D00AB6A00913962 /* APCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91C61D00AB6A00913962 /* APCLabelViewController.xib */; };
+		2A8A91CE1D00AB6A00913962 /* APCInterfaceObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91C71D00AB6A00913962 /* APCInterfaceObjectsViewController.swift */; };
+		2A8A91D01D01390D00913962 /* APCTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91CF1D01390D00913962 /* APCTableRowController.swift */; };
 		2A8DF1731CFE1A5800273853 /* APCLabelTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1721CFE1A5800273853 /* APCLabelTableRowController.swift */; };
 		2A8DF1751CFE1A7500273853 /* APCButtonTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1741CFE1A7500273853 /* APCButtonTableRowController.swift */; };
 		2A8DF1771CFE1A9100273853 /* APCImageTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1761CFE1A9100273853 /* APCImageTableRowController.swift */; };
 		2A8DF17A1CFE223B00273853 /* APCInterfaceObjectListAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1791CFE223B00273853 /* APCInterfaceObjectListAction.swift */; };
 		2A8DF17B1CFE223B00273853 /* APCInterfaceObjectListAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1791CFE223B00273853 /* APCInterfaceObjectListAction.swift */; };
-		2A8DF17E1CFE3F9C00273853 /* APCObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF17D1CFE3F9C00273853 /* APCObjectsViewController.swift */; };
-		2A8DF1841CFE44D800273853 /* APCLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1821CFE44D800273853 /* APCLabelViewController.swift */; };
-		2A8DF1851CFE44D800273853 /* APCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8DF1831CFE44D800273853 /* APCLabelViewController.xib */; };
-		2A8DF1881CFE44EF00273853 /* APCImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1861CFE44EF00273853 /* APCImageViewController.swift */; };
-		2A8DF1891CFE44EF00273853 /* APCImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8DF1871CFE44EF00273853 /* APCImageViewController.xib */; };
-		2A8DF18C1CFE451100273853 /* APCButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF18A1CFE451100273853 /* APCButtonViewController.swift */; };
-		2A8DF18D1CFE451100273853 /* APCButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8DF18B1CFE451100273853 /* APCButtonViewController.xib */; };
-		2A8DF1911CFE495F00273853 /* APCButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF18E1CFE495F00273853 /* APCButtonCollectionViewCell.swift */; };
-		2A8DF1921CFE495F00273853 /* APCButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8DF18F1CFE495F00273853 /* APCButtonCollectionViewCell.xib */; };
-		2A8DF1931CFE495F00273853 /* APCObjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1901CFE495F00273853 /* APCObjectListViewController.swift */; };
 		2A8DF1951CFE497C00273853 /* APCScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1941CFE497C00273853 /* APCScreenViewController.swift */; };
 		2A8DF1971CFE510400273853 /* APCButtonViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1961CFE510400273853 /* APCButtonViewControllerDelegate.swift */; };
-		2A8DF1991CFE533D00273853 /* APCObjectsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1981CFE533D00273853 /* APCObjectsViewControllerDelegate.swift */; };
 		2A8DF19B1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF19A1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift */; };
 		2A8DF19D1CFF201700273853 /* APCLabelViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF19C1CFF201700273853 /* APCLabelViewControllerDelegate.swift */; };
 		2A8DF1A01CFF2EF900273853 /* NSCoding+Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF19F1CFF2EF900273853 /* NSCoding+Archive.swift */; };
-		2A8DF1A31CFF396D00273853 /* APCImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1A11CFF396D00273853 /* APCImageCollectionViewCell.swift */; };
-		2A8DF1A41CFF396D00273853 /* APCImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8DF1A21CFF396D00273853 /* APCImageCollectionViewCell.xib */; };
-		2A8DF1A71CFF398500273853 /* APCLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1A51CFF398500273853 /* APCLabelCollectionViewCell.swift */; };
-		2A8DF1A81CFF398500273853 /* APCLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8DF1A61CFF398500273853 /* APCLabelCollectionViewCell.xib */; };
 		2A8DF1AB1CFF75DB00273853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A60F07F1CF891BA0060F53D /* Assets.xcassets */; };
+		2ACD3C4A1D01D864004378D2 /* APCCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD3C491D01D864004378D2 /* APCCollectionViewFlowLayout.swift */; };
+		2AE801391D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE801381D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift */; };
 		2AEB26A11CFA759700B02B2C /* APCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F962F1CFA1DDF002E70E6 /* APCButton.swift */; };
-		2AF67D5A1CFBC604002888DD /* APCObjectListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF67D591CFBC604002888DD /* APCObjectListViewControllerDelegate.swift */; };
 		2AF67D5C1CFBC633002888DD /* APCInterfaceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF67D5B1CFBC633002888DD /* APCInterfaceObject.swift */; };
 		2AF67D5D1CFBC6D1002888DD /* APCInterfaceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF67D5B1CFBC633002888DD /* APCInterfaceObject.swift */; };
 /* End PBXBuildFile section */
@@ -115,9 +119,12 @@
 		2A0828CE1CF8AA1100E5CD36 /* APCScreenList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCScreenList.swift; path = Model/APCScreenList.swift; sourceTree = "<group>"; };
 		2A0828D01CF8C20000E5CD36 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Views/Main.storyboard; sourceTree = "<group>"; };
 		2A0828D51CF8CB9000E5CD36 /* ScratchPad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ScratchPad.playground; sourceTree = SOURCE_ROOT; };
-		2A0828D61CF8EA7800E5CD36 /* APCScreenListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCScreenListDelegate.swift; path = Library/Protocols/APCScreenListDelegate.swift; sourceTree = "<group>"; };
 		2A0F962F1CFA1DDF002E70E6 /* APCButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButton.swift; path = Model/APCButton.swift; sourceTree = "<group>"; };
 		2A0F96341CFA1EFE002E70E6 /* APCInterfaceObjectList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObjectList.swift; path = Model/APCInterfaceObjectList.swift; sourceTree = "<group>"; };
+		2A28CF9D1D0328C700F98720 /* APCAlertViewControllerPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCAlertViewControllerPresentationController.swift; path = Views/AlertViewController/APCAlertViewControllerPresentationController.swift; sourceTree = "<group>"; };
+		2A28CF9F1D032CEE00F98720 /* APCAlertViewControllerAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCAlertViewControllerAnimatedTransitioning.swift; path = Views/AlertViewController/APCAlertViewControllerAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		2A28CFA71D035A2D00F98720 /* APCAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCAlertViewController.swift; path = Views/AlertViewController/APCAlertViewController.swift; sourceTree = "<group>"; };
+		2A28CFA81D035A2D00F98720 /* APCAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCAlertViewController.xib; path = Views/AlertViewController/APCAlertViewController.xib; sourceTree = "<group>"; };
 		2A3096101CFB9248006F7768 /* APCLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabel.swift; path = Model/APCLabel.swift; sourceTree = "<group>"; };
 		2A3096141CFB9268006F7768 /* APCImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImage.swift; path = Model/APCImage.swift; sourceTree = "<group>"; };
 		2A5239251CFD01DC00A6A7BC /* APCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCSession.swift; path = Library/APCSession.swift; sourceTree = "<group>"; };
@@ -137,31 +144,32 @@
 		2A7F2D3D1CF7B13500CB06F5 /* APCNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APCNotificationController.swift; sourceTree = "<group>"; };
 		2A7F2D3F1CF7B13500CB06F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A7F2D411CF7B13500CB06F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A8A91B31D00AB5F00913962 /* APCButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonCollectionViewCell.swift; path = Views/InterfaceObjectListViewController/APCButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		2A8A91B41D00AB5F00913962 /* APCButtonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCButtonCollectionViewCell.xib; path = Views/InterfaceObjectListViewController/APCButtonCollectionViewCell.xib; sourceTree = "<group>"; };
+		2A8A91B51D00AB5F00913962 /* APCImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageCollectionViewCell.swift; path = Views/InterfaceObjectListViewController/APCImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		2A8A91B61D00AB5F00913962 /* APCImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCImageCollectionViewCell.xib; path = Views/InterfaceObjectListViewController/APCImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		2A8A91B71D00AB5F00913962 /* APCInterfaceObjectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObjectListViewController.swift; path = Views/InterfaceObjectListViewController/APCInterfaceObjectListViewController.swift; sourceTree = "<group>"; };
+		2A8A91B81D00AB5F00913962 /* APCLabelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelCollectionViewCell.swift; path = Views/InterfaceObjectListViewController/APCLabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		2A8A91B91D00AB5F00913962 /* APCLabelCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCLabelCollectionViewCell.xib; path = Views/InterfaceObjectListViewController/APCLabelCollectionViewCell.xib; sourceTree = "<group>"; };
+		2A8A91C11D00AB6A00913962 /* APCButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonViewController.swift; path = Views/InterfaceObjectsViewController/APCButtonViewController.swift; sourceTree = "<group>"; };
+		2A8A91C21D00AB6A00913962 /* APCButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCButtonViewController.xib; path = Views/InterfaceObjectsViewController/APCButtonViewController.xib; sourceTree = "<group>"; };
+		2A8A91C31D00AB6A00913962 /* APCImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageViewController.swift; path = Views/InterfaceObjectsViewController/APCImageViewController.swift; sourceTree = "<group>"; };
+		2A8A91C41D00AB6A00913962 /* APCImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCImageViewController.xib; path = Views/InterfaceObjectsViewController/APCImageViewController.xib; sourceTree = "<group>"; };
+		2A8A91C51D00AB6A00913962 /* APCLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelViewController.swift; path = Views/InterfaceObjectsViewController/APCLabelViewController.swift; sourceTree = "<group>"; };
+		2A8A91C61D00AB6A00913962 /* APCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCLabelViewController.xib; path = Views/InterfaceObjectsViewController/APCLabelViewController.xib; sourceTree = "<group>"; };
+		2A8A91C71D00AB6A00913962 /* APCInterfaceObjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObjectsViewController.swift; path = Views/InterfaceObjectsViewController/APCInterfaceObjectsViewController.swift; sourceTree = "<group>"; };
+		2A8A91CF1D01390D00913962 /* APCTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCTableRowController.swift; sourceTree = "<group>"; };
 		2A8DF1721CFE1A5800273853 /* APCLabelTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCLabelTableRowController.swift; sourceTree = "<group>"; };
 		2A8DF1741CFE1A7500273853 /* APCButtonTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCButtonTableRowController.swift; sourceTree = "<group>"; };
 		2A8DF1761CFE1A9100273853 /* APCImageTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCImageTableRowController.swift; sourceTree = "<group>"; };
 		2A8DF1791CFE223B00273853 /* APCInterfaceObjectListAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObjectListAction.swift; path = Library/Enumerations/APCInterfaceObjectListAction.swift; sourceTree = "<group>"; };
-		2A8DF17D1CFE3F9C00273853 /* APCObjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCObjectsViewController.swift; path = Views/ObjectsViewController/APCObjectsViewController.swift; sourceTree = "<group>"; };
-		2A8DF1821CFE44D800273853 /* APCLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelViewController.swift; path = Views/ObjectsViewController/APCLabelViewController.swift; sourceTree = "<group>"; };
-		2A8DF1831CFE44D800273853 /* APCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCLabelViewController.xib; path = Views/ObjectsViewController/APCLabelViewController.xib; sourceTree = "<group>"; };
-		2A8DF1861CFE44EF00273853 /* APCImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageViewController.swift; path = Views/ObjectsViewController/APCImageViewController.swift; sourceTree = "<group>"; };
-		2A8DF1871CFE44EF00273853 /* APCImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCImageViewController.xib; path = Views/ObjectsViewController/APCImageViewController.xib; sourceTree = "<group>"; };
-		2A8DF18A1CFE451100273853 /* APCButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonViewController.swift; path = Views/ObjectsViewController/APCButtonViewController.swift; sourceTree = "<group>"; };
-		2A8DF18B1CFE451100273853 /* APCButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCButtonViewController.xib; path = Views/ObjectsViewController/APCButtonViewController.xib; sourceTree = "<group>"; };
-		2A8DF18E1CFE495F00273853 /* APCButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonCollectionViewCell.swift; path = Views/ObjectListViewController/APCButtonCollectionViewCell.swift; sourceTree = "<group>"; };
-		2A8DF18F1CFE495F00273853 /* APCButtonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCButtonCollectionViewCell.xib; path = Views/ObjectListViewController/APCButtonCollectionViewCell.xib; sourceTree = "<group>"; };
-		2A8DF1901CFE495F00273853 /* APCObjectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCObjectListViewController.swift; path = Views/ObjectListViewController/APCObjectListViewController.swift; sourceTree = "<group>"; };
 		2A8DF1941CFE497C00273853 /* APCScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCScreenViewController.swift; path = Views/ScreenViewController/APCScreenViewController.swift; sourceTree = "<group>"; };
 		2A8DF1961CFE510400273853 /* APCButtonViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonViewControllerDelegate.swift; path = Library/Protocols/APCButtonViewControllerDelegate.swift; sourceTree = "<group>"; };
-		2A8DF1981CFE533D00273853 /* APCObjectsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCObjectsViewControllerDelegate.swift; path = Library/Protocols/APCObjectsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		2A8DF19A1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageViewControllerDelegate.swift; path = Library/Protocols/APCImageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		2A8DF19C1CFF201700273853 /* APCLabelViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelViewControllerDelegate.swift; path = Library/Protocols/APCLabelViewControllerDelegate.swift; sourceTree = "<group>"; };
 		2A8DF19F1CFF2EF900273853 /* NSCoding+Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSCoding+Archive.swift"; path = "Library/Extensions/NSCoding+Archive.swift"; sourceTree = "<group>"; };
-		2A8DF1A11CFF396D00273853 /* APCImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageCollectionViewCell.swift; path = Views/ObjectListViewController/APCImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		2A8DF1A21CFF396D00273853 /* APCImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCImageCollectionViewCell.xib; path = Views/ObjectListViewController/APCImageCollectionViewCell.xib; sourceTree = "<group>"; };
-		2A8DF1A51CFF398500273853 /* APCLabelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelCollectionViewCell.swift; path = Views/ObjectListViewController/APCLabelCollectionViewCell.swift; sourceTree = "<group>"; };
-		2A8DF1A61CFF398500273853 /* APCLabelCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCLabelCollectionViewCell.xib; path = Views/ObjectListViewController/APCLabelCollectionViewCell.xib; sourceTree = "<group>"; };
-		2AF67D591CFBC604002888DD /* APCObjectListViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCObjectListViewControllerDelegate.swift; path = Library/Protocols/APCObjectListViewControllerDelegate.swift; sourceTree = "<group>"; };
+		2ACD3C491D01D864004378D2 /* APCCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCCollectionViewFlowLayout.swift; path = Views/APCCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		2AE801381D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionViewCell+AnimateSize.swift"; path = "Library/Extensions/UICollectionViewCell+AnimateSize.swift"; sourceTree = "<group>"; };
 		2AF67D5B1CFBC633002888DD /* APCInterfaceObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObject.swift; path = Library/Protocols/APCInterfaceObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,25 +216,22 @@
 				2A8DF1961CFE510400273853 /* APCButtonViewControllerDelegate.swift */,
 				2A8DF19A1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift */,
 				2A8DF19C1CFF201700273853 /* APCLabelViewControllerDelegate.swift */,
-				2AF67D591CFBC604002888DD /* APCObjectListViewControllerDelegate.swift */,
-				2A8DF1981CFE533D00273853 /* APCObjectsViewControllerDelegate.swift */,
-				2A0828D61CF8EA7800E5CD36 /* APCScreenListDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
 		};
-		2A0F96281CFA1770002E70E6 /* ObjectListViewController */ = {
+		2A0F96281CFA1770002E70E6 /* InterfaceObjectListViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2A8DF1901CFE495F00273853 /* APCObjectListViewController.swift */,
-				2A8DF18F1CFE495F00273853 /* APCButtonCollectionViewCell.xib */,
-				2A8DF18E1CFE495F00273853 /* APCButtonCollectionViewCell.swift */,
-				2A8DF1A21CFF396D00273853 /* APCImageCollectionViewCell.xib */,
-				2A8DF1A11CFF396D00273853 /* APCImageCollectionViewCell.swift */,
-				2A8DF1A61CFF398500273853 /* APCLabelCollectionViewCell.xib */,
-				2A8DF1A51CFF398500273853 /* APCLabelCollectionViewCell.swift */,
+				2A8A91B71D00AB5F00913962 /* APCInterfaceObjectListViewController.swift */,
+				2A8A91B41D00AB5F00913962 /* APCButtonCollectionViewCell.xib */,
+				2A8A91B31D00AB5F00913962 /* APCButtonCollectionViewCell.swift */,
+				2A8A91B61D00AB5F00913962 /* APCImageCollectionViewCell.xib */,
+				2A8A91B51D00AB5F00913962 /* APCImageCollectionViewCell.swift */,
+				2A8A91B91D00AB5F00913962 /* APCLabelCollectionViewCell.xib */,
+				2A8A91B81D00AB5F00913962 /* APCLabelCollectionViewCell.swift */,
 			);
-			name = ObjectListViewController;
+			name = InterfaceObjectListViewController;
 			sourceTree = "<group>";
 		};
 		2A60F0761CF891590060F53D /* Application */ = {
@@ -257,9 +262,11 @@
 				2A60F0811CF891EC0060F53D /* LaunchScreen */,
 				2A0828C31CF8A74A00E5CD36 /* ScreenListViewController */,
 				2A0828D21CF8C21B00E5CD36 /* ScreenViewController */,
-				2A0F96281CFA1770002E70E6 /* ObjectListViewController */,
-				2A8DF17C1CFE3F3A00273853 /* ObjectsViewController */,
+				2A0F96281CFA1770002E70E6 /* InterfaceObjectListViewController */,
+				2A8DF17C1CFE3F3A00273853 /* InterfaceObjectsViewController */,
+				2AE8013C1D027CE500D3C0EC /* AlertViewController */,
 				2A0828D01CF8C20000E5CD36 /* Main.storyboard */,
+				2ACD3C491D01D864004378D2 /* APCCollectionViewFlowLayout.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -339,6 +346,7 @@
 			children = (
 				2A7F2D3B1CF7B13500CB06F5 /* APCExtensionDelegate.swift */,
 				2A7F2D391CF7B13500CB06F5 /* APCTemplateInterfaceController.swift */,
+				2A8A91CF1D01390D00913962 /* APCTableRowController.swift */,
 				2A8DF1741CFE1A7500273853 /* APCButtonTableRowController.swift */,
 				2A8DF1761CFE1A9100273853 /* APCImageTableRowController.swift */,
 				2A8DF1721CFE1A5800273853 /* APCLabelTableRowController.swift */,
@@ -366,26 +374,38 @@
 			name = Enumerations;
 			sourceTree = "<group>";
 		};
-		2A8DF17C1CFE3F3A00273853 /* ObjectsViewController */ = {
+		2A8DF17C1CFE3F3A00273853 /* InterfaceObjectsViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2A8DF17D1CFE3F9C00273853 /* APCObjectsViewController.swift */,
-				2A8DF18B1CFE451100273853 /* APCButtonViewController.xib */,
-				2A8DF18A1CFE451100273853 /* APCButtonViewController.swift */,
-				2A8DF1871CFE44EF00273853 /* APCImageViewController.xib */,
-				2A8DF1861CFE44EF00273853 /* APCImageViewController.swift */,
-				2A8DF1831CFE44D800273853 /* APCLabelViewController.xib */,
-				2A8DF1821CFE44D800273853 /* APCLabelViewController.swift */,
+				2A8A91C71D00AB6A00913962 /* APCInterfaceObjectsViewController.swift */,
+				2A8A91C21D00AB6A00913962 /* APCButtonViewController.xib */,
+				2A8A91C11D00AB6A00913962 /* APCButtonViewController.swift */,
+				2A8A91C41D00AB6A00913962 /* APCImageViewController.xib */,
+				2A8A91C31D00AB6A00913962 /* APCImageViewController.swift */,
+				2A8A91C61D00AB6A00913962 /* APCLabelViewController.xib */,
+				2A8A91C51D00AB6A00913962 /* APCLabelViewController.swift */,
 			);
-			name = ObjectsViewController;
+			name = InterfaceObjectsViewController;
 			sourceTree = "<group>";
 		};
 		2A8DF19E1CFF2EA900273853 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				2A8DF19F1CFF2EF900273853 /* NSCoding+Archive.swift */,
+				2AE801381D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		2AE8013C1D027CE500D3C0EC /* AlertViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2A28CFA81D035A2D00F98720 /* APCAlertViewController.xib */,
+				2A28CFA71D035A2D00F98720 /* APCAlertViewController.swift */,
+				2A28CF9D1D0328C700F98720 /* APCAlertViewControllerPresentationController.swift */,
+				2A28CF9F1D032CEE00F98720 /* APCAlertViewControllerAnimatedTransitioning.swift */,
+			);
+			name = AlertViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -491,16 +511,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A8DF1851CFE44D800273853 /* APCLabelViewController.xib in Resources */,
 				2A0828BC1CF8930400E5CD36 /* LaunchScreen.storyboard in Resources */,
 				2A0828C91CF8A77900E5CD36 /* APCScreenCollectionViewCell.xib in Resources */,
-				2A8DF18D1CFE451100273853 /* APCButtonViewController.xib in Resources */,
 				2A8DF1AB1CFF75DB00273853 /* Assets.xcassets in Resources */,
-				2A8DF1A81CFF398500273853 /* APCLabelCollectionViewCell.xib in Resources */,
+				2A28CFAA1D035A2D00F98720 /* APCAlertViewController.xib in Resources */,
+				2A8A91C91D00AB6A00913962 /* APCButtonViewController.xib in Resources */,
+				2A8A91CD1D00AB6A00913962 /* APCLabelViewController.xib in Resources */,
 				2A0828D11CF8C20000E5CD36 /* Main.storyboard in Resources */,
-				2A8DF1891CFE44EF00273853 /* APCImageViewController.xib in Resources */,
-				2A8DF1921CFE495F00273853 /* APCButtonCollectionViewCell.xib in Resources */,
-				2A8DF1A41CFF396D00273853 /* APCImageCollectionViewCell.xib in Resources */,
+				2A8A91CB1D00AB6A00913962 /* APCImageViewController.xib in Resources */,
+				2A8A91BB1D00AB5F00913962 /* APCButtonCollectionViewCell.xib in Resources */,
+				2A8A91BD1D00AB5F00913962 /* APCImageCollectionViewCell.xib in Resources */,
+				2A8A91C01D00AB5F00913962 /* APCLabelCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,34 +549,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A8DF17E1CFE3F9C00273853 /* APCObjectsViewController.swift in Sources */,
 				2A60F07D1CF891AC0060F53D /* AppDelegate.swift in Sources */,
 				2A3096111CFB9248006F7768 /* APCLabel.swift in Sources */,
 				2A0F96301CFA1DDF002E70E6 /* APCButton.swift in Sources */,
-				2A8DF1911CFE495F00273853 /* APCButtonCollectionViewCell.swift in Sources */,
+				2AE801391D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift in Sources */,
 				2A0828C81CF8A77900E5CD36 /* APCScreenCollectionViewCell.swift in Sources */,
 				2A8DF1971CFE510400273853 /* APCButtonViewControllerDelegate.swift in Sources */,
+				2A8A91BA1D00AB5F00913962 /* APCButtonCollectionViewCell.swift in Sources */,
 				2A8DF17A1CFE223B00273853 /* APCInterfaceObjectListAction.swift in Sources */,
 				2A0828CD1CF8A95000E5CD36 /* APCScreen.swift in Sources */,
+				2A8A91BE1D00AB5F00913962 /* APCInterfaceObjectListViewController.swift in Sources */,
+				2ACD3C4A1D01D864004378D2 /* APCCollectionViewFlowLayout.swift in Sources */,
 				2A8DF1951CFE497C00273853 /* APCScreenViewController.swift in Sources */,
-				2A0828D71CF8EA7800E5CD36 /* APCScreenListDelegate.swift in Sources */,
 				2A0828CA1CF8A77900E5CD36 /* APCScreenListViewController.swift in Sources */,
-				2A8DF1A71CFF398500273853 /* APCLabelCollectionViewCell.swift in Sources */,
 				2A0828CF1CF8AA1100E5CD36 /* APCScreenList.swift in Sources */,
-				2A8DF1881CFE44EF00273853 /* APCImageViewController.swift in Sources */,
 				2A3096151CFB9268006F7768 /* APCImage.swift in Sources */,
+				2A8A91BF1D00AB5F00913962 /* APCLabelCollectionViewCell.swift in Sources */,
+				2A8A91CC1D00AB6A00913962 /* APCLabelViewController.swift in Sources */,
+				2A28CF9E1D0328C700F98720 /* APCAlertViewControllerPresentationController.swift in Sources */,
 				2A5239261CFD01DC00A6A7BC /* APCSession.swift in Sources */,
+				2A8A91C81D00AB6A00913962 /* APCButtonViewController.swift in Sources */,
 				2A8DF19B1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift in Sources */,
-				2AF67D5A1CFBC604002888DD /* APCObjectListViewControllerDelegate.swift in Sources */,
-				2A8DF1931CFE495F00273853 /* APCObjectListViewController.swift in Sources */,
+				2A8A91CE1D00AB6A00913962 /* APCInterfaceObjectsViewController.swift in Sources */,
+				2A8A91BC1D00AB5F00913962 /* APCImageCollectionViewCell.swift in Sources */,
+				2A28CFA91D035A2D00F98720 /* APCAlertViewController.swift in Sources */,
 				2A8DF1A01CFF2EF900273853 /* NSCoding+Archive.swift in Sources */,
-				2A8DF18C1CFE451100273853 /* APCButtonViewController.swift in Sources */,
+				2A28CFA01D032CEE00F98720 /* APCAlertViewControllerAnimatedTransitioning.swift in Sources */,
 				2A0F96351CFA1EFE002E70E6 /* APCInterfaceObjectList.swift in Sources */,
 				2A8DF19D1CFF201700273853 /* APCLabelViewControllerDelegate.swift in Sources */,
-				2A8DF1991CFE533D00273853 /* APCObjectsViewControllerDelegate.swift in Sources */,
-				2A8DF1A31CFF396D00273853 /* APCImageCollectionViewCell.swift in Sources */,
-				2A8DF1841CFE44D800273853 /* APCLabelViewController.swift in Sources */,
 				2AF67D5C1CFBC633002888DD /* APCInterfaceObject.swift in Sources */,
+				2A8A91CA1D00AB6A00913962 /* APCImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +596,7 @@
 				2A8DF1751CFE1A7500273853 /* APCButtonTableRowController.swift in Sources */,
 				2A8DF1771CFE1A9100273853 /* APCImageTableRowController.swift in Sources */,
 				2A7F2D3A1CF7B13500CB06F5 /* APCTemplateInterfaceController.swift in Sources */,
+				2A8A91D01D01390D00913962 /* APCTableRowController.swift in Sources */,
 				2AF67D5D1CFBC6D1002888DD /* APCInterfaceObject.swift in Sources */,
 				2A30960E1CFB60D9006F7768 /* APCInterfaceObjectList.swift in Sources */,
 				2A8DF17B1CFE223B00273853 /* APCInterfaceObjectListAction.swift in Sources */,

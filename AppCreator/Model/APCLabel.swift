@@ -8,10 +8,10 @@
 
 import Foundation
 
-class APCLabel: NSObject, APCInterfaceObject, NSCoding
+class APCLabel: NSObject, APCInterfaceObject
 {
     let id : NSUUID
-    dynamic var text : String?
+    dynamic var text : String
     
     init(text : String)
     {

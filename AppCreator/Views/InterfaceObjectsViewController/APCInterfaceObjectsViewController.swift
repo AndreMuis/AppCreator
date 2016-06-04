@@ -8,7 +8,7 @@
 
 import UIKit
 
-class APCObjectsViewController :
+class APCInterfaceObjectsViewController :
     UIViewController,
     APCButtonViewControllerDelegate,
     APCImageViewControllerDelegate,
@@ -21,49 +21,22 @@ class APCObjectsViewController :
     let imageViewController : APCImageViewController
     let labelViewController : APCLabelViewController
     
-    var delegate : APCObjectsViewControllerDelegate?
-    
-    var interfaceObject : APCInterfaceObject?
-    {
-        didSet
-        {
-            if let button = self.interfaceObject as? APCButton
-            {
-                self.buttonViewController.button = button
-                
-                self.segmentedControl.selectedSegmentIndex = 2
-                self.showObjectView()
-            }
-            else if let image = self.interfaceObject as? APCImage
-            {
-                self.imageViewController.image = image
+    var session : APCSession
+    var objectList : APCInterfaceObjectList?
 
-                self.segmentedControl.selectedSegmentIndex = 1
-                self.showObjectView()
-            }
-            else if let label = self.interfaceObject as? APCLabel
-            {
-                self.labelViewController.label = label
-
-                self.segmentedControl.selectedSegmentIndex = 0
-                self.showObjectView()
-            }
-        }
-    }
-    
     required init?(coder aDecoder: NSCoder)
     {
         self.buttonViewController = APCButtonViewController(nibName: String(APCButtonViewController.self), bundle: nil)
         self.imageViewController = APCImageViewController(nibName: String(APCImageViewController.self), bundle: nil)
         self.labelViewController = APCLabelViewController(nibName: String(APCLabelViewController.self), bundle: nil)
-
-        self.delegate = nil
         
-        self.interfaceObject = nil
+        self.session = (UIApplication.sharedApplication().delegate as? AppDelegate)!.session
         
         super.init(coder: aDecoder)
     }
 
+    private var context = 0
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -78,8 +51,50 @@ class APCObjectsViewController :
         
         self.segmentedControl.selectedSegmentIndex = 0
         self.showObjectView()
+        
+        if let list = self.objectList
+        {
+            list.addObserver(self, forKeyPath: "selectedObject", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+        }
     }
 
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
+    {
+        if (context == &self.context)
+        {
+            if let object = self.objectList?.selectedObject
+            {
+                if let button = object as? APCButton
+                {
+                    self.buttonViewController.button = button
+                    self.imageViewController.image = nil
+                    self.labelViewController.label = nil
+                    
+                    self.segmentedControl.selectedSegmentIndex = 2
+                    self.showObjectView()
+                }
+                else if let image = object as? APCImage
+                {
+                    self.buttonViewController.button = nil
+                    self.imageViewController.image = image
+                    self.labelViewController.label = nil
+                    
+                    self.segmentedControl.selectedSegmentIndex = 1
+                    self.showObjectView()
+                }
+                else if let label = object as? APCLabel
+                {
+                    self.buttonViewController.button = nil
+                    self.imageViewController.image = nil
+                    self.labelViewController.label = label
+                    
+                    self.segmentedControl.selectedSegmentIndex = 0
+                    self.showObjectView()
+                }
+            }
+        }
+    }
+    
     func addObjectViewController(viewController : UIViewController)
     {
         self.addChildViewController(viewController)
@@ -114,54 +129,68 @@ class APCObjectsViewController :
     
     func buttonViewController(viewController: APCButtonViewController, addButton button: APCButton)
     {
-        self.delegate?.objectsViewController(self, appendInterfaceObject: button)
-    }
-    
-    func buttonViewController(viewController: APCButtonViewController, didModifyButton button: APCButton)
-    {
-        self.delegate?.objectsViewController(self, didModifyInterfaceObject: button)
+        if let list : APCInterfaceObjectList = self.objectList
+        {
+            list.add(object: button)
+        }
     }
     
     func buttonViewController(viewController: APCButtonViewController, deleteButton button: APCButton)
     {
-        self.delegate?.objectsViewController(self, deleteInterfaceObject: button)
+        if let list = self.objectList,
+            let index : Int = list.indexOfObject(button)
+        {
+            list.remove(objectAtIndex: index)
+        }
     }
     
     // MARK: APCImageViewControllerDelegate
     
     func imageViewController(viewController: APCImageViewController, addImage image: APCImage)
     {
-        self.delegate?.objectsViewController(self, appendInterfaceObject: image)
-    }
-    
-    func imageViewController(viewController: APCImageViewController, didModifyImage image: APCImage)
-    {
-        self.delegate?.objectsViewController(self, didModifyInterfaceObject: image)
+        if let list : APCInterfaceObjectList = self.objectList
+        {
+            list.add(object: image)
+        }
     }
     
     func imageViewController(viewController: APCImageViewController, deleteImage image: APCImage)
     {
-        self.delegate?.objectsViewController(self, deleteInterfaceObject: image)
+        if let list = self.objectList,
+            let index : Int = list.indexOfObject(image)
+        {
+            list.remove(objectAtIndex: index)
+        }
     }
     
     // MARK: APCLabelViewControllerDelegate
     
     func labelViewController(viewController: APCLabelViewController, addLabel label: APCLabel)
     {
-        self.delegate?.objectsViewController(self, appendInterfaceObject: label)
-    }
-    
-    func labelViewController(viewController: APCLabelViewController, didModifyLabel label: APCLabel)
-    {
-        self.delegate?.objectsViewController(self, didModifyInterfaceObject: label)
+        if let list : APCInterfaceObjectList = self.objectList
+        {
+            list.add(object: label)
+        }
     }
     
     func labelViewController(viewController: APCLabelViewController, deleteLabel label: APCLabel)
     {
-        self.delegate?.objectsViewController(self, deleteInterfaceObject: label)
+        if let list = self.objectList,
+            let index : Int = list.indexOfObject(label)
+        {
+            list.remove(objectAtIndex: index)
+        }
     }
-    
+
     // MARK:
+    
+    deinit
+    {
+        if let list = self.objectList
+        {
+            list.removeArrayObserver(self)
+        }
+    }
 }
 
 

@@ -37,7 +37,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7VD-Vk-uEw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YgQ-gt-9EV">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YgQ-gt-9EV" customClass="APCCollectionViewFlowLayout" customModule="AppCreator" customModuleProvider="target">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -52,7 +52,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Screen Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33a-bL-wbK">
                                 <rect key="frame" x="20" y="528" width="108" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jQ-NJ-gU9" userLabel="screenNameTextField">
@@ -61,28 +61,21 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beE-I3-LLi" userLabel="addButton">
-                                <rect key="frame" x="20" y="573" width="28" height="30"/>
+                                <rect key="frame" x="68" y="573" width="28" height="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="7N4-CN-bEB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMv-gv-54T" userLabel="saveButton">
-                                <rect key="frame" x="110" y="573" width="34" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3k-DM-vDb" userLabel="saveButton">
+                                <rect key="frame" x="170" y="573" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
-                                    <action selector="saveButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="mtQ-MW-i6N"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzO-Es-2i0" userLabel="designButton">
-                                <rect key="frame" x="206" y="573" width="48" height="30"/>
-                                <state key="normal" title="Design"/>
-                                <connections>
-                                    <action selector="designButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="Ge4-Ei-mSc"/>
+                                    <action selector="saveButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="ML8-kh-Pts"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T2-el-x9g" userLabel="deleteButton">
-                                <rect key="frame" x="310" y="573" width="45" height="30"/>
+                                <rect key="frame" x="259" y="573" width="45" height="30"/>
                                 <state key="normal" title="Delete"/>
                                 <connections>
                                     <action selector="deleteButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="0XM-21-W7j"/>
@@ -137,10 +130,10 @@
             </objects>
             <point key="canvasLocation" x="1528.5" y="45.5"/>
         </scene>
-        <!--Object List View Controller-->
+        <!--Interface Object List View Controller-->
         <scene sceneID="4xr-WB-Ov5">
             <objects>
-                <viewController id="wJy-qO-nrh" customClass="APCObjectListViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wJy-qO-nrh" customClass="APCInterfaceObjectListViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xn1-3B-1Zq"/>
                         <viewControllerLayoutGuide type="bottom" id="Mmr-X8-IND"/>
@@ -180,10 +173,14 @@
             </objects>
             <point key="canvasLocation" x="1985" y="-118"/>
         </scene>
-        <!--Objects View Controller-->
+        <!--Interface Objects View Controller-->
         <scene sceneID="Eck-U2-hZe">
             <objects>
-                <viewController id="7pP-fM-2AF" customClass="APCObjectsViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7pP-fM-2AF" customClass="APCInterfaceObjectsViewController" customModule="AppCreator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IMa-FR-AjR"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ytp-lQ-gGu"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ru3-dI-Ezr">
                         <rect key="frame" x="0.0" y="0.0" width="335" height="281"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,18 +8,26 @@
 
 import Foundation
 
-class APCInterfaceObjectList : NSObject, NSCoding
+public class APCInterfaceObjectList : NSObject, NSCoding
 {
     private dynamic var objects : NSMutableArray
-    
-    static let emptyList : APCInterfaceObjectList = APCInterfaceObjectList()
+
+    dynamic var selectedObject : APCInterfaceObject?
+
+    var isPerformingMove : Bool
     
     override init()
     {
         self.objects = NSMutableArray()
+
+        self.selectedObject = nil
+        
+        self.isPerformingMove = false
+        
+        super.init()
     }
     
-    required convenience init?(coder decoder: NSCoder)
+    public required convenience init?(coder decoder: NSCoder)
     {
         guard let objects = decoder.decodeObjectForKey("objects") as? NSMutableArray
             else
@@ -31,19 +39,17 @@ class APCInterfaceObjectList : NSObject, NSCoding
         self.objects = objects
     }
     
-    func encodeWithCoder(coder: NSCoder)
+    public func encodeWithCoder(coder: NSCoder)
     {
         coder.encodeObject(self.objects, forKey: "objects")
     }
 
-    private var context = 0
-    
-    func addObserver(observer : NSObject)
+    func addArrayObserver(observer : NSObject, inout context : Int)
     {
         self.addObserver(observer, forKeyPath: "objects", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
     }
     
-    func removeObserver(observer : NSObject)
+    func removeArrayObserver(observer : NSObject)
     {
         self.removeObserver(observer, forKeyPath: "objects")
     }
@@ -83,11 +89,17 @@ class APCInterfaceObjectList : NSObject, NSCoding
     {
         if 0 ..< self.objects.count ~= fromIndex && 0 ..< self.objects.count ~= toIndex
         {
+            self.isPerformingMove = true
+            
             let object = self.objects[fromIndex]
             
-            self.objects.removeObjectAtIndex(fromIndex)
+            let childrenProxy = mutableArrayValueForKey("objects")
+
+            childrenProxy.removeObjectAtIndex(fromIndex)
             
-            self.objects.insertObject(object, atIndex: toIndex)
+            childrenProxy.insertObject(object, atIndex: toIndex)
+            
+            self.isPerformingMove = false
             
             return true
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class APCButton : NSObject, NSCoding, APCInterfaceObject
+class APCButton : NSObject, APCInterfaceObject
 {
     let id : NSUUID
     dynamic var title : String

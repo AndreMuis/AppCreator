@@ -12,11 +12,11 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75j-jM-Nud" userLabel="nameLabel">
-                        <rect key="frame" x="8" y="71" width="84" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75j-jM-Nud" userLabel="nameLabel">
+                        <rect key="frame" x="8" y="39" width="84" height="21"/>
                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="q3P-Xd-mXT"/>
+                            <constraint firstAttribute="height" priority="750" constant="21" id="q3P-Xd-mXT"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -33,7 +33,8 @@
             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="75j-jM-Nud" secondAttribute="trailing" constant="8" id="Nf4-Ee-9ST"/>
-                <constraint firstAttribute="bottom" secondItem="75j-jM-Nud" secondAttribute="bottom" constant="8" id="blg-9o-jKg"/>
+                <constraint firstAttribute="bottom" secondItem="75j-jM-Nud" secondAttribute="bottom" constant="40" id="blg-9o-jKg"/>
+                <constraint firstItem="75j-jM-Nud" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="gE1-wU-2Am"/>
                 <constraint firstItem="75j-jM-Nud" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="nND-Zh-7ss"/>
             </constraints>
             <size key="customSize" width="154" height="149"/>
@@ -45,7 +46,7 @@
             <connections>
                 <outlet property="nameLabel" destination="75j-jM-Nud" id="09N-qm-0AS"/>
             </connections>
-            <point key="canvasLocation" x="471" y="445"/>
+            <point key="canvasLocation" x="615" y="585"/>
         </collectionViewCell>
     </objects>
 </document>

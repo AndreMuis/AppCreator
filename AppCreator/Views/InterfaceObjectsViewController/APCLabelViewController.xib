@@ -25,23 +25,19 @@
                     <rect key="frame" x="69" y="38" width="210" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="uTF-ad-XbN"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZF4-nZ-Xd7" userLabel="addButton">
-                    <rect key="frame" x="46" y="104" width="30" height="30"/>
+                    <rect key="frame" x="75" y="104" width="30" height="30"/>
                     <state key="normal" title="Add"/>
                     <connections>
                         <action selector="addLabelTapped:" destination="-1" eventType="touchUpInside" id="Kt9-es-cGz"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xV-Q6-dym" userLabel="saveButton">
-                    <rect key="frame" x="138" y="104" width="34" height="30"/>
-                    <state key="normal" title="Save"/>
-                    <connections>
-                        <action selector="saveLabelTapped:" destination="-1" eventType="touchUpInside" id="FtN-S4-70O"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OuH-Dd-w7W" userLabel="deleteButton">
-                    <rect key="frame" x="230" y="104" width="45" height="30"/>
+                    <rect key="frame" x="196" y="104" width="45" height="30"/>
                     <state key="normal" title="Delete">
                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>

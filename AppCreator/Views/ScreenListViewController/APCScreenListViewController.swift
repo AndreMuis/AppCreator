@@ -10,13 +10,15 @@ import UIKit
 
 class APCScreenListViewController: UIViewController,
     UICollectionViewDataSource,
-    UICollectionViewDelegate,
-    APCScreenListDelegate
+    UICollectionViewDelegate
 {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var screenNameTextField: UITextField!
     
     var cellReuseIdentifier : String
+    
+    var movingCell : UICollectionViewCell?
+    var movingCellInitalCenter : CGPoint?
     
     var screenList : APCScreenList
     var session : APCSession
@@ -25,16 +27,13 @@ class APCScreenListViewController: UIViewController,
     {
         self.cellReuseIdentifier = String(APCScreenCollectionViewCell.self)
         
+        self.movingCell = nil
+        self.movingCellInitalCenter = nil
+        
         self.screenList = APCScreenList()
-        self.session = APCSession()
+        self.session = (UIApplication.sharedApplication().delegate as? AppDelegate)!.session
     
         super.init(coder: aDecoder)
-        
-        self.screenList.add(screen: APCScreen(name: "Screen 1"))
-        self.screenList.add(screen: APCScreen(name: "Screen 2"))
-        self.screenList.add(screen: APCScreen(name: "Screen 3"))
-        self.screenList.add(screen: APCScreen(name: "Screen 4"))
-        self.screenList.add(screen: APCScreen(name: "Screen 5"))
     }
     
     override func viewDidLoad()
@@ -55,44 +54,25 @@ class APCScreenListViewController: UIViewController,
             layout.minimumLineSpacing = 20.0
         }
         
-        self.collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(APCObjectListViewController.handleLongPress)))
-
-        self.screenList.delegate = self
         
-        self.session.activate()
-    }
-    
-    func handleLongPress(gesture: UILongPressGestureRecognizer)
-    {
-        switch(gesture.state)
-        {
-        case UIGestureRecognizerState.Began:
-            if let selectedIndexPath = self.collectionView!.indexPathForItemAtPoint(gesture.locationInView(self.collectionView))
-            {
-                self.collectionView.beginInteractiveMovementForItemAtIndexPath(selectedIndexPath)
-            }
-            
-        case UIGestureRecognizerState.Changed:
-            self.collectionView.updateInteractiveMovementTargetPosition(gesture.locationInView(gesture.view!))
-            
-        case UIGestureRecognizerState.Ended:
-            self.collectionView.endInteractiveMovement()
-            
-        default:
-            self.collectionView.cancelInteractiveMovement()
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
-    {
-        self.screenList.move(objectAtIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
-    }
-    
-    // MARK: APCScreenListDelegate
+        let doubleTapGestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                                         action: #selector(APCScreenCollectionViewCell.handleDoubleTap))
+        doubleTapGestureRecognizer.numberOfTapsRequired = 2
+        
+        self.collectionView.addGestureRecognizer(doubleTapGestureRecognizer)
 
-    func screenList(screenList: APCScreenList, didRemoveScreen screen: APCScreen)
-    {
-        self.collectionView.reloadData()
+        
+        let longPressGestureRecognizer : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(APCInterfaceObjectListViewController.handleLongPress))
+        
+        self.collectionView.addGestureRecognizer(longPressGestureRecognizer)
+
+
+        
+        self.screenList.add(screen: APCScreen(name: "Screen 1"))
+        self.screenList.add(screen: APCScreen(name: "Screen 2"))
+        self.screenList.add(screen: APCScreen(name: "Screen 3"))
+        self.screenList.add(screen: APCScreen(name: "Screen 4"))
+        self.screenList.add(screen: APCScreen(name: "Screen 5"))
     }
     
     // MARK: UICollectionViewDataSource
@@ -109,14 +89,20 @@ class APCScreenListViewController: UIViewController,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.cellReuseIdentifier, forIndexPath: indexPath) as! APCScreenCollectionViewCell
-
-        if let screen : APCScreen = self.screenList[indexPath.row]
+        let someCell : UICollectionViewCell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.cellReuseIdentifier, forIndexPath: indexPath)
+        
+        if let screen : APCScreen = self.screenList[indexPath.row],
+            cell = someCell as? APCScreenCollectionViewCell
         {
             cell.refresh(screen: screen)
         }
         
-        return cell
+        return someCell
+    }
+
+    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
+    {
+        self.screenList.move(objectAtIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
     
     // MARK: UICollectionViewDelegate
@@ -130,14 +116,68 @@ class APCScreenListViewController: UIViewController,
     }
 
     // MARK:
+
+    func handleDoubleTap(gestureRecognizer: UITapGestureRecognizer)
+    {
+        let point : CGPoint = gestureRecognizer.locationInView(self.collectionView)
     
+        if let indexPath : NSIndexPath = self.collectionView.indexPathForItemAtPoint(point)
+        {
+            if let screen : APCScreen = self.screenList[indexPath.row],
+                storyboard : UIStoryboard = self.storyboard,
+                viewController : APCScreenViewController = storyboard.instantiateViewControllerWithIdentifier(String(APCScreenViewController.self)) as? APCScreenViewController,
+                navigationController = self.navigationController
+            {
+                viewController.screen = screen
+                
+                navigationController.pushViewController(viewController, animated: true)
+            }
+        }
+    }
+
+    func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer)
+    {
+        switch(gestureRecognizer.state)
+        {
+        case UIGestureRecognizerState.Began:
+            if let indexPath = self.collectionView.indexPathForItemAtPoint(gestureRecognizer.locationInView(self.collectionView)),
+                let movingCell = self.collectionView.cellForItemAtIndexPath(indexPath)
+            {
+                self.movingCell = movingCell
+                self.movingCellInitalCenter = movingCell.center
+                
+                movingCell.animateExpansion()
+                
+                self.collectionView.beginInteractiveMovementForItemAtIndexPath(indexPath)
+            }
+            
+        case UIGestureRecognizerState.Changed:
+            self.collectionView.updateInteractiveMovementTargetPosition(gestureRecognizer.locationInView(gestureRecognizer.view))
+            
+        case UIGestureRecognizerState.Ended:
+            self.collectionView.endInteractiveMovement()
+            
+            if let cell = self.movingCell where cell.center == self.movingCellInitalCenter
+            {
+                cell.animateContraction()
+            }
+            
+        default:
+            self.collectionView.cancelInteractiveMovement()
+        }
+    }
+
     @IBAction func addButtonTapped(sender: AnyObject)
     {
-        self.screenList.add(screen: APCScreen(name: self.screenNameTextField.text!))
-
+        let screen : APCScreen = APCScreen(name: self.screenNameTextField.text!)
+        self.screenList.add(screen: screen)
+         
         let indexPath : NSIndexPath = NSIndexPath(forRow: self.screenList.count - 1, inSection: 0)
-        
         self.collectionView.insertItemsAtIndexPaths([indexPath])
+         
+        self.collectionView.selectItemAtIndexPath(indexPath,
+                                                  animated: false,
+                                                  scrollPosition: UICollectionViewScrollPosition.None)
     }
     
     @IBAction func saveButtonTapped(sender: AnyObject)
@@ -145,31 +185,14 @@ class APCScreenListViewController: UIViewController,
         if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
         {
             let indexPath = indexPaths[0]
-
+    
             if let screen : APCScreen = self.screenList[indexPath.row]
             {
                 screen.name = self.screenNameTextField.text!
             }
         }
     }
-    
-    @IBAction func designButtonTapped(sender: AnyObject)
-    {
-        if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
-        {
-            let indexPath = indexPaths[0]
-        
-            if let screen = self.screenList[indexPath.row],
-                viewController = self.storyboard?.instantiateViewControllerWithIdentifier("APCScreenViewController") as? APCScreenViewController
-            {
-                viewController.session = self.session
-                viewController.screen = screen
-             
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }
-        }
-    }
-    
+
     @IBAction func deleteButtonTapped(sender: AnyObject)
     {
         if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
@@ -179,6 +202,8 @@ class APCScreenListViewController: UIViewController,
             self.screenList.remove(objectAtIndex: indexPath.row)
             
             self.collectionView.deleteItemsAtIndexPaths([indexPath])
+            
+            self.screenNameTextField.text = ""
         }
     }
 }

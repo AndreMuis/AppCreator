@@ -24,6 +24,97 @@ class APCSession : NSObject, WCSessionDelegate
         }
     }
     
+    private var arrayContext = 0
+    private var selectedInterfaceObjectContext = 0
+    private var interfaceObjectContext = 0
+    
+    func addObservers(list : APCInterfaceObjectList)
+    {
+        list.addArrayObserver(self, context: &self.arrayContext)
+        
+        list.addObserver(self, forKeyPath: "selectedObject", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.selectedInterfaceObjectContext)
+    }
+
+    func removeObservers(list : APCInterfaceObjectList)
+    {
+        list.removeArrayObserver(self)
+        
+        list.removeObserver(self, forKeyPath: "selectedObject")
+    }
+
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
+    {
+        if (context == &self.arrayContext)
+        {
+            if let indexSet = change?["indexes"] as? NSIndexSet,
+                let changeRaw = change?["kind"] as? UInt,
+                let keyValueChange : NSKeyValueChange = NSKeyValueChange(rawValue: changeRaw)
+            {
+                switch keyValueChange
+                {
+                case NSKeyValueChange.Setting:
+                    break
+                    
+                case NSKeyValueChange.Insertion:
+                    if let objects = change?["new"] as? [APCInterfaceObject],
+                        object : APCInterfaceObject = objects[0]
+                    {
+                        self.insertInterfaceObject(object, atIndex: indexSet.firstIndex)
+                    }
+                    
+                case NSKeyValueChange.Removal:
+                    if let objects = change?["old"] as? [APCInterfaceObject],
+                        object : APCInterfaceObject = objects[0]
+                    {
+                        self.deleteInterfaceObject(object)
+                    }
+                    
+                case NSKeyValueChange.Replacement:
+                    break
+                }
+            }
+        }
+        else if (context == &self.selectedInterfaceObjectContext)
+        {
+            if let button = change?["old"] as? APCButton
+            {
+                button.removeObserver(self, forKeyPath: "title")
+            }
+            
+            if let button = change?["new"] as? APCButton
+            {
+                button.addObserver(self, forKeyPath: "title", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.interfaceObjectContext)
+            }
+            
+            if let image = change?["old"] as? APCImage
+            {
+                image.removeObserver(self, forKeyPath: "uiImage")
+            }
+            
+            if let image = change?["new"] as? APCImage
+            {
+                image.addObserver(self, forKeyPath: "uiImage", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.interfaceObjectContext)
+            }
+
+            if let label = change?["old"] as? APCLabel
+            {
+                label.removeObserver(self, forKeyPath: "text")
+            }
+
+            if let label = change?["new"] as? APCLabel
+            {
+                label.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.interfaceObjectContext)
+            }
+        }
+        else
+        {
+            if let object = object as? APCInterfaceObject
+            {
+                self.modifyInterfaceObject(object)
+            }
+        }
+    }
+    
     func activate()
     {
         self.session.activateSession()
@@ -67,31 +158,28 @@ class APCSession : NSObject, WCSessionDelegate
         self.sendMessage(message)
     }
     
-    func modifyInterfaceObject(object : APCInterfaceObject, atIndex index : Int)
+    func modifyInterfaceObject(object : APCInterfaceObject)
     {
         let message : [String : AnyObject] =
             [
                 "action" : APCInterfaceObjectListAction.Modify.rawValue,
-                "objectData" : object.archivedData(),
-                "index" : index
+                "objectData" : object.archivedData()
             ]
         
         if let image = object as? APCImage
         {
-            print(image.filePathURL!)
-            
-            self.session.transferFile(image.filePathURL!, metadata: nil)
+            self.session.transferFile(image.fileURL, metadata: ["imageIdAsString" : image.id.UUIDString])
         }
         
         self.sendMessage(message)
     }
 
-    func deleteInterfaceObject(atIndex index : Int)
+    func deleteInterfaceObject(object : APCInterfaceObject)
     {
         let message : [String : AnyObject] =
             [
                 "action" : APCInterfaceObjectListAction.Delete.rawValue,
-                "index" : index
+                "objectData" : object.archivedData()
             ]
         
         self.sendMessage(message)

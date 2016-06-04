@@ -9,7 +9,16 @@
 import Foundation
 import WatchKit
 
-class APCButtonTableRowController : NSObject
+class APCButtonTableRowController : NSObject, APCTableRowController
 {
     @IBOutlet var button : WKInterfaceButton!
+
+    var interfaceObjectId : NSUUID?
+    
+    override init()
+    {
+        super.init()
+        
+        self.interfaceObjectId = nil
+    }
 }

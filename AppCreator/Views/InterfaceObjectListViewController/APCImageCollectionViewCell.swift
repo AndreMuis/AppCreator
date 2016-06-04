@@ -1,5 +1,5 @@
 //
-//  APCLabelCollectionViewCell.swift
+//  APCImageCollectionViewCell.swift
 //  AppCreator
 //
 //  Created by Andre Muis on 6/1/16.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class APCLabelCollectionViewCell: UICollectionViewCell
+class APCImageCollectionViewCell: UICollectionViewCell
 {
-    @IBOutlet weak var textLabel: UILabel!
-    
-    var label : APCLabel?
+    @IBOutlet weak var imageView: UIImageView!
+
+    var image : APCImage?
     
     static var nib : UINib
     {
@@ -25,8 +25,6 @@ class APCLabelCollectionViewCell: UICollectionViewCell
     {
         super.awakeFromNib()
         
-        self.textLabel.textColor = UIColor.whiteColor()
-        
         let backgroundView : UIView = UIView()
         backgroundView.backgroundColor = UIColor(white: 0.3, alpha: 1.0)
         
@@ -38,32 +36,50 @@ class APCLabelCollectionViewCell: UICollectionViewCell
         self.selectedBackgroundView = selectedBackgroundView
     }
     
+    private var context = 0
+    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
-        self.textLabel.text = self.label!.text
+        if (context == &self.context)
+        {
+            if let image = self.image
+            {
+                self.imageView.image = image.uiImage
+            }
+        }
     }
     
     override func prepareForReuse()
     {
-        self.label?.removeObserver(self, forKeyPath: "text")
+        super.prepareForReuse()
+
+        if let image = self.image
+        {
+            image.removeObserver(self, forKeyPath: "uiImage")
+        }
     }
     
-    private var context = 0
-    
-    func refresh(label label : APCLabel)
+    func refresh(image image : APCImage)
     {
-        self.label = label
-
-        self.textLabel.text = label.text
+        self.image = image
         
-        label.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+        self.imageView.image = image.uiImage
+        
+        image.addObserver(self, forKeyPath: "uiImage", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
     }
     
     deinit
     {
-        self.label?.removeObserver(self, forKeyPath: "text")
+        if let image = self.image
+        {
+            image.removeObserver(self, forKeyPath: "uiImage")
+        }
     }
 }
+
+
+
+
 
 
 

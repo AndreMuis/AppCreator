@@ -10,7 +10,5 @@ protocol APCLabelViewControllerDelegate
 {
     func labelViewController(viewController : APCLabelViewController, addLabel label : APCLabel)
     
-    func labelViewController(viewController : APCLabelViewController, didModifyLabel label : APCLabel)
-    
     func labelViewController(viewController : APCLabelViewController, deleteLabel label : APCLabel)
 }

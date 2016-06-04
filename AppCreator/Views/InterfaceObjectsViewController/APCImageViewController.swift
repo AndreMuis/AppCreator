@@ -14,6 +14,13 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
     
     var delegate : APCImageViewControllerDelegate?
     var image : APCImage?
+    {
+        didSet
+        {
+            self.imageView.image = self.image?.uiImage ?? UIImage(named: "NoPhoto")
+        }
+    }
+    var imageFileURL : String?
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -26,13 +33,24 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
         
         self.delegate = nil
         self.image = nil
+        self.imageFileURL = nil
+    }
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        self.imageView.image = UIImage(named: "NoPhoto")
     }
     
     @IBAction func addImageTapped(sender: AnyObject)
     {
-        let image = APCImage(filePathURL: NSURL(fileURLWithPath: ""))
-        
-        self.delegate?.imageViewController(self, addImage: image)
+        if let delegate = self.delegate,
+            let uiImage = self.imageView.image,
+            let image = APCImage(uiImage: uiImage)
+        {
+            delegate.imageViewController(self, addImage: image)
+        }
     }
 
     @IBAction func selectImageTapped(sender: AnyObject)
@@ -50,7 +68,11 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
 
     @IBAction func deleteImageTapped(sender: AnyObject)
     {
-        self.delegate?.imageViewController(self, deleteImage: self.image!)
+        if let delegate = self.delegate,
+            image = self.image
+        {
+            delegate.imageViewController(self, deleteImage: image)
+        }
     }
     
     // MARK: UIImagePickerControllerDelegate
@@ -60,23 +82,14 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
         if let uiImage : UIImage = info[UIImagePickerControllerEditedImage] as? UIImage
         {
             self.imageView.image = uiImage
-        
-            self.image?.uiImage = uiImage
             
-            
-            let paths : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
-                                                                       NSSearchPathDomainMask.UserDomainMask,
-                                                                       true)
-
-            self.image!.filePathURL = NSURL(fileURLWithPath: "\(paths[0])/Image.png")
-            
-            
-            print(self.image!.filePathURL)
-            
-            UIImagePNGRepresentation(uiImage)?.writeToFile("\(paths[0])/Image.png", atomically: true)
-            
-            
-            self.delegate?.imageViewController(self, didModifyImage: self.image!)
+            if let image = self.image
+            {
+                if image.updateUIImage(uiImage) == false
+                {
+                    print("unable to update uiImage on an APCImage object")
+                }
+            }
             
             picker.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -87,11 +100,6 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 }
-
-
-
-
-
 
 
 

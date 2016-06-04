@@ -13,8 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 {
     var window: UIWindow?
 
+    let session : APCSession
+    
+    override init()
+    {
+        self.session = APCSession()
+
+        super.init()
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        self.session.activate()
+        
         return true
     }
 }

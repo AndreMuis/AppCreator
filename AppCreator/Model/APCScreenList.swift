@@ -8,15 +8,11 @@
 
 class APCScreenList
 {
-    internal weak var delegate : APCScreenListDelegate?
-
     private var screens : [APCScreen]
     
     init()
     {
         self.screens = [APCScreen]()
-        
-        self.delegate = nil
     }
     
     var count : Int

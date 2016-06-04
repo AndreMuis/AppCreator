@@ -36,17 +36,28 @@ class APCScreenCollectionViewCell: UICollectionViewCell
         self.selectedBackgroundView = selectedBackgroundView
     }
     
+    private var context = 0
+    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
-        self.nameLabel.text = self.screen!.name
+        if (context == &self.context)
+        {
+            if let screen = self.screen
+            {
+                self.nameLabel.text = screen.name
+            }
+        }
     }
     
     override func prepareForReuse()
     {
-        self.screen?.removeObserver(self, forKeyPath: "name")
+        super.prepareForReuse()
+        
+        if let screen = self.screen
+        {
+            screen.removeObserver(self, forKeyPath: "name")
+        }
     }
-
-    private var context = 0
 
     func refresh(screen screen : APCScreen)
     {
@@ -57,9 +68,17 @@ class APCScreenCollectionViewCell: UICollectionViewCell
         screen.addObserver(self, forKeyPath: "name", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
     }
     
+    func handleDoubleTap(gesture: UITapGestureRecognizer)
+    {
+        print("double tap")
+    }
+    
     deinit
     {
-        self.screen?.removeObserver(self, forKeyPath: "name")
+        if let screen = self.screen
+        {
+            screen.removeObserver(self, forKeyPath: "name")
+        }
     }
 }
 

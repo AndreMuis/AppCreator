@@ -10,7 +10,5 @@ protocol APCButtonViewControllerDelegate
 {
     func buttonViewController(viewController : APCButtonViewController, addButton button : APCButton)
 
-    func buttonViewController(viewController : APCButtonViewController, didModifyButton button : APCButton)
-    
     func buttonViewController(viewController : APCButtonViewController, deleteButton button : APCButton)
 }

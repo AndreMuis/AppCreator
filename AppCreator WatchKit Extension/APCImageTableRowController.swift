@@ -9,7 +9,16 @@
 import Foundation
 import WatchKit
 
-class APCImageTableRowController : NSObject
+class APCImageTableRowController : NSObject, APCTableRowController
 {
     @IBOutlet var image : WKInterfaceImage!
+    
+    var interfaceObjectId : NSUUID?
+    
+    override init()
+    {
+        super.init()
+        
+        self.interfaceObjectId = nil
+    }
 }

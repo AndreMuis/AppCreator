@@ -42,18 +42,29 @@ class APCButtonCollectionViewCell : UICollectionViewCell
         self.selectedBackgroundView = selectedBackgroundView
     }
     
+    private var context = 0
+    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
-        self.titleLabel.text = self.button!.title
+        if (context == &self.context)
+        {
+            if let button = self.button
+            {
+                self.titleLabel.text = button.title
+            }
+        }
     }
     
     override func prepareForReuse()
     {
-        self.button?.removeObserver(self, forKeyPath: "title")
+        super.prepareForReuse()
+
+        if let button = self.button
+        {
+            button.removeObserver(self, forKeyPath: "title")
+        }
     }
     
-    private var context = 0
-
     func refresh(button button : APCButton)
     {
         self.titleLabel.text = button.title
@@ -65,7 +76,10 @@ class APCButtonCollectionViewCell : UICollectionViewCell
     
     deinit
     {
-        self.button?.removeObserver(self, forKeyPath: "title")
+        if let button = self.button
+        {
+            button.removeObserver(self, forKeyPath: "title")
+        }
     }
 }
 

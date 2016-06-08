@@ -12,6 +12,8 @@ class APCButtonCollectionViewCell : UICollectionViewCell
 {
     @IBOutlet weak var titleLabel: UILabel!
     
+    var style : APCButtonCellStyle
+    
     var button : APCButton?
     
     static var nib : UINib
@@ -21,23 +23,31 @@ class APCButtonCollectionViewCell : UICollectionViewCell
         return nib
     }
     
+    required init?(coder aDecoder: NSCoder)
+    {
+        self.style = APCButtonCellStyle()
+        
+        self.button = nil
+        
+        super.init(coder: aDecoder)
+    }
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
 
-        self.layer.cornerRadius = 10.0
+        self.layer.cornerRadius = self.style.cornerRadius
         self.layer.masksToBounds = true
 
-        self.titleLabel.backgroundColor = UIColor.clearColor()
-        self.titleLabel.textColor = UIColor.whiteColor()
+        self.titleLabel.textColor = self.style.titleTextColor
 
         let backgroundView : UIView = UIView()
-        backgroundView.backgroundColor = UIColor(white: 0.3, alpha: 1.0)
+        backgroundView.backgroundColor = self.style.backgroundColor
         
         self.backgroundView = backgroundView
         
         let selectedBackgroundView : UIView = UIView()
-        selectedBackgroundView.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
+        selectedBackgroundView.backgroundColor = self.style.selectedBackgroundColor
         
         self.selectedBackgroundView = selectedBackgroundView
     }
@@ -65,6 +75,13 @@ class APCButtonCollectionViewCell : UICollectionViewCell
         }
     }
     
+    static func size(width : CGFloat) -> CGSize
+    {
+        let size : CGSize = CGSize(width: width, height: APCButtonCellStyle.height)
+        
+        return size
+    }
+
     func refresh(button button : APCButton)
     {
         self.titleLabel.text = button.title

@@ -125,32 +125,32 @@ class APCSession : NSObject, WCSessionDelegate
         print("reachable = \(self.session.reachable)")
     }
     
-    func refreshInterfaceObjectList(list : APCInterfaceObjectList)
+    func refreshScreen(screen : APCScreen)
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCInterfaceObjectListAction.Refresh.rawValue,
-                "listData" : list.archivedData()
+                "action" : APCWatchAppAction.RefreshScreen.rawValue,
+                "screenData" : screen.archivedData()
             ]
         
         self.sendMessage(message)
     }
 
-    func clearInterfaceObjectList()
+    func clearScreen()
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCInterfaceObjectListAction.Clear.rawValue
-            ]
+                "action" : APCWatchAppAction.ClearScreen.rawValue
+        ]
         
         self.sendMessage(message)
     }
-
+    
     func insertInterfaceObject(object : APCInterfaceObject, atIndex index : Int)
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCInterfaceObjectListAction.Insert.rawValue,
+                "action" : APCWatchAppAction.InsertInterfaceObject.rawValue,
                 "objectData" : object.archivedData(),
                 "index" : index
             ]
@@ -162,14 +162,9 @@ class APCSession : NSObject, WCSessionDelegate
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCInterfaceObjectListAction.Modify.rawValue,
+                "action" : APCWatchAppAction.ModifyInterfaceObject.rawValue,
                 "objectData" : object.archivedData()
             ]
-        
-        if let image = object as? APCImage
-        {
-            self.session.transferFile(image.fileURL, metadata: ["imageIdAsString" : image.id.UUIDString])
-        }
         
         self.sendMessage(message)
     }
@@ -178,18 +173,37 @@ class APCSession : NSObject, WCSessionDelegate
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCInterfaceObjectListAction.Delete.rawValue,
+                "action" : APCWatchAppAction.DeleteInterfaceObject.rawValue,
                 "objectData" : object.archivedData()
             ]
         
         self.sendMessage(message)
     }
 
+    func runWatchApp(screenList : APCScreenList)
+    {
+        let message : [String : AnyObject] =
+        [
+            "action" : APCWatchAppAction.Run.rawValue,
+            "screenListData" : screenList.archivedData()
+        ]
+        
+        self.sendMessage(message)
+    }
+    
     func sendMessage(message : [String : AnyObject])
     {
         self.session.sendMessage(message, replyHandler:
             { (reply) in
-                print(reply)
+                
+                if let imageIdAsString = reply["transferFileWithImageIdAsString"] as? String,
+                    let imageId : NSUUID = NSUUID(UUIDString: imageIdAsString)
+                {
+                    let image : APCImage = APCImage(id: imageId)
+                    
+                    self.session.transferFile(image.fileURL, metadata: ["imageIdAsString" : image.id.UUIDString])
+                }
+            
             })
             { (error) in
                 print(error)

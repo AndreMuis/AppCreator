@@ -6,7 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APCImageViewController" customModule="AppCreator" customModuleProvider="target">
             <connections>
+                <outlet property="deleteButton" destination="hCF-Xg-aRq" id="aU0-Iv-7gk"/>
                 <outlet property="imageView" destination="x7D-tH-ocM" id="rRy-WX-Ll9"/>
+                <outlet property="saveButton" destination="foy-wR-jFk" id="NGo-Xu-0sU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,36 +18,39 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7D-tH-ocM" userLabel="imageView">
-                    <rect key="frame" x="89" y="12" width="132" height="105"/>
+                    <rect key="frame" x="80" y="12" width="141" height="121"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBh-Wx-rIb" userLabel="addButton">
-                    <rect key="frame" x="46" y="141" width="30" height="30"/>
+                    <rect key="frame" x="41" y="151" width="30" height="30"/>
                     <state key="normal" title="Add"/>
                     <connections>
-                        <action selector="addImageTapped:" destination="-1" eventType="touchUpInside" id="fK7-Us-0Dk"/>
+                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="xpO-me-kkt"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoD-Ls-kx9" userLabel="selectButton">
-                    <rect key="frame" x="133" y="141" width="44" height="30"/>
-                    <state key="normal" title="Select"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foy-wR-jFk" userLabel="saveButton">
+                    <rect key="frame" x="133" y="151" width="34" height="30"/>
+                    <state key="normal" title="Save"/>
                     <connections>
-                        <action selector="selectImageTapped:" destination="-1" eventType="touchUpInside" id="YhK-mv-eJM"/>
+                        <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="7So-59-gUE"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCF-Xg-aRq" userLabel="deleteButton">
-                    <rect key="frame" x="230" y="141" width="45" height="30"/>
+                    <rect key="frame" x="229" y="151" width="45" height="30"/>
                     <state key="normal" title="Delete">
                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <state key="disabled">
+                        <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
-                        <action selector="deleteImageTapped:" destination="-1" eventType="touchUpInside" id="Kzw-cb-68l"/>
+                        <action selector="deleteButtonTapped:" destination="-1" eventType="touchUpInside" id="oEu-ci-fXS"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="301" y="536"/>
+            <point key="canvasLocation" x="365" y="359"/>
         </view>
     </objects>
 </document>

@@ -11,7 +11,19 @@ import UIKit
 class APCImage: NSObject, APCInterfaceObject
 {
     let id : NSUUID
+    
     var fileURL : NSURL
+    {
+        let documentDirectoryURLs : [NSURL] = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory,
+                                                                                              inDomains: NSSearchPathDomainMask.UserDomainMask)
+        
+        let documentDirectoryURL : NSURL = documentDirectoryURLs[0]
+        
+        let url = documentDirectoryURL.URLByAppendingPathComponent("\(self.id.UUIDString).png")
+        
+        return url
+    }
+    
     dynamic var uiImage : UIImage?
     
     init?(uiImage : UIImage)
@@ -19,17 +31,11 @@ class APCImage: NSObject, APCInterfaceObject
         self.id = NSUUID()
         self.uiImage = uiImage
         
+        super.init()
+
         if let imageData = UIImagePNGRepresentation(uiImage)
         {
-            let documentDirectoryURLs : [NSURL] = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory,
-                                                                                                  inDomains: NSSearchPathDomainMask.UserDomainMask)
-            
-            let documentDirectoryURL : NSURL = documentDirectoryURLs[0]
-            
-            let fileURL = documentDirectoryURL.URLByAppendingPathComponent("\(self.id.UUIDString).png")
-            self.fileURL = fileURL
-            
-            if imageData.writeToURL(fileURL, atomically: true) == false
+            if imageData.writeToURL(self.fileURL, atomically: true) == false
             {
                 return nil
             }
@@ -40,12 +46,13 @@ class APCImage: NSObject, APCInterfaceObject
         }
     }
     
-    init(id : NSUUID, fileURL : NSURL)
+    init(id : NSUUID)
     {
         self.id = id
-        self.fileURL = fileURL
         
-        if let imageData = NSData(contentsOfURL: fileURL)
+        super.init()
+
+        if let imageData = NSData(contentsOfURL: self.fileURL)
         {
             self.uiImage = UIImage(data: imageData)
         }
@@ -53,20 +60,18 @@ class APCImage: NSObject, APCInterfaceObject
     
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let id = decoder.decodeObjectForKey("id") as? NSUUID,
-            let fileURL = decoder.decodeObjectForKey("fileURL") as? NSURL
+        guard let id = decoder.decodeObjectForKey("id") as? NSUUID
             else
         {
             return nil
         }
         
-        self.init(id: id, fileURL: fileURL)
+        self.init(id: id)
     }
     
     func encodeWithCoder(coder: NSCoder)
     {
         coder.encodeObject(self.id, forKey: "id")
-        coder.encodeObject(self.fileURL, forKey: "fileURL")
     }
 
     func updateUIImage(uiImage : UIImage) -> Bool

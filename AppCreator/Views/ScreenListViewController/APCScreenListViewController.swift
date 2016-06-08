@@ -12,8 +12,17 @@ class APCScreenListViewController: UIViewController,
     UICollectionViewDataSource,
     UICollectionViewDelegate
 {
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var screenNameTextField: UITextField!
+    
+    @IBOutlet weak var bottomContentView: UIView!
+    @IBOutlet weak var screenTitleTextField: UITextField!
+    @IBOutlet weak var initialScreenSwitch: UISwitch!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    var style : APCScreenListStyle
     
     var cellReuseIdentifier : String
     
@@ -25,12 +34,14 @@ class APCScreenListViewController: UIViewController,
     
     required init?(coder aDecoder: NSCoder)
     {
+        self.style = APCScreenListStyle()
+        
         self.cellReuseIdentifier = String(APCScreenCollectionViewCell.self)
         
         self.movingCell = nil
         self.movingCellInitalCenter = nil
         
-        self.screenList = APCScreenList()
+        self.screenList = (UIApplication.sharedApplication().delegate as? AppDelegate)!.screenList
         self.session = (UIApplication.sharedApplication().delegate as? AppDelegate)!.session
     
         super.init(coder: aDecoder)
@@ -40,23 +51,38 @@ class APCScreenListViewController: UIViewController,
     {
         super.viewDidLoad()
         
-        self.collectionView.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+        self.scrollView.delaysContentTouches = false
+        
+        self.collectionView.backgroundColor = self.style.backgroundColor
         self.collectionView.showsVerticalScrollIndicator = false
         
         self.collectionView.registerNib(APCScreenCollectionViewCell.nib, forCellWithReuseIdentifier: self.cellReuseIdentifier)
         
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         {
-            layout.itemSize = CGSize(width: 150.0, height: 150.0)
+            let cellWidth = (CGRectGetWidth(self.collectionView.bounds) - 3.0 * self.style.cellMargin) / 2.0
             
-            layout.sectionInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
-            layout.minimumInteritemSpacing = 20.0
-            layout.minimumLineSpacing = 20.0
+            layout.itemSize = CGSize(width: cellWidth,
+                                     height: cellWidth)
+            
+            layout.sectionInset = UIEdgeInsets(top: self.style.cellMargin,
+                                               left: self.style.cellMargin,
+                                               bottom: self.style.cellMargin,
+                                               right: self.style.cellMargin)
+            
+            layout.minimumInteritemSpacing = self.style.cellMargin
+            layout.minimumLineSpacing = self.style.cellMargin
         }
+
+        self.initialScreenSwitch.enabled = false
+        self.initialScreenSwitch.on = false
         
+        self.saveButton.enabled = false
+        self.deleteButton.enabled = false
+
         
         let doubleTapGestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer(target: self,
-                                                                                         action: #selector(APCScreenCollectionViewCell.handleDoubleTap))
+                                                                                         action: #selector(APCScreenListViewController.handleDoubleTap))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
         
         self.collectionView.addGestureRecognizer(doubleTapGestureRecognizer)
@@ -66,15 +92,23 @@ class APCScreenListViewController: UIViewController,
         
         self.collectionView.addGestureRecognizer(longPressGestureRecognizer)
 
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(keyboardWillShow),
+                                                         name: UIKeyboardWillShowNotification,
+                                                         object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(keyboardWillHide),
+                                                         name: UIKeyboardWillHideNotification,
+                                                         object: nil)
 
         
-        self.screenList.add(screen: APCScreen(name: "Screen 1"))
-        self.screenList.add(screen: APCScreen(name: "Screen 2"))
-        self.screenList.add(screen: APCScreen(name: "Screen 3"))
-        self.screenList.add(screen: APCScreen(name: "Screen 4"))
-        self.screenList.add(screen: APCScreen(name: "Screen 5"))
+        
+        self.screenList.add(screen: APCScreen(title: "Screen 1"))
+        self.screenList.add(screen: APCScreen(title: "Screen 2"))
+        self.screenList.add(screen: APCScreen(title: "Screen 3"))
     }
-    
+
     // MARK: UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
@@ -111,10 +145,42 @@ class APCScreenListViewController: UIViewController,
     {
         if let screen : APCScreen = self.screenList[indexPath.row]
         {
-            self.screenNameTextField.text = screen.name
+            self.screenList.selectedScreen = screen
+            
+            self.screenTitleTextField.text = screen.title
+            
+            self.initialScreenSwitch.enabled = true
+            
+            if screen.id == self.screenList.initialScreenId
+            {
+                self.initialScreenSwitch.on = true
+            }
+            else
+            {
+                self.initialScreenSwitch.on = false
+            }
+
+            self.saveButton.enabled = true
+            self.deleteButton.enabled = true
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
+    {
+        if cell.selected == true
+        {
+            self.screenTitleTextField.text = ""
 
+            self.screenList.initialScreenId = nil
+            
+            self.initialScreenSwitch.enabled = false
+            self.initialScreenSwitch.on = false
+            
+            self.saveButton.enabled = false
+            self.deleteButton.enabled = false
+        }
+    }
+    
     // MARK:
 
     func handleDoubleTap(gestureRecognizer: UITapGestureRecognizer)
@@ -167,28 +233,44 @@ class APCScreenListViewController: UIViewController,
         }
     }
 
+    @IBAction func initialScreenSwitchValueChanged(sender: AnyObject)
+    {
+        if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count == 1,
+            let screen = self.screenList[indexPaths[0].row]
+        {
+            self.screenList.initialScreenId = screen.id
+        }
+    }
+    
     @IBAction func addButtonTapped(sender: AnyObject)
     {
-        let screen : APCScreen = APCScreen(name: self.screenNameTextField.text!)
-        self.screenList.add(screen: screen)
-         
-        let indexPath : NSIndexPath = NSIndexPath(forRow: self.screenList.count - 1, inSection: 0)
-        self.collectionView.insertItemsAtIndexPaths([indexPath])
-         
-        self.collectionView.selectItemAtIndexPath(indexPath,
-                                                  animated: false,
-                                                  scrollPosition: UICollectionViewScrollPosition.None)
+        if self.screenTitleTextField.trimmedText.isEmpty == false
+        {
+            let screen : APCScreen = APCScreen(title: self.screenTitleTextField.text!)
+            self.screenList.add(screen: screen)
+            self.screenList.selectedScreen = screen
+            
+            let indexPath : NSIndexPath = NSIndexPath(forRow: self.screenList.count - 1, inSection: 0)
+            self.collectionView.insertItemsAtIndexPaths([indexPath])
+            
+            self.collectionView.selectItemAtIndexPath(indexPath,
+                                                      animated: false,
+                                                      scrollPosition: UICollectionViewScrollPosition.None)
+        }
     }
     
     @IBAction func saveButtonTapped(sender: AnyObject)
     {
-        if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
+        if self.screenTitleTextField.trimmedText.isEmpty == false
         {
-            let indexPath = indexPaths[0]
-    
-            if let screen : APCScreen = self.screenList[indexPath.row]
+            if let indexPaths = self.collectionView.indexPathsForSelectedItems() where indexPaths.count >= 1
             {
-                screen.name = self.screenNameTextField.text!
+                let indexPath = indexPaths[0]
+        
+                if let screen : APCScreen = self.screenList[indexPath.row]
+                {
+                    screen.title = self.screenTitleTextField.text!
+                }
             }
         }
     }
@@ -200,11 +282,68 @@ class APCScreenListViewController: UIViewController,
             let indexPath = indexPaths[0]
             
             self.screenList.remove(objectAtIndex: indexPath.row)
+            self.screenList.selectedScreen = nil
             
             self.collectionView.deleteItemsAtIndexPaths([indexPath])
             
-            self.screenNameTextField.text = ""
+            self.screenTitleTextField.text = ""
         }
+    }
+    
+    @IBAction func runAppButtonTapped(sender: AnyObject)
+    {
+        if self.screenList.initialScreenId != nil
+        {
+            self.session.runWatchApp(self.screenList)
+        }
+        else
+        {
+            let alertController : UIAlertController = UIAlertController(title: "",
+                                                                        message: "Please set an inital screen.",
+                                                                        preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let alertAction = UIAlertAction(title: "OK",
+                                            style: UIAlertActionStyle.Default,
+                                            handler: nil)
+            
+            alertController.addAction(alertAction)
+            
+            self.presentViewController(alertController,
+                                       animated: true,
+                                       completion: nil)
+        }
+    }
+    
+    // MARK: Keyboard
+    
+    func keyboardWillShow(notification : NSNotification)
+    {
+        if let keyboardFrame : CGRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue()
+        {
+            let textFieldBottomMargin = CGRectGetHeight(self.bottomContentView.bounds) - CGRectGetMaxY(self.screenTitleTextField.frame)
+            
+            let scrollViewYOffset : CGFloat = (CGRectGetHeight(keyboardFrame) - textFieldBottomMargin) + self.style.screenTitleTextFieldToKeyboardSpacing
+            
+            self.scrollView.contentOffset = CGPoint(x: 0.0, y: scrollViewYOffset)
+        }
+    }
+    
+    func keyboardWillHide(notification : NSNotification)
+    {
+        self.scrollView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+    }
+    
+    // MARK:
+
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillShowNotification,
+                                                            object: nil)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillHideNotification,
+                                                            object: nil)
     }
 }
 

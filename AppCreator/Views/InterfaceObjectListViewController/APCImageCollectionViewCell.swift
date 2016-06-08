@@ -11,7 +11,11 @@ import UIKit
 class APCImageCollectionViewCell: UICollectionViewCell
 {
     @IBOutlet weak var imageView: UIImageView!
-
+    @IBOutlet weak var overlayView: UIView!
+    
+    let style : APCImageCellStyle
+    
+    var delegate : APCImageCollectionViewCellDelegate?
     var image : APCImage?
     
     static var nib : UINib
@@ -20,20 +24,53 @@ class APCImageCollectionViewCell: UICollectionViewCell
         
         return nib
     }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        self.style = APCImageCellStyle()
+        
+        self.delegate = nil
+        self.image = nil
+        
+        super.init(coder: aDecoder)
+    }
+    
+    override var selected: Bool
+    {
+        didSet
+        {
+            if (self.selected == true)
+            {
+                self.overlayView.hidden = false
+            }
+            else
+            {
+                self.overlayView.hidden = true
+            }
+        }
+    }
 
+    override var highlighted : Bool
+    {
+        didSet
+        {
+            if (self.highlighted == true)
+            {
+                self.overlayView.hidden = false
+            }
+            else if (self.selected == false)
+            {
+                self.overlayView.hidden = true
+            }
+        }
+    }
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        
-        let backgroundView : UIView = UIView()
-        backgroundView.backgroundColor = UIColor(white: 0.3, alpha: 1.0)
-        
-        self.backgroundView = backgroundView
-        
-        let selectedBackgroundView : UIView = UIView()
-        selectedBackgroundView.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
-        
-        self.selectedBackgroundView = selectedBackgroundView
+
+        self.overlayView.backgroundColor = self.style.overlayBackgroundColor
+        self.overlayView.hidden = true
     }
     
     private var context = 0
@@ -45,6 +82,11 @@ class APCImageCollectionViewCell: UICollectionViewCell
             if let image = self.image
             {
                 self.imageView.image = image.uiImage
+                
+                if let delegate = self.delegate
+                {
+                    delegate.imageCollectionViewCellDidUpdateText(self)
+                }
             }
         }
     }
@@ -59,6 +101,33 @@ class APCImageCollectionViewCell: UICollectionViewCell
         }
     }
     
+    static func size(width : CGFloat, uiImage : UIImage) -> CGSize
+    {
+        var size : CGSize = CGSizeZero
+
+        let topLevelObjects : [AnyObject] = NSBundle.mainBundle().loadNibNamed(String(APCImageCollectionViewCell.self), owner: nil, options: nil)
+        
+        if let cell : APCImageCollectionViewCell = topLevelObjects[0] as? APCImageCollectionViewCell,
+            let image = APCImage(uiImage: uiImage)
+            {
+                cell.refresh(image: image)
+                
+                cell.imageView.addConstraint(NSLayoutConstraint(item: cell.imageView,
+                                                                attribute: NSLayoutAttribute.Height,
+                                                                relatedBy: NSLayoutRelation.Equal,
+                                                                toItem: cell.imageView,
+                                                                attribute: NSLayoutAttribute.Width,
+                                                                multiplier: uiImage.size.height / uiImage.size.width,
+                                                                constant: 0.0))
+                
+                size = cell.systemLayoutSizeFittingSize(CGSize(width: width, height: 10000.0),
+                                                        withHorizontalFittingPriority: UILayoutPriorityRequired,
+                                                        verticalFittingPriority: UILayoutPriorityDefaultLow)
+            }
+        
+        return size
+    }
+    
     func refresh(image image : APCImage)
     {
         self.image = image
@@ -67,7 +136,7 @@ class APCImageCollectionViewCell: UICollectionViewCell
         
         image.addObserver(self, forKeyPath: "uiImage", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
     }
-    
+   
     deinit
     {
         if let image = self.image

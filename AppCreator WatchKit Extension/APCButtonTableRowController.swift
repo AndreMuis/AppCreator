@@ -11,14 +11,34 @@ import WatchKit
 
 class APCButtonTableRowController : NSObject, APCTableRowController
 {
-    @IBOutlet var button : WKInterfaceButton!
+    @IBOutlet var buttonOutlet : WKInterfaceButton!
+
+    var button : APCButton?
+    {
+        didSet
+        {
+            if let button = self.button
+            {
+                self.buttonOutlet.setTitle(button.title)
+            }
+            else
+            {
+                self.buttonOutlet.setTitle("")
+            }
+
+            self.buttonOutlet.setTitle(self.button?.title ?? "")
+        }
+    }
 
     var interfaceObjectId : NSUUID?
+    {
+        return self.button?.id
+    }
     
     override init()
     {
         super.init()
         
-        self.interfaceObjectId = nil
+        self.button = nil
     }
 }

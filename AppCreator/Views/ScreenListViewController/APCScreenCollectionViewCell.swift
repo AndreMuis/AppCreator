@@ -10,7 +10,9 @@ import UIKit
 
 class APCScreenCollectionViewCell: UICollectionViewCell
 {
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+
+    let style : APCScreenListCellStyle
 
     var screen : APCScreen?
     
@@ -21,17 +23,24 @@ class APCScreenCollectionViewCell: UICollectionViewCell
         return nib
     }
     
+    required init?(coder aDecoder: NSCoder)
+    {
+        self.style = APCScreenListCellStyle()
+        
+        super.init(coder: aDecoder)
+    }
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
     
         let backgroundView : UIView = UIView()
-        backgroundView.backgroundColor = UIColor.whiteColor()
+        backgroundView.backgroundColor = self.style.backgroundColor
         
         self.backgroundView = backgroundView
         
         let selectedBackgroundView : UIView = UIView()
-        selectedBackgroundView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        selectedBackgroundView.backgroundColor = self.style.selectedBackgroundColor
         
         self.selectedBackgroundView = selectedBackgroundView
     }
@@ -44,7 +53,7 @@ class APCScreenCollectionViewCell: UICollectionViewCell
         {
             if let screen = self.screen
             {
-                self.nameLabel.text = screen.name
+                self.titleLabel.text = screen.title
             }
         }
     }
@@ -63,14 +72,9 @@ class APCScreenCollectionViewCell: UICollectionViewCell
     {
         self.screen = screen
         
-        self.nameLabel.text = screen.name
+        self.titleLabel.text = screen.title
         
         screen.addObserver(self, forKeyPath: "name", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
-    }
-    
-    func handleDoubleTap(gesture: UITapGestureRecognizer)
-    {
-        print("double tap")
     }
     
     deinit

@@ -5,41 +5,41 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
-        <!--Template Interface Controller-->
+        <!--APCTemplateInterfaceController-->
         <scene sceneID="Tj3-5j-L2s">
             <objects>
-                <controller id="qEF-x8-Rvf" customClass="APCTemplateInterfaceController" customModule="AppCreator_WatchKit_Extension">
+                <controller identifier="APCTemplateInterfaceController" id="qEF-x8-Rvf" customClass="APCTemplateInterfaceController" customModule="AppCreator_WatchKit_Extension">
                     <items>
                         <table alignment="left" id="HR4-2B-6xK" userLabel="table">
                             <items>
                                 <tableRow identifier="APCButtonTableRowController" id="BLN-88-Rni" customClass="APCButtonTableRowController" customModule="AppCreator_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="XBG-yx-dES">
                                         <items>
-                                            <button width="1" alignment="left" title="Button" id="RQN-Us-5ED" userLabel="button"/>
+                                            <button width="136" alignment="left" title="Button" enabled="NO" id="RQN-Us-5ED" userLabel="buttonOutlet"/>
                                         </items>
                                     </group>
                                     <connections>
-                                        <outlet property="button" destination="RQN-Us-5ED" id="ZEn-gQ-DuU"/>
+                                        <outlet property="buttonOutlet" destination="RQN-Us-5ED" id="nRU-7K-Xz3"/>
                                     </connections>
                                 </tableRow>
                                 <tableRow identifier="APCImageTableRowController" id="Pof-7I-nCW" customClass="APCImageTableRowController" customModule="AppCreator_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="asw-bN-WdJ">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="asw-bN-WdJ">
                                         <items>
-                                            <imageView alignment="left" id="x6p-Hh-hXB" userLabel="image"/>
+                                            <imageView alignment="left" id="x6p-Hh-hXB" userLabel="imageOutlet"/>
                                         </items>
                                     </group>
                                     <connections>
-                                        <outlet property="image" destination="x6p-Hh-hXB" id="mHk-UX-d5j"/>
+                                        <outlet property="imageOutlet" destination="x6p-Hh-hXB" id="UfT-7X-YkN"/>
                                     </connections>
                                 </tableRow>
                                 <tableRow identifier="APCLabelTableRowController" id="85m-Mv-hj5" customClass="APCLabelTableRowController" customModule="AppCreator_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="p1t-ek-eat">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="p1t-ek-eat">
                                         <items>
-                                            <label alignment="left" text="Label" id="wNO-ru-3Jd" userLabel="label"/>
+                                            <label width="1" alignment="left" text="Label" numberOfLines="0" id="wNO-ru-3Jd" userLabel="labelOutlet"/>
                                         </items>
                                     </group>
                                     <connections>
-                                        <outlet property="label" destination="wNO-ru-3Jd" id="baL-yn-w1k"/>
+                                        <outlet property="labelOutlet" destination="wNO-ru-3Jd" id="u0g-ad-fX4"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -50,7 +50,14 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="340" y="261"/>
+            <point key="canvasLocation" x="220" y="289"/>
+        </scene>
+        <!--tmp-->
+        <scene sceneID="25v-RJ-g71">
+            <objects>
+                <controller identifier="tmp" id="04T-We-f0w"/>
+            </objects>
+            <point key="canvasLocation" x="504" y="289"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

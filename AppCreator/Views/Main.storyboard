@@ -34,61 +34,137 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7VD-Vk-uEw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YgQ-gt-9EV" customClass="APCCollectionViewFlowLayout" customModule="AppCreator" customModuleProvider="target">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="ck3-Vr-u4K" id="NJr-AR-OoI"/>
-                                    <outlet property="delegate" destination="ck3-Vr-u4K" id="9u8-hq-IZZ"/>
-                                </connections>
-                            </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Screen Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33a-bL-wbK">
-                                <rect key="frame" x="20" y="528" width="108" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jQ-NJ-gU9" userLabel="screenNameTextField">
-                                <rect key="frame" x="136" y="524" width="186" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beE-I3-LLi" userLabel="addButton">
-                                <rect key="frame" x="68" y="573" width="28" height="30"/>
-                                <state key="normal" title="Add"/>
-                                <connections>
-                                    <action selector="addButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="7N4-CN-bEB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3k-DM-vDb" userLabel="saveButton">
-                                <rect key="frame" x="170" y="573" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="ML8-kh-Pts"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T2-el-x9g" userLabel="deleteButton">
-                                <rect key="frame" x="259" y="573" width="45" height="30"/>
-                                <state key="normal" title="Delete"/>
-                                <connections>
-                                    <action selector="deleteButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="0XM-21-W7j"/>
-                                </connections>
-                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gl5-jJ-sT5" userLabel="scrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHc-IB-Dwq">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7VD-Vk-uEw">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="463"/>
+                                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YgQ-gt-9EV" customClass="APCCollectionViewFlowLayout" customModule="AppCreator" customModuleProvider="target">
+                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="ck3-Vr-u4K" id="NJr-AR-OoI"/>
+                                                    <outlet property="delegate" destination="ck3-Vr-u4K" id="9u8-hq-IZZ"/>
+                                                </connections>
+                                            </collectionView>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-vu-XdH" userLabel="bottomContentView">
+                                                <rect key="frame" x="0.0" y="463" width="375" height="160"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="double tap to design  /  tap and hold to reorder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tND-DT-tJ6">
+                                                        <rect key="frame" x="20" y="12" width="335" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Screen Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33a-bL-wbK">
+                                                        <rect key="frame" x="20" y="45" width="96" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jQ-NJ-gU9" userLabel="screenTitleTextField">
+                                                        <rect key="frame" x="125" y="41" width="231" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beE-I3-LLi" userLabel="addButton">
+                                                        <rect key="frame" x="20" y="112" width="28" height="30"/>
+                                                        <state key="normal" title="Add"/>
+                                                        <connections>
+                                                            <action selector="addButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="7N4-CN-bEB"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3k-DM-vDb" userLabel="saveButton">
+                                                        <rect key="frame" x="115" y="112" width="34" height="30"/>
+                                                        <state key="normal" title="Save"/>
+                                                        <connections>
+                                                            <action selector="saveButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="ML8-kh-Pts"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T2-el-x9g" userLabel="deleteButton">
+                                                        <rect key="frame" x="207" y="112" width="45" height="30"/>
+                                                        <state key="normal" title="Delete">
+                                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <state key="disabled">
+                                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="deleteButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="0XM-21-W7j"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eM5-yD-ZHK" userLabel="runAppButton">
+                                                        <rect key="frame" x="296" y="112" width="59" height="30"/>
+                                                        <state key="normal" title="Run App"/>
+                                                        <connections>
+                                                            <action selector="runAppButtonTapped:" destination="ck3-Vr-u4K" eventType="touchUpInside" id="tkb-Pg-5mg"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Initial Screen:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Rk-u1-LiK">
+                                                        <rect key="frame" x="19" y="84" width="103" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rF2-3X-ax9" userLabel="initialScreenSwitch">
+                                                        <rect key="frame" x="130" y="79" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="initialScreenSwitchValueChanged:" destination="ck3-Vr-u4K" eventType="valueChanged" id="LXd-hT-mcp"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xHc-IB-Dwq" secondAttribute="trailing" id="4hJ-Ch-W9A"/>
+                                    <constraint firstItem="xHc-IB-Dwq" firstAttribute="top" secondItem="Gl5-jJ-sT5" secondAttribute="top" id="NGm-Pf-58g"/>
+                                    <constraint firstItem="xHc-IB-Dwq" firstAttribute="centerX" secondItem="Gl5-jJ-sT5" secondAttribute="centerX" id="ZUM-wx-pYG"/>
+                                    <constraint firstItem="xHc-IB-Dwq" firstAttribute="leading" secondItem="Gl5-jJ-sT5" secondAttribute="leading" id="exp-7P-6Fy"/>
+                                    <constraint firstItem="xHc-IB-Dwq" firstAttribute="centerY" secondItem="Gl5-jJ-sT5" secondAttribute="centerY" id="iHS-Rs-KR1"/>
+                                    <constraint firstAttribute="bottom" secondItem="xHc-IB-Dwq" secondAttribute="bottom" id="js3-Bc-krH"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gl5-jJ-sT5" firstAttribute="leading" secondItem="ATC-7V-g5p" secondAttribute="leading" id="Edk-hB-QBP"/>
+                            <constraint firstItem="Gl5-jJ-sT5" firstAttribute="top" secondItem="6gs-fM-Ukv" secondAttribute="bottom" id="SaS-hw-hjq"/>
+                            <constraint firstAttribute="trailing" secondItem="Gl5-jJ-sT5" secondAttribute="trailing" id="oS3-28-HEe"/>
+                            <constraint firstItem="b8C-pX-65F" firstAttribute="top" secondItem="Gl5-jJ-sT5" secondAttribute="bottom" id="wzD-IT-Cb9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Screens" id="Dzo-wN-Vp0"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="bottomContentView" destination="yZc-vu-XdH" id="ReZ-mb-pTJ"/>
                         <outlet property="collectionView" destination="7VD-Vk-uEw" id="3yT-SD-4Ea"/>
-                        <outlet property="screenNameTextField" destination="5jQ-NJ-gU9" id="oNi-03-rdD"/>
+                        <outlet property="deleteButton" destination="9T2-el-x9g" id="IpD-3P-f9T"/>
+                        <outlet property="initialScreenSwitch" destination="rF2-3X-ax9" id="lJu-Jr-a1H"/>
+                        <outlet property="saveButton" destination="E3k-DM-vDb" id="Owb-do-ao6"/>
+                        <outlet property="screenTitleTextField" destination="5jQ-NJ-gU9" id="afZ-rp-siI"/>
+                        <outlet property="scrollView" destination="Gl5-jJ-sT5" id="agY-lR-4U6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTD-eE-yWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -107,24 +183,52 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-xN-n8G">
-                                <rect key="frame" x="67" y="46" width="240" height="208"/>
-                                <connections>
-                                    <segue destination="wJy-qO-nrh" kind="embed" id="NVk-td-SCN"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9v-Tp-lW2">
-                                <rect key="frame" x="20" y="322" width="335" height="281"/>
-                                <connections>
-                                    <segue destination="7pP-fM-2AF" kind="embed" id="lfo-do-UsR"/>
-                                </connections>
-                            </containerView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bF-sJ-fN2" userLabel="scrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="py6-8X-fBL">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-xN-n8G">
+                                                <rect key="frame" x="67" y="36" width="240" height="208"/>
+                                                <connections>
+                                                    <segue destination="wJy-qO-nrh" kind="embed" id="NVk-td-SCN"/>
+                                                </connections>
+                                            </containerView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9v-Tp-lW2">
+                                                <rect key="frame" x="20" y="304" width="335" height="281"/>
+                                                <connections>
+                                                    <segue destination="7pP-fM-2AF" kind="embed" id="lfo-do-UsR"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="py6-8X-fBL" firstAttribute="centerX" secondItem="1bF-sJ-fN2" secondAttribute="centerX" id="Bsg-ZB-xMx"/>
+                                    <constraint firstAttribute="trailing" secondItem="py6-8X-fBL" secondAttribute="trailing" id="Hmw-RM-KuC"/>
+                                    <constraint firstItem="py6-8X-fBL" firstAttribute="top" secondItem="1bF-sJ-fN2" secondAttribute="top" id="ab5-fA-Oge"/>
+                                    <constraint firstAttribute="bottom" secondItem="py6-8X-fBL" secondAttribute="bottom" id="lcR-Nj-5Ko"/>
+                                    <constraint firstItem="py6-8X-fBL" firstAttribute="centerY" secondItem="1bF-sJ-fN2" secondAttribute="centerY" id="wzw-ta-Jls"/>
+                                    <constraint firstItem="py6-8X-fBL" firstAttribute="leading" secondItem="1bF-sJ-fN2" secondAttribute="leading" id="xFJ-Wf-3kD"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1bF-sJ-fN2" secondAttribute="trailing" id="Dev-Rd-njY"/>
+                            <constraint firstItem="I6E-b0-EA1" firstAttribute="top" secondItem="1bF-sJ-fN2" secondAttribute="bottom" id="EpW-ar-bkR"/>
+                            <constraint firstItem="1bF-sJ-fN2" firstAttribute="leading" secondItem="lLI-yD-JDy" secondAttribute="leading" id="KwW-It-rrh"/>
+                            <constraint firstItem="1bF-sJ-fN2" firstAttribute="top" secondItem="KO7-4a-NXF" secondAttribute="bottom" id="mvZ-Ny-w4T"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="scrollView" destination="1bF-sJ-fN2" id="mLX-cr-KU1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpz-jf-92h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -144,7 +248,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="92Y-Kz-5ce" userLabel="collectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="208"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DfF-Lt-18J">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DfF-Lt-18J" customClass="APCCollectionViewFlowLayout" customModule="AppCreator" customModuleProvider="target">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>

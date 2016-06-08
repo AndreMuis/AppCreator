@@ -8,51 +8,83 @@
 
 import UIKit
 
-class APCLabelViewController: UIViewController, UITextFieldDelegate
+class APCLabelViewController: UIViewController
 {
-    @IBOutlet weak var textTextField: UITextField!
+    @IBOutlet weak var textTextView : UITextView!
+    @IBOutlet weak var saveButton : UIButton!
+    @IBOutlet weak var deleteButton : UIButton!
 
+    var style : APCLabelViewStyle!
+    
     var delegate : APCLabelViewControllerDelegate?
 
     var label : APCLabel?
     {
         didSet
         {
-            self.textTextField.text = self.label?.text ?? ""
+            self.textTextView.text = self.label?.text ?? ""
+            
+            self.saveButton.enabled = self.label != nil ? true : false
+            self.deleteButton.enabled = self.label != nil ? true : false
         }
     }
 
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
+
+        initCommon()
     }
     
     override init(nibName: String?, bundle: NSBundle?)
     {
         super.init(nibName: nibName, bundle: bundle)
         
+        initCommon()
+    }
+    
+    func initCommon()
+    {
+        self.style = APCLabelViewStyle()
+        
         self.delegate = nil
     }
     
-    @IBAction func addLabelTapped(sender: AnyObject)
+    override func viewDidLoad()
     {
-        let viewController : APCAlertViewController = APCAlertViewController(title: "Add Label",
-                                                                             textFieldPlaceholder: "label text")
+        super.viewDidLoad()
+        
+        self.textTextView.backgroundColor = self.style.textTextViewBackgroundColor
+        
+        self.saveButton.enabled = false
+        self.deleteButton.enabled = false
+    }
+
+    @IBAction func addButtonTapped(sender: AnyObject)
+    {
+        if self.textTextView.trimmedText.isEmpty == false
         {
-            (enteredText : String) in
-            
             if let delegate = self.delegate
             {
-                let label = APCLabel(text: enteredText)
+                let label = APCLabel(text: self.textTextView.text!)
                 
                 delegate.labelViewController(self, addLabel: label)
             }
         }
-        
-        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
-    @IBAction func deleteLabelTapped(sender: AnyObject)
+    @IBAction func saveButtonTapped(sender: AnyObject)
+    {
+        if self.textTextView.trimmedText.isEmpty == false
+        {
+            if let label = self.label
+            {
+                label.text = self.textTextView.text!
+            }
+        }
+    }
+    
+    @IBAction func deleteButtonTapped(sender: AnyObject)
     {
         if let delegate = self.delegate,
         let label = self.label
@@ -60,20 +92,6 @@ class APCLabelViewController: UIViewController, UITextFieldDelegate
             delegate.labelViewController(self, deleteLabel: label)
         }
     }
-    
-    // MARK: UITextFieldDelegate
-    
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
-    {
-        if let label = self.label
-        {
-            label.text = (label.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        }
-        
-        return true
-    }
-    
-    // MARK:
 }
 
 

@@ -14,11 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     var window: UIWindow?
 
     let session : APCSession
+    let screenList : APCScreenList
     
     override init()
     {
         self.session = APCSession()
-
+        self.screenList = APCScreenList()
+        
         super.init()
     }
     

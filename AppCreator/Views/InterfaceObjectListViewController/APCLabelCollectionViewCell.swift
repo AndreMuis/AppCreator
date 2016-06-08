@@ -12,6 +12,9 @@ class APCLabelCollectionViewCell: UICollectionViewCell
 {
     @IBOutlet weak var textLabel: UILabel!
     
+    let style : APCLabelCellStyle
+    
+    var delegate : APCLabelCollectionViewCellDelegate?
     var label : APCLabel?
     
     static var nib : UINib
@@ -20,20 +23,30 @@ class APCLabelCollectionViewCell: UICollectionViewCell
         
         return nib
     }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        self.style = APCLabelCellStyle()
+        
+        self.delegate = nil
+        self.label = nil
+        
+        super.init(coder: aDecoder)
+    }
 
     override func awakeFromNib()
     {
         super.awakeFromNib()
         
-        self.textLabel.textColor = UIColor.whiteColor()
+        self.textLabel.textColor = self.style.textTextColor
         
         let backgroundView : UIView = UIView()
-        backgroundView.backgroundColor = UIColor(white: 0.3, alpha: 1.0)
+        backgroundView.backgroundColor = self.style.backgroundColor
         
         self.backgroundView = backgroundView
         
         let selectedBackgroundView : UIView = UIView()
-        selectedBackgroundView.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
+        selectedBackgroundView.backgroundColor = self.style.selectedBackgroundColor
         
         self.selectedBackgroundView = selectedBackgroundView
     }
@@ -47,6 +60,11 @@ class APCLabelCollectionViewCell: UICollectionViewCell
             if let label = self.label
             {
                 self.textLabel.text = label.text
+                
+                if let delegate = self.delegate
+                {
+                    delegate.labelCollectionViewCellDidUpdateText(self)
+                }
             }
         }
     }
@@ -58,13 +76,33 @@ class APCLabelCollectionViewCell: UICollectionViewCell
         if let label = self.label
         {
             label.removeObserver(self, forKeyPath: "text")
+            
+            self.invalidateIntrinsicContentSize()
+
         }
+    }
+
+    static func size(width : CGFloat, text : String) -> CGSize
+    {
+        var size : CGSize = CGSizeZero
+        
+        let topLevelObjects : [AnyObject] = NSBundle.mainBundle().loadNibNamed(String(APCLabelCollectionViewCell.self), owner: nil, options: nil)
+    
+        if let cell : APCLabelCollectionViewCell = topLevelObjects[0] as? APCLabelCollectionViewCell
+        {
+            let label = APCLabel(text: text)
+            cell.refresh(label: label)
+            
+            size = CGSize(width: width, height: cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height)
+        }
+        
+        return size
     }
     
     func refresh(label label : APCLabel)
     {
         self.label = label
-
+        
         self.textLabel.text = label.text
         
         label.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)

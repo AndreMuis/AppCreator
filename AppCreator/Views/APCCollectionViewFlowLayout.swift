@@ -14,7 +14,9 @@ class APCCollectionViewFlowLayout : UICollectionViewFlowLayout
     {
         let attributes = super.layoutAttributesForInteractivelyMovingItemAtIndexPath(indexPath, withTargetPosition: position)
         
-        attributes.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1)
+        attributes.transform = CGAffineTransformScale(CGAffineTransformIdentity,
+                                                      APCCommonStyles.movingCellSizeScale,
+                                                      APCCommonStyles.movingCellSizeScale)
         
         return attributes
     }

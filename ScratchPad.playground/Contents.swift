@@ -12,3 +12,17 @@ let first = array.sort{$0 < $1}.last
 first
 
 
+class SomeClass : UICollectionViewDataSource
+{
+    @objc func doSomething()
+    {
+        print("doSomething")
+    }
+}
+
+
+let someClass = SomeClass()
+
+someClass.doSomething()
+
+

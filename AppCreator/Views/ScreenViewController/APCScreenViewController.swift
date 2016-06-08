@@ -10,6 +10,8 @@ import UIKit
 
 class APCScreenViewController: UIViewController
 {
+    @IBOutlet weak var scrollView: UIScrollView!
+
     var session : APCSession
     var screen : APCScreen?
 
@@ -24,25 +26,27 @@ class APCScreenViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
+        self.scrollView.delaysContentTouches = false
+    
         if let screen = self.screen
         {
-            self.navigationItem.title = screen.name
+            self.navigationItem.title = screen.title
             
-            session.refreshInterfaceObjectList(screen.interfaceObjectList)
+            session.refreshScreen(screen)
             
             self.session.addObservers(screen.interfaceObjectList)
         }
-    }
-    
-    deinit
-    {
-        self.session.clearInterfaceObjectList()
         
-        if let screen = self.screen
-        {
-            self.session.removeObservers(screen.interfaceObjectList)
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(keyboardWillShow),
+                                                         name: UIKeyboardWillShowNotification,
+                                                         object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(keyboardWillHide),
+                                                         name: UIKeyboardWillHideNotification,
+                                                         object: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -59,6 +63,44 @@ class APCScreenViewController: UIViewController
             }
         }
     }
+    
+    // MARK: Keyboard
+    
+    func keyboardWillShow(notification : NSNotification)
+    {
+        /*
+        if let keyboardFrame : CGRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue()
+        {
+            self.scrollView.contentOffset = CGPoint(x: 0.0, y: 250.0)
+        }
+        */
+    }
+    
+    func keyboardWillHide(notification : NSNotification)
+    {
+        self.scrollView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+    }
+    
+    // MARK:
+    
+    deinit
+    {
+        self.session.clearScreen()
+        
+        if let screen = self.screen
+        {
+            self.session.removeObservers(screen.interfaceObjectList)
+        }
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillShowNotification,
+                                                            object: nil)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: UIKeyboardWillHideNotification,
+                                                            object: nil)
+    }
+
 }
 
 

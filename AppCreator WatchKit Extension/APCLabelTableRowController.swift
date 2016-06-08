@@ -11,14 +11,32 @@ import WatchKit
 
 class APCLabelTableRowController : NSObject, APCTableRowController
 {
-    @IBOutlet var label : WKInterfaceLabel!
+    @IBOutlet var labelOutlet : WKInterfaceLabel!
     
+    var label : APCLabel?
+    {
+        didSet
+        {
+            if let label = self.label
+            {
+                self.labelOutlet.setText(label.text)
+            }
+            else
+            {
+                self.labelOutlet.setText("")
+            }
+        }
+    }
+
     var interfaceObjectId : NSUUID?
+    {
+        return self.label?.id
+    }
     
     override init()
     {
         super.init()
         
-        self.interfaceObjectId = nil
+        self.label = nil
     }
 }

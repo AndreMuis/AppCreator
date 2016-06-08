@@ -12,15 +12,19 @@ extension UICollectionViewCell
 {
     func animateExpansion()
     {
-        UIView.animateWithDuration(0.1, animations:
+        UIView.animateWithDuration(APCCommonStyles.movingCellSizeAnimationDuration,
+                                   animations:
         {
-            self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1)
+            self.transform = CGAffineTransformScale(CGAffineTransformIdentity,
+                                                    APCCommonStyles.movingCellSizeScale,
+                                                    APCCommonStyles.movingCellSizeScale)
         })
     }
 
     func animateContraction()
     {
-        UIView.animateWithDuration(0.1, animations:
+        UIView.animateWithDuration(APCCommonStyles.movingCellSizeAnimationDuration,
+                                   animations:
         {
             self.transform = CGAffineTransformIdentity
         })

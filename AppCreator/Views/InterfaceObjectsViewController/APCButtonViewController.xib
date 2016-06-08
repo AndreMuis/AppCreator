@@ -6,40 +6,63 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APCButtonViewController" customModule="AppCreator" customModuleProvider="target">
             <connections>
+                <outlet property="deleteButton" destination="28q-7B-XbI" id="YPY-P8-GrY"/>
+                <outlet property="pickerView" destination="Wft-Ho-pyF" id="yKD-y9-n8K"/>
+                <outlet property="saveButton" destination="RGt-GI-FBR" id="MUZ-hM-iBo"/>
                 <outlet property="titleTextField" destination="jnj-Hl-zfV" id="ddy-5d-4F5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="212"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xl-Z2-koQ" userLabel="addButton">
-                    <rect key="frame" x="74" y="93" width="30" height="30"/>
-                    <state key="normal" title="Add"/>
-                    <connections>
-                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="HJe-3Y-XjP"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df8-hD-bT0">
-                    <rect key="frame" x="28" y="31" width="38" height="21"/>
+                    <rect key="frame" x="52" y="12" width="38" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-Hl-zfV" userLabel="titleTextField">
-                    <rect key="frame" x="74" y="27" width="184" height="30"/>
+                    <rect key="frame" x="98" y="8" width="184" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="hWP-oB-LEF"/>
-                    </connections>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opens screen:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wze-mD-nCJ">
+                    <rect key="frame" x="31" y="95" width="111" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wft-Ho-pyF" userLabel="pickerView">
+                    <rect key="frame" x="157" y="54" width="132" height="103"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="srg-L8-V3D"/>
+                        <outlet property="delegate" destination="-1" id="FXF-LW-g8E"/>
+                    </connections>
+                </pickerView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xl-Z2-koQ" userLabel="addButton">
+                    <rect key="frame" x="55" y="174" width="30" height="30"/>
+                    <state key="normal" title="Add"/>
+                    <connections>
+                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="HJe-3Y-XjP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGt-GI-FBR" userLabel="saveButton">
+                    <rect key="frame" x="146" y="174" width="34" height="30"/>
+                    <state key="normal" title="Save"/>
+                    <connections>
+                        <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="7qk-uQ-jGM"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28q-7B-XbI" userLabel="deleteButton">
-                    <rect key="frame" x="195" y="93" width="45" height="30"/>
+                    <rect key="frame" x="221" y="174" width="45" height="30"/>
                     <state key="normal" title="Delete">
                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="deleteButtonTapped:" destination="-1" eventType="touchUpInside" id="vqJ-lP-EOO"/>
@@ -49,7 +72,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="412" y="583"/>
+            <point key="canvasLocation" x="371" y="379"/>
         </view>
     </objects>
 </document>

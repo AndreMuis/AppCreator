@@ -6,18 +6,55 @@
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
-class APCScreenList
+import Foundation
+
+class APCScreenList : NSObject, NSCoding
 {
     private var screens : [APCScreen]
+
+    var initialScreenId : NSUUID?
+    var selectedScreen : APCScreen?
     
-    init()
+    override init()
     {
         self.screens = [APCScreen]()
+        self.initialScreenId = nil
+        
+        super.init()
+    }
+    
+    init(screens : [APCScreen], rootScreenId : NSUUID)
+    {
+        self.screens = screens
+        self.initialScreenId = rootScreenId
+    }
+    
+    required convenience init?(coder decoder: NSCoder)
+    {
+        guard let screens = decoder.decodeObjectForKey("screens") as? [APCScreen],
+            let rootScreenId = decoder.decodeObjectForKey("initialScreenId") as? NSUUID
+            else
+        {
+            return nil
+        }
+        
+        self.init(screens: screens, rootScreenId: rootScreenId)
+    }
+    
+    func encodeWithCoder(coder: NSCoder)
+    {
+        coder.encodeObject(self.screens, forKey: "screens")
+        coder.encodeObject(self.initialScreenId, forKey: "initialScreenId")
     }
     
     var count : Int
     {
         return self.screens.count
+    }
+    
+    var allScreens : [APCScreen]
+    {
+        return self.screens
     }
     
     subscript(index : Int) -> APCScreen?
@@ -35,6 +72,25 @@ class APCScreenList
         }
     }
 
+    func screenWithId(id : NSUUID) -> APCScreen?
+    {
+        let screen : APCScreen? = self.screens.filter({$0.id == id}).first
+        
+        return screen
+    }
+
+    func indexWithId(id : NSUUID) -> Int?
+    {
+        var index : Int?
+        
+        if let screen : APCScreen = self.screens.filter({$0.id == id}).first
+        {
+            index = self.screens.indexOf(screen)
+        }
+        
+        return index
+    }
+    
     func add(screen screen : APCScreen)
     {
         self.screens.append(screen)

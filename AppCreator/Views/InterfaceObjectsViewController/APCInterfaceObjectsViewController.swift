@@ -92,6 +92,12 @@ class APCInterfaceObjectsViewController :
                     self.showObjectView()
                 }
             }
+            else
+            {
+                self.buttonViewController.button = nil
+                self.imageViewController.image = nil
+                self.labelViewController.label = nil
+            }
         }
     }
     

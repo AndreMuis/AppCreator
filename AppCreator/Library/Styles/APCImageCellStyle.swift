@@ -10,7 +10,7 @@ import UIKit
 
 struct APCImageCellStyle
 {
-    let overlayBackgroundColor = UIColor(white: 1.0, alpha: 0.3)
+    let overlayBackgroundColor : UIColor = UIColor(white: 1.0, alpha: 0.3)
 }
 
 

@@ -12,5 +12,6 @@ struct APCInterfaceObjectListStyle
 {
     let backgroundColor : UIColor = UIColor.blackColor()
     
-    let cellMargin : CGFloat = 10.0
+    let cellMargin : CGFloat = 5.0
+    let lineSpacing : CGFloat = 7.0
 }

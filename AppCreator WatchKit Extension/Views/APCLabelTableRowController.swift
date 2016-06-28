@@ -11,20 +11,13 @@ import WatchKit
 
 class APCLabelTableRowController : NSObject, APCTableRowController
 {
-    @IBOutlet var labelOutlet : WKInterfaceLabel!
+    @IBOutlet var interfaceLabel : WKInterfaceLabel!
     
     var label : APCLabel?
     {
         didSet
         {
-            if let label = self.label
-            {
-                self.labelOutlet.setText(label.text)
-            }
-            else
-            {
-                self.labelOutlet.setText("")
-            }
+            self.interfaceLabel.setText(self.label?.text ?? "")
         }
     }
 

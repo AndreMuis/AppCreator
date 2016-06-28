@@ -8,7 +8,9 @@
 
 protocol APCLabelViewControllerDelegate
 {
-    func labelViewController(viewController : APCLabelViewController, addLabel label : APCLabel)
+    func labelViewController(viewController: APCLabelViewController, addLabel label: APCLabel)
     
-    func labelViewController(viewController : APCLabelViewController, deleteLabel label : APCLabel)
+    func labelViewController(viewController: APCLabelViewController, moveLabel label: APCLabel, moveDirection : APCMoveDirection)
+
+    func labelViewController(viewController: APCLabelViewController, deleteLabel label: APCLabel)
 }

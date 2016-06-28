@@ -11,22 +11,15 @@ import WatchKit
 
 class APCButtonTableRowController : NSObject, APCTableRowController
 {
-    @IBOutlet var buttonOutlet : WKInterfaceButton!
+    @IBOutlet var interfaceButton : WKInterfaceButton!
 
+    var delegate : APCButtonTableRowControllerDelegate?
+    
     var button : APCButton?
     {
         didSet
         {
-            if let button = self.button
-            {
-                self.buttonOutlet.setTitle(button.title)
-            }
-            else
-            {
-                self.buttonOutlet.setTitle("")
-            }
-
-            self.buttonOutlet.setTitle(self.button?.title ?? "")
+            self.interfaceButton.setTitle(self.button?.title ?? "")
         }
     }
 
@@ -39,6 +32,30 @@ class APCButtonTableRowController : NSObject, APCTableRowController
     {
         super.init()
         
+        self.delegate = nil
         self.button = nil
     }
+    
+    @IBAction func tap()
+    {
+        if let delegate : APCButtonTableRowControllerDelegate = self.delegate
+        {
+            delegate.buttonTableRowControllerDidTap(self)
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

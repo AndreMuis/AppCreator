@@ -11,12 +11,17 @@ import UIKit
 class APCScreenViewController: UIViewController
 {
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var interfaceObjectsContainerView: UIView!
 
-    var session : APCSession
+    var interfaceObjectsViewController : APCInterfaceObjectsViewController?
+    
+    let session : APCSession
     var screen : APCScreen?
 
     required init?(coder aDecoder: NSCoder)
     {
+        self.interfaceObjectsViewController = nil
+        
         self.session = (UIApplication.sharedApplication().delegate as? AppDelegate)!.session
         self.screen = nil
 
@@ -60,6 +65,8 @@ class APCScreenViewController: UIViewController
             else if let viewController = segue.destinationViewController as? APCInterfaceObjectsViewController
             {
                 viewController.objectList = screen.interfaceObjectList
+                
+                self.interfaceObjectsViewController = viewController
             }
         }
     }
@@ -68,12 +75,28 @@ class APCScreenViewController: UIViewController
     
     func keyboardWillShow(notification : NSNotification)
     {
-        /*
-        if let keyboardFrame : CGRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue()
+        if let viewController = self.interfaceObjectsViewController
         {
-            self.scrollView.contentOffset = CGPoint(x: 0.0, y: 250.0)
+            if viewController.selectedObjectViewIndex == 0
+            {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Dismiss",
+                                                                         style: UIBarButtonItemStyle.Plain,
+                                                                         target: self,
+                                                                         action: #selector(APCScreenViewController.dismissButtonTapped))
+            }
         }
-        */
+        
+        if let keyboardFrame : CGRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(),
+            interfaceObjectsViewController = self.interfaceObjectsViewController
+        {
+            let containerViewBottomMargin = CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(self.interfaceObjectsContainerView.frame)
+
+            let margin : CGFloat = interfaceObjectsViewController.textElementBottomMargin + containerViewBottomMargin
+            
+            let scrollViewYOffset : CGFloat = (CGRectGetHeight(keyboardFrame) - margin) + APCCommonStyles.keyboardTopToTextElementBottomSpacing
+            
+            self.scrollView.contentOffset = CGPoint(x: 0.0, y: scrollViewYOffset)
+        }
     }
     
     func keyboardWillHide(notification : NSNotification)
@@ -82,6 +105,13 @@ class APCScreenViewController: UIViewController
     }
     
     // MARK:
+    
+    func dismissButtonTapped(sender: AnyObject)
+    {
+        self.navigationItem.rightBarButtonItem = nil
+        
+        self.view.endEditing(true)
+    }
     
     deinit
     {
@@ -100,7 +130,6 @@ class APCScreenViewController: UIViewController
                                                             name: UIKeyboardWillHideNotification,
                                                             object: nil)
     }
-
 }
 
 

@@ -38,8 +38,6 @@ class APCLabelCollectionViewCell: UICollectionViewCell
     {
         super.awakeFromNib()
         
-        self.textLabel.textColor = self.style.textTextColor
-        
         let backgroundView : UIView = UIView()
         backgroundView.backgroundColor = self.style.backgroundColor
         
@@ -49,6 +47,9 @@ class APCLabelCollectionViewCell: UICollectionViewCell
         selectedBackgroundView.backgroundColor = self.style.selectedBackgroundColor
         
         self.selectedBackgroundView = selectedBackgroundView
+
+        self.textLabel.textColor = self.style.textTextColor
+        self.textLabel.font = APCLabelCellStyle.font
     }
     
     private var context = 0
@@ -57,11 +58,11 @@ class APCLabelCollectionViewCell: UICollectionViewCell
     {
         if (context == &self.context)
         {
-            if let label = self.label
+            if let label : APCLabel = self.label
             {
                 self.textLabel.text = label.text
                 
-                if let delegate = self.delegate
+                if let delegate : APCLabelCollectionViewCellDelegate = self.delegate
                 {
                     delegate.labelCollectionViewCellDidUpdateText(self)
                 }
@@ -73,28 +74,21 @@ class APCLabelCollectionViewCell: UICollectionViewCell
     {
         super.prepareForReuse()
 
-        if let label = self.label
+        if let label : APCLabel = self.label
         {
-            label.removeObserver(self, forKeyPath: "text")
-            
-            self.invalidateIntrinsicContentSize()
-
+            label.removeObserver(self, forKeyPath: APCConstants.textKeyPath)
         }
     }
 
-    static func size(width : CGFloat, text : String) -> CGSize
+    static func size(width width : CGFloat, text : String) -> CGSize
     {
-        var size : CGSize = CGSizeZero
+        let label : UILabel = UILabel()
+        label.text = text
+        label.font = APCLabelCellStyle.font
         
-        let topLevelObjects : [AnyObject] = NSBundle.mainBundle().loadNibNamed(String(APCLabelCollectionViewCell.self), owner: nil, options: nil)
-    
-        if let cell : APCLabelCollectionViewCell = topLevelObjects[0] as? APCLabelCollectionViewCell
-        {
-            let label = APCLabel(text: text)
-            cell.refresh(label: label)
-            
-            size = CGSize(width: width, height: cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height)
-        }
+        let height : CGFloat = label.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        
+        let size = CGSize(width: width, height: height)
         
         return size
     }
@@ -105,14 +99,14 @@ class APCLabelCollectionViewCell: UICollectionViewCell
         
         self.textLabel.text = label.text
         
-        label.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+        label.addObserver(self, forKeyPath: APCConstants.textKeyPath, options: NSKeyValueObservingOptions([.New]), context: &context)
     }
     
     deinit
     {
         if let label = self.label
         {
-            label.removeObserver(self, forKeyPath: "text")
+            label.removeObserver(self, forKeyPath: APCConstants.textKeyPath)
         }
     }
 }

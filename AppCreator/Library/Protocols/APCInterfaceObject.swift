@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc protocol APCInterfaceObject : NSCoding
+@objc public protocol APCInterfaceObject : NSCoding
 {
     var id : NSUUID {get}
 }

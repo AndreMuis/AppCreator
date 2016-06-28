@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APCButtonViewController" customModule="AppCreator" customModuleProvider="target">
             <connections>
                 <outlet property="deleteButton" destination="28q-7B-XbI" id="YPY-P8-GrY"/>
+                <outlet property="moveDownButton" destination="zA9-Eu-rUG" id="gbI-ZW-CyW"/>
+                <outlet property="moveUpButton" destination="KcJ-qy-HTv" id="kZg-Bb-CMj"/>
                 <outlet property="pickerView" destination="Wft-Ho-pyF" id="yKD-y9-n8K"/>
                 <outlet property="saveButton" destination="RGt-GI-FBR" id="MUZ-hM-iBo"/>
                 <outlet property="titleTextField" destination="jnj-Hl-zfV" id="ddy-5d-4F5"/>
@@ -15,64 +17,170 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="212"/>
+            <rect key="frame" x="0.0" y="0.0" width="335" height="180"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df8-hD-bT0">
-                    <rect key="frame" x="52" y="12" width="38" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df8-hD-bT0">
+                    <rect key="frame" x="0.0" y="4" width="38" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="DdX-qi-Egp"/>
+                        <constraint firstAttribute="height" constant="21" id="buQ-E8-02A"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-Hl-zfV" userLabel="titleTextField">
+                    <rect key="frame" x="46" y="0.0" width="289" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="PwK-c4-HT7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="72m-ML-U4n"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opens screen:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wze-mD-nCJ">
+                    <rect key="frame" x="0.0" y="76" width="111" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="5dc-rs-qvU"/>
+                        <constraint firstAttribute="width" constant="111" id="NJ2-PQ-2R6"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-Hl-zfV" userLabel="titleTextField">
-                    <rect key="frame" x="98" y="8" width="184" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opens screen:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wze-mD-nCJ">
-                    <rect key="frame" x="31" y="95" width="111" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wft-Ho-pyF" userLabel="pickerView">
-                    <rect key="frame" x="157" y="54" width="132" height="103"/>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wft-Ho-pyF" userLabel="pickerView">
+                    <rect key="frame" x="119" y="38" width="216" height="98"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="98" id="Lo1-z3-4CR"/>
+                    </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="srg-L8-V3D"/>
                         <outlet property="delegate" destination="-1" id="FXF-LW-g8E"/>
                     </connections>
                 </pickerView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xl-Z2-koQ" userLabel="addButton">
-                    <rect key="frame" x="55" y="174" width="30" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xl-Z2-koQ" userLabel="addButton">
+                    <rect key="frame" x="0.0" y="144" width="67" height="30"/>
+                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="E4X-sn-rY1"/>
+                    </constraints>
                     <state key="normal" title="Add"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="HJe-3Y-XjP"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGt-GI-FBR" userLabel="saveButton">
-                    <rect key="frame" x="146" y="174" width="34" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGt-GI-FBR" userLabel="saveButton">
+                    <rect key="frame" x="67" y="144" width="67" height="30"/>
+                    <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="VH3-k5-H1M"/>
+                    </constraints>
                     <state key="normal" title="Save"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="7qk-uQ-jGM"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28q-7B-XbI" userLabel="deleteButton">
-                    <rect key="frame" x="221" y="174" width="45" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KcJ-qy-HTv" userLabel="moveUpButton">
+                    <rect key="frame" x="134" y="144" width="67" height="30"/>
+                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="dgm-OE-UXC"/>
+                    </constraints>
+                    <state key="normal" title="Up"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="moveUpButtonTapped:" destination="-1" eventType="touchUpInside" id="Xq2-ss-0kf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zA9-Eu-rUG" userLabel="moveDownButton">
+                    <rect key="frame" x="201" y="144" width="67" height="30"/>
+                    <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Zv3-11-BSK"/>
+                    </constraints>
+                    <state key="normal" title="Down"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="moveDownButtonTapped:" destination="-1" eventType="touchUpInside" id="CC9-iY-7ca"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28q-7B-XbI" userLabel="deleteButton">
+                    <rect key="frame" x="268" y="144" width="67" height="30"/>
+                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="eeg-vq-aIs"/>
+                    </constraints>
                     <state key="normal" title="Delete">
                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="disabled">
                         <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="deleteButtonTapped:" destination="-1" eventType="touchUpInside" id="vqJ-lP-EOO"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="1xl-Z2-koQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="76e-vg-JkM"/>
+                <constraint firstAttribute="bottom" secondItem="KcJ-qy-HTv" secondAttribute="bottom" constant="6" id="BX6-K0-d0D"/>
+                <constraint firstItem="df8-hD-bT0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CAl-hf-RFR"/>
+                <constraint firstItem="zA9-Eu-rUG" firstAttribute="width" secondItem="1xl-Z2-koQ" secondAttribute="width" id="Csu-N3-mUL"/>
+                <constraint firstItem="KcJ-qy-HTv" firstAttribute="leading" secondItem="RGt-GI-FBR" secondAttribute="trailing" id="E7Y-mg-6B7"/>
+                <constraint firstItem="Wft-Ho-pyF" firstAttribute="leading" secondItem="wze-mD-nCJ" secondAttribute="trailing" constant="8" id="FBT-cl-aH8"/>
+                <constraint firstAttribute="trailing" secondItem="28q-7B-XbI" secondAttribute="trailing" id="Hsm-TK-zgP"/>
+                <constraint firstAttribute="bottom" secondItem="RGt-GI-FBR" secondAttribute="bottom" constant="6" id="Lhu-RK-8mu"/>
+                <constraint firstItem="KcJ-qy-HTv" firstAttribute="leading" secondItem="RGt-GI-FBR" secondAttribute="trailing" id="LoD-fK-xKj"/>
+                <constraint firstItem="RGt-GI-FBR" firstAttribute="leading" secondItem="1xl-Z2-koQ" secondAttribute="trailing" id="NQp-Lr-tjh"/>
+                <constraint firstAttribute="trailing" secondItem="jnj-Hl-zfV" secondAttribute="trailing" id="Oe2-nE-eW1"/>
+                <constraint firstItem="RGt-GI-FBR" firstAttribute="width" secondItem="1xl-Z2-koQ" secondAttribute="width" id="RYv-OP-RXY"/>
+                <constraint firstAttribute="bottom" secondItem="28q-7B-XbI" secondAttribute="bottom" constant="6" id="XHW-HT-xXJ"/>
+                <constraint firstItem="df8-hD-bT0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="4" id="YQj-1k-9th"/>
+                <constraint firstItem="zA9-Eu-rUG" firstAttribute="leading" secondItem="KcJ-qy-HTv" secondAttribute="trailing" id="ZFo-c1-sYr"/>
+                <constraint firstItem="zA9-Eu-rUG" firstAttribute="leading" secondItem="KcJ-qy-HTv" secondAttribute="trailing" id="aEQ-6K-X8g"/>
+                <constraint firstItem="RGt-GI-FBR" firstAttribute="leading" secondItem="1xl-Z2-koQ" secondAttribute="trailing" id="bBj-ht-cgH"/>
+                <constraint firstItem="jnj-Hl-zfV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="c95-h2-AqG"/>
+                <constraint firstAttribute="trailing" secondItem="Wft-Ho-pyF" secondAttribute="trailing" id="fGY-M5-HOI"/>
+                <constraint firstItem="Wft-Ho-pyF" firstAttribute="top" secondItem="jnj-Hl-zfV" secondAttribute="bottom" constant="8" id="fSo-GL-Loo"/>
+                <constraint firstItem="wze-mD-nCJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jul-uf-1r2"/>
+                <constraint firstAttribute="bottom" secondItem="zA9-Eu-rUG" secondAttribute="bottom" constant="6" id="k7n-bh-Qli"/>
+                <constraint firstItem="KcJ-qy-HTv" firstAttribute="width" secondItem="1xl-Z2-koQ" secondAttribute="width" id="omB-hN-GnB"/>
+                <constraint firstItem="28q-7B-XbI" firstAttribute="leading" secondItem="zA9-Eu-rUG" secondAttribute="trailing" id="pdI-Vx-pAl"/>
+                <constraint firstItem="28q-7B-XbI" firstAttribute="width" secondItem="1xl-Z2-koQ" secondAttribute="width" id="uym-aw-vX0"/>
+                <constraint firstItem="jnj-Hl-zfV" firstAttribute="leading" secondItem="df8-hD-bT0" secondAttribute="trailing" constant="8" id="vyN-sx-cTq"/>
+                <constraint firstItem="28q-7B-XbI" firstAttribute="leading" secondItem="zA9-Eu-rUG" secondAttribute="trailing" id="wut-dr-XxE"/>
+                <constraint firstItem="wze-mD-nCJ" firstAttribute="top" secondItem="jnj-Hl-zfV" secondAttribute="bottom" constant="46" id="xSn-tl-Kq3"/>
+                <constraint firstAttribute="bottom" secondItem="1xl-Z2-koQ" secondAttribute="bottom" constant="6" id="zhe-zK-BPL"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="371" y="379"/>
+            <point key="canvasLocation" x="569.5" y="1023"/>
         </view>
     </objects>
 </document>

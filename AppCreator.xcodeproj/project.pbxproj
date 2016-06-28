@@ -16,6 +16,19 @@
 		2A0828D11CF8C20000E5CD36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A0828D01CF8C20000E5CD36 /* Main.storyboard */; };
 		2A0F96301CFA1DDF002E70E6 /* APCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F962F1CFA1DDF002E70E6 /* APCButton.swift */; };
 		2A0F96351CFA1EFE002E70E6 /* APCInterfaceObjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F96341CFA1EFE002E70E6 /* APCInterfaceObjectList.swift */; };
+		2A0FC8CD1D21EAAF005E96F0 /* APCKeyedUnarchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8CC1D21EAAF005E96F0 /* APCKeyedUnarchiver.swift */; };
+		2A0FC8CF1D21EAD7005E96F0 /* APCKeyedArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8CE1D21EAD7005E96F0 /* APCKeyedArchiver.swift */; };
+		2A0FC8D01D21EBBD005E96F0 /* APCKeyedUnarchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8CC1D21EAAF005E96F0 /* APCKeyedUnarchiver.swift */; };
+		2A0FC8D51D221268005E96F0 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8D21D221268005E96F0 /* ExtensionDelegate.swift */; };
+		2A0FC8D71D221268005E96F0 /* PushNotificationPayload.apns in Resources */ = {isa = PBXBuildFile; fileRef = 2A0FC8D41D221268005E96F0 /* PushNotificationPayload.apns */; };
+		2A0FC8E01D221282005E96F0 /* APCButtonTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8D91D221282005E96F0 /* APCButtonTableRowController.swift */; };
+		2A0FC8E11D221282005E96F0 /* APCButtonTableRowControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8DA1D221282005E96F0 /* APCButtonTableRowControllerDelegate.swift */; };
+		2A0FC8E21D221282005E96F0 /* APCImageTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8DB1D221282005E96F0 /* APCImageTableRowController.swift */; };
+		2A0FC8E31D221282005E96F0 /* APCLabelTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8DC1D221282005E96F0 /* APCLabelTableRowController.swift */; };
+		2A0FC8E41D221282005E96F0 /* APCNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8DD1D221282005E96F0 /* APCNotificationController.swift */; };
+		2A0FC8E51D221282005E96F0 /* APCTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8DE1D221282005E96F0 /* APCTableRowController.swift */; };
+		2A0FC8E61D221282005E96F0 /* APCTemplateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FC8DF1D221282005E96F0 /* APCTemplateInterfaceController.swift */; };
+		2A0FC8E91D2212A7005E96F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A0FC8E81D2212A7005E96F0 /* Assets.xcassets */; };
 		2A28CFAE1D03B26800F98720 /* UITextField+TrimText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A28CFAD1D03B26800F98720 /* UITextField+TrimText.swift */; };
 		2A30960E1CFB60D9006F7768 /* APCInterfaceObjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F96341CFA1EFE002E70E6 /* APCInterfaceObjectList.swift */; };
 		2A30960F1CFB60DD006F7768 /* APCScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0828CC1CF8A95000E5CD36 /* APCScreen.swift */; };
@@ -31,10 +44,6 @@
 		2A7F2D2A1CF7B13500CB06F5 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A7F2D281CF7B13500CB06F5 /* Interface.storyboard */; };
 		2A7F2D2C1CF7B13500CB06F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A7F2D2B1CF7B13500CB06F5 /* Assets.xcassets */; };
 		2A7F2D331CF7B13500CB06F5 /* AppCreator WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2A7F2D321CF7B13500CB06F5 /* AppCreator WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2A7F2D3A1CF7B13500CB06F5 /* APCTemplateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F2D391CF7B13500CB06F5 /* APCTemplateInterfaceController.swift */; };
-		2A7F2D3C1CF7B13500CB06F5 /* APCExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F2D3B1CF7B13500CB06F5 /* APCExtensionDelegate.swift */; };
-		2A7F2D3E1CF7B13500CB06F5 /* APCNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F2D3D1CF7B13500CB06F5 /* APCNotificationController.swift */; };
-		2A7F2D401CF7B13500CB06F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A7F2D3F1CF7B13500CB06F5 /* Assets.xcassets */; };
 		2A8A91BA1D00AB5F00913962 /* APCButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91B31D00AB5F00913962 /* APCButtonCollectionViewCell.swift */; };
 		2A8A91BB1D00AB5F00913962 /* APCButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91B41D00AB5F00913962 /* APCButtonCollectionViewCell.xib */; };
 		2A8A91BC1D00AB5F00913962 /* APCImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91B51D00AB5F00913962 /* APCImageCollectionViewCell.swift */; };
@@ -49,21 +58,15 @@
 		2A8A91CC1D00AB6A00913962 /* APCLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91C51D00AB6A00913962 /* APCLabelViewController.swift */; };
 		2A8A91CD1D00AB6A00913962 /* APCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A8A91C61D00AB6A00913962 /* APCLabelViewController.xib */; };
 		2A8A91CE1D00AB6A00913962 /* APCInterfaceObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91C71D00AB6A00913962 /* APCInterfaceObjectsViewController.swift */; };
-		2A8A91D01D01390D00913962 /* APCTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A91CF1D01390D00913962 /* APCTableRowController.swift */; };
 		2A8C4B521D047E4D000C6DF7 /* UITextView+TrimText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C4B511D047E4D000C6DF7 /* UITextView+TrimText.swift */; };
-		2A8DF1731CFE1A5800273853 /* APCLabelTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1721CFE1A5800273853 /* APCLabelTableRowController.swift */; };
-		2A8DF1751CFE1A7500273853 /* APCButtonTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1741CFE1A7500273853 /* APCButtonTableRowController.swift */; };
-		2A8DF1771CFE1A9100273853 /* APCImageTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1761CFE1A9100273853 /* APCImageTableRowController.swift */; };
 		2A8DF17A1CFE223B00273853 /* APCWatchAppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1791CFE223B00273853 /* APCWatchAppAction.swift */; };
 		2A8DF17B1CFE223B00273853 /* APCWatchAppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1791CFE223B00273853 /* APCWatchAppAction.swift */; };
 		2A8DF1951CFE497C00273853 /* APCScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1941CFE497C00273853 /* APCScreenViewController.swift */; };
 		2A8DF1971CFE510400273853 /* APCButtonViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF1961CFE510400273853 /* APCButtonViewControllerDelegate.swift */; };
 		2A8DF19B1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF19A1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift */; };
 		2A8DF19D1CFF201700273853 /* APCLabelViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF19C1CFF201700273853 /* APCLabelViewControllerDelegate.swift */; };
-		2A8DF1A01CFF2EF900273853 /* NSCoding+Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8DF19F1CFF2EF900273853 /* NSCoding+Archive.swift */; };
 		2A8DF1AB1CFF75DB00273853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A60F07F1CF891BA0060F53D /* Assets.xcassets */; };
 		2AB711151D05EFFB00EB3A7F /* APCScreenList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0828CE1CF8AA1100E5CD36 /* APCScreenList.swift */; };
-		2AB711171D061CBE00EB3A7F /* APCWatchAppMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB711161D061CBE00EB3A7F /* APCWatchAppMode.swift */; };
 		2AB7112E1D077E9800EB3A7F /* APCScreenListStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB711271D077E9800EB3A7F /* APCScreenListStyle.swift */; };
 		2AB7112F1D077E9800EB3A7F /* APCScreenListCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB711281D077E9800EB3A7F /* APCScreenListCellStyle.swift */; };
 		2AB711301D077E9800EB3A7F /* APCLabelViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB711291D077E9800EB3A7F /* APCLabelViewStyle.swift */; };
@@ -72,11 +75,16 @@
 		2AB711331D077E9800EB3A7F /* APCImageCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7112C1D077E9800EB3A7F /* APCImageCellStyle.swift */; };
 		2AB711341D077E9800EB3A7F /* APCButtonCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7112D1D077E9800EB3A7F /* APCButtonCellStyle.swift */; };
 		2AB711381D077F4000EB3A7F /* APCCommonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB711371D077F4000EB3A7F /* APCCommonStyles.swift */; };
-		2ACD3C4A1D01D864004378D2 /* APCCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD3C491D01D864004378D2 /* APCCollectionViewFlowLayout.swift */; };
+		2AD3AF011D1F16FF00DA8BE6 /* APCMoveDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3AF001D1F16FF00DA8BE6 /* APCMoveDirection.swift */; };
 		2AE801391D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE801381D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift */; };
 		2AEB26A11CFA759700B02B2C /* APCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F962F1CFA1DDF002E70E6 /* APCButton.swift */; };
 		2AF67D5C1CFBC633002888DD /* APCInterfaceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF67D5B1CFBC633002888DD /* APCInterfaceObject.swift */; };
 		2AF67D5D1CFBC6D1002888DD /* APCInterfaceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF67D5B1CFBC633002888DD /* APCInterfaceObject.swift */; };
+		2AFD402B1D203E9400D8E37A /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFD402A1D203E9400D8E37A /* UIImage+Resize.swift */; };
+		2AFD402D1D204FDE00D8E37A /* APCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFD402C1D204FDE00D8E37A /* APCConstants.swift */; };
+		2AFD402F1D20525700D8E37A /* APCCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFD402E1D20525700D8E37A /* APCCollectionViewFlowLayout.swift */; };
+		2AFD40311D20832800D8E37A /* APCInterfaceObjectViewIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFD40301D20832800D8E37A /* APCInterfaceObjectViewIndex.swift */; };
+		2AFD40321D2097BA00D8E37A /* APCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFD402C1D204FDE00D8E37A /* APCConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +139,19 @@
 		2A0828D51CF8CB9000E5CD36 /* ScratchPad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ScratchPad.playground; sourceTree = SOURCE_ROOT; };
 		2A0F962F1CFA1DDF002E70E6 /* APCButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButton.swift; path = Model/APCButton.swift; sourceTree = "<group>"; };
 		2A0F96341CFA1EFE002E70E6 /* APCInterfaceObjectList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObjectList.swift; path = Model/APCInterfaceObjectList.swift; sourceTree = "<group>"; };
+		2A0FC8CC1D21EAAF005E96F0 /* APCKeyedUnarchiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCKeyedUnarchiver.swift; path = Library/APCKeyedUnarchiver.swift; sourceTree = "<group>"; };
+		2A0FC8CE1D21EAD7005E96F0 /* APCKeyedArchiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCKeyedArchiver.swift; path = Library/APCKeyedArchiver.swift; sourceTree = "<group>"; };
+		2A0FC8D21D221268005E96F0 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionDelegate.swift; path = Application/ExtensionDelegate.swift; sourceTree = "<group>"; };
+		2A0FC8D31D221268005E96F0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Application/Info.plist; sourceTree = "<group>"; };
+		2A0FC8D41D221268005E96F0 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PushNotificationPayload.apns; path = Application/PushNotificationPayload.apns; sourceTree = "<group>"; };
+		2A0FC8D91D221282005E96F0 /* APCButtonTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonTableRowController.swift; path = Views/APCButtonTableRowController.swift; sourceTree = "<group>"; };
+		2A0FC8DA1D221282005E96F0 /* APCButtonTableRowControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonTableRowControllerDelegate.swift; path = Views/APCButtonTableRowControllerDelegate.swift; sourceTree = "<group>"; };
+		2A0FC8DB1D221282005E96F0 /* APCImageTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageTableRowController.swift; path = Views/APCImageTableRowController.swift; sourceTree = "<group>"; };
+		2A0FC8DC1D221282005E96F0 /* APCLabelTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelTableRowController.swift; path = Views/APCLabelTableRowController.swift; sourceTree = "<group>"; };
+		2A0FC8DD1D221282005E96F0 /* APCNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCNotificationController.swift; path = Views/APCNotificationController.swift; sourceTree = "<group>"; };
+		2A0FC8DE1D221282005E96F0 /* APCTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCTableRowController.swift; path = Views/APCTableRowController.swift; sourceTree = "<group>"; };
+		2A0FC8DF1D221282005E96F0 /* APCTemplateInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCTemplateInterfaceController.swift; path = Views/APCTemplateInterfaceController.swift; sourceTree = "<group>"; };
+		2A0FC8E81D2212A7005E96F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets/Assets.xcassets; sourceTree = "<group>"; };
 		2A28CFAD1D03B26800F98720 /* UITextField+TrimText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+TrimText.swift"; path = "Library/Extensions/UITextField+TrimText.swift"; sourceTree = "<group>"; };
 		2A3096101CFB9248006F7768 /* APCLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabel.swift; path = Model/APCLabel.swift; sourceTree = "<group>"; };
 		2A3096141CFB9268006F7768 /* APCImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImage.swift; path = Model/APCImage.swift; sourceTree = "<group>"; };
@@ -147,12 +168,6 @@
 		2A7F2D2B1CF7B13500CB06F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A7F2D2D1CF7B13500CB06F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A7F2D321CF7B13500CB06F5 /* AppCreator WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AppCreator WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A7F2D381CF7B13500CB06F5 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		2A7F2D391CF7B13500CB06F5 /* APCTemplateInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APCTemplateInterfaceController.swift; sourceTree = "<group>"; };
-		2A7F2D3B1CF7B13500CB06F5 /* APCExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APCExtensionDelegate.swift; sourceTree = "<group>"; };
-		2A7F2D3D1CF7B13500CB06F5 /* APCNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APCNotificationController.swift; sourceTree = "<group>"; };
-		2A7F2D3F1CF7B13500CB06F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2A7F2D411CF7B13500CB06F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A8A91B31D00AB5F00913962 /* APCButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonCollectionViewCell.swift; path = Views/InterfaceObjectListViewController/APCButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A8A91B41D00AB5F00913962 /* APCButtonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCButtonCollectionViewCell.xib; path = Views/InterfaceObjectListViewController/APCButtonCollectionViewCell.xib; sourceTree = "<group>"; };
 		2A8A91B51D00AB5F00913962 /* APCImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageCollectionViewCell.swift; path = Views/InterfaceObjectListViewController/APCImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -167,18 +182,12 @@
 		2A8A91C51D00AB6A00913962 /* APCLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelViewController.swift; path = Views/InterfaceObjectsViewController/APCLabelViewController.swift; sourceTree = "<group>"; };
 		2A8A91C61D00AB6A00913962 /* APCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APCLabelViewController.xib; path = Views/InterfaceObjectsViewController/APCLabelViewController.xib; sourceTree = "<group>"; };
 		2A8A91C71D00AB6A00913962 /* APCInterfaceObjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObjectsViewController.swift; path = Views/InterfaceObjectsViewController/APCInterfaceObjectsViewController.swift; sourceTree = "<group>"; };
-		2A8A91CF1D01390D00913962 /* APCTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCTableRowController.swift; sourceTree = "<group>"; };
 		2A8C4B511D047E4D000C6DF7 /* UITextView+TrimText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextView+TrimText.swift"; path = "Library/Extensions/UITextView+TrimText.swift"; sourceTree = "<group>"; };
-		2A8DF1721CFE1A5800273853 /* APCLabelTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCLabelTableRowController.swift; sourceTree = "<group>"; };
-		2A8DF1741CFE1A7500273853 /* APCButtonTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCButtonTableRowController.swift; sourceTree = "<group>"; };
-		2A8DF1761CFE1A9100273853 /* APCImageTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCImageTableRowController.swift; sourceTree = "<group>"; };
 		2A8DF1791CFE223B00273853 /* APCWatchAppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCWatchAppAction.swift; path = Library/Enumerations/APCWatchAppAction.swift; sourceTree = "<group>"; };
 		2A8DF1941CFE497C00273853 /* APCScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCScreenViewController.swift; path = Views/ScreenViewController/APCScreenViewController.swift; sourceTree = "<group>"; };
 		2A8DF1961CFE510400273853 /* APCButtonViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonViewControllerDelegate.swift; path = Library/Protocols/APCButtonViewControllerDelegate.swift; sourceTree = "<group>"; };
 		2A8DF19A1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageViewControllerDelegate.swift; path = Library/Protocols/APCImageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		2A8DF19C1CFF201700273853 /* APCLabelViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelViewControllerDelegate.swift; path = Library/Protocols/APCLabelViewControllerDelegate.swift; sourceTree = "<group>"; };
-		2A8DF19F1CFF2EF900273853 /* NSCoding+Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSCoding+Archive.swift"; path = "Library/Extensions/NSCoding+Archive.swift"; sourceTree = "<group>"; };
-		2AB711161D061CBE00EB3A7F /* APCWatchAppMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCWatchAppMode.swift; sourceTree = "<group>"; };
 		2AB711271D077E9800EB3A7F /* APCScreenListStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCScreenListStyle.swift; path = Library/Styles/APCScreenListStyle.swift; sourceTree = "<group>"; };
 		2AB711281D077E9800EB3A7F /* APCScreenListCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCScreenListCellStyle.swift; path = Library/Styles/APCScreenListCellStyle.swift; sourceTree = "<group>"; };
 		2AB711291D077E9800EB3A7F /* APCLabelViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCLabelViewStyle.swift; path = Library/Styles/APCLabelViewStyle.swift; sourceTree = "<group>"; };
@@ -187,9 +196,13 @@
 		2AB7112C1D077E9800EB3A7F /* APCImageCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCImageCellStyle.swift; path = Library/Styles/APCImageCellStyle.swift; sourceTree = "<group>"; };
 		2AB7112D1D077E9800EB3A7F /* APCButtonCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCButtonCellStyle.swift; path = Library/Styles/APCButtonCellStyle.swift; sourceTree = "<group>"; };
 		2AB711371D077F4000EB3A7F /* APCCommonStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCCommonStyles.swift; path = Library/Styles/APCCommonStyles.swift; sourceTree = "<group>"; };
-		2ACD3C491D01D864004378D2 /* APCCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCCollectionViewFlowLayout.swift; path = Views/APCCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		2AD3AF001D1F16FF00DA8BE6 /* APCMoveDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCMoveDirection.swift; path = Library/Enumerations/APCMoveDirection.swift; sourceTree = "<group>"; };
 		2AE801381D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionViewCell+AnimateSize.swift"; path = "Library/Extensions/UICollectionViewCell+AnimateSize.swift"; sourceTree = "<group>"; };
 		2AF67D5B1CFBC633002888DD /* APCInterfaceObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObject.swift; path = Library/Protocols/APCInterfaceObject.swift; sourceTree = "<group>"; };
+		2AFD402A1D203E9400D8E37A /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Resize.swift"; path = "Library/Extensions/UIImage+Resize.swift"; sourceTree = "<group>"; };
+		2AFD402C1D204FDE00D8E37A /* APCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCConstants.swift; path = Library/APCConstants.swift; sourceTree = "<group>"; };
+		2AFD402E1D20525700D8E37A /* APCCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCCollectionViewFlowLayout.swift; path = Views/ScreenListViewController/APCCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		2AFD40301D20832800D8E37A /* APCInterfaceObjectViewIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APCInterfaceObjectViewIndex.swift; path = Library/Enumerations/APCInterfaceObjectViewIndex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +229,7 @@
 				2A0828C61CF8A77900E5CD36 /* APCScreenListViewController.swift */,
 				2A0828C51CF8A77900E5CD36 /* APCScreenCollectionViewCell.xib */,
 				2A0828C41CF8A77900E5CD36 /* APCScreenCollectionViewCell.swift */,
+				2AFD402E1D20525700D8E37A /* APCCollectionViewFlowLayout.swift */,
 			);
 			name = ScreenListViewController;
 			sourceTree = "<group>";
@@ -255,6 +269,38 @@
 			name = InterfaceObjectListViewController;
 			sourceTree = "<group>";
 		};
+		2A0FC8D11D221255005E96F0 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				2A0FC8D21D221268005E96F0 /* ExtensionDelegate.swift */,
+				2A0FC8D31D221268005E96F0 /* Info.plist */,
+				2A0FC8D41D221268005E96F0 /* PushNotificationPayload.apns */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		2A0FC8D81D22126E005E96F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2A0FC8DF1D221282005E96F0 /* APCTemplateInterfaceController.swift */,
+				2A0FC8DE1D221282005E96F0 /* APCTableRowController.swift */,
+				2A0FC8D91D221282005E96F0 /* APCButtonTableRowController.swift */,
+				2A0FC8DA1D221282005E96F0 /* APCButtonTableRowControllerDelegate.swift */,
+				2A0FC8DB1D221282005E96F0 /* APCImageTableRowController.swift */,
+				2A0FC8DC1D221282005E96F0 /* APCLabelTableRowController.swift */,
+				2A0FC8DD1D221282005E96F0 /* APCNotificationController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2A0FC8E71D221293005E96F0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2A0FC8E81D2212A7005E96F0 /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		2A60F0761CF891590060F53D /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,7 +332,6 @@
 				2A0F96281CFA1770002E70E6 /* InterfaceObjectListViewController */,
 				2A8DF17C1CFE3F3A00273853 /* InterfaceObjectsViewController */,
 				2A0828D01CF8C20000E5CD36 /* Main.storyboard */,
-				2ACD3C491D01D864004378D2 /* APCCollectionViewFlowLayout.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -298,6 +343,9 @@
 				2A0828D81CF8EA7E00E5CD36 /* Protocols */,
 				2A8DF19E1CFF2EA900273853 /* Extensions */,
 				2AB711261D077E3400EB3A7F /* Styles */,
+				2AFD402C1D204FDE00D8E37A /* APCConstants.swift */,
+				2A0FC8CE1D21EAD7005E96F0 /* APCKeyedArchiver.swift */,
+				2A0FC8CC1D21EAAF005E96F0 /* APCKeyedUnarchiver.swift */,
 				2A5239251CFD01DC00A6A7BC /* APCSession.swift */,
 			);
 			name = Library;
@@ -365,33 +413,19 @@
 		2A7F2D361CF7B13500CB06F5 /* AppCreator WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2A7F2D3B1CF7B13500CB06F5 /* APCExtensionDelegate.swift */,
-				2A7F2D391CF7B13500CB06F5 /* APCTemplateInterfaceController.swift */,
-				2A8A91CF1D01390D00913962 /* APCTableRowController.swift */,
-				2A8DF1741CFE1A7500273853 /* APCButtonTableRowController.swift */,
-				2A8DF1761CFE1A9100273853 /* APCImageTableRowController.swift */,
-				2A8DF1721CFE1A5800273853 /* APCLabelTableRowController.swift */,
-				2AB711161D061CBE00EB3A7F /* APCWatchAppMode.swift */,
-				2A7F2D3D1CF7B13500CB06F5 /* APCNotificationController.swift */,
-				2A7F2D3F1CF7B13500CB06F5 /* Assets.xcassets */,
-				2A7F2D411CF7B13500CB06F5 /* Info.plist */,
-				2A7F2D371CF7B13500CB06F5 /* Supporting Files */,
+				2A0FC8D11D221255005E96F0 /* Application */,
+				2A0FC8D81D22126E005E96F0 /* Views */,
+				2A0FC8E71D221293005E96F0 /* Assets */,
 			);
 			path = "AppCreator WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		2A7F2D371CF7B13500CB06F5 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2A7F2D381CF7B13500CB06F5 /* PushNotificationPayload.apns */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		2A8DF1781CFE220000273853 /* Enumerations */ = {
 			isa = PBXGroup;
 			children = (
+				2AD3AF001D1F16FF00DA8BE6 /* APCMoveDirection.swift */,
 				2A8DF1791CFE223B00273853 /* APCWatchAppAction.swift */,
+				2AFD40301D20832800D8E37A /* APCInterfaceObjectViewIndex.swift */,
 			);
 			name = Enumerations;
 			sourceTree = "<group>";
@@ -413,8 +447,8 @@
 		2A8DF19E1CFF2EA900273853 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2A8DF19F1CFF2EF900273853 /* NSCoding+Archive.swift */,
 				2AE801381D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift */,
+				2AFD402A1D203E9400D8E37A /* UIImage+Resize.swift */,
 				2A28CFAD1D03B26800F98720 /* UITextField+TrimText.swift */,
 				2A8C4B511D047E4D000C6DF7 /* UITextView+TrimText.swift */,
 			);
@@ -505,12 +539,15 @@
 				TargetAttributes = {
 					2A7F2D101CF7B13500CB06F5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = LN6BM2BQ5J;
 					};
 					2A7F2D221CF7B13500CB06F5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = LN6BM2BQ5J;
 					};
 					2A7F2D311CF7B13500CB06F5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = LN6BM2BQ5J;
 					};
 				};
 			};
@@ -565,7 +602,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A7F2D401CF7B13500CB06F5 /* Assets.xcassets in Resources */,
+				2A0FC8E91D2212A7005E96F0 /* Assets.xcassets in Resources */,
+				2A0FC8D71D221268005E96F0 /* PushNotificationPayload.apns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,26 +617,31 @@
 				2A60F07D1CF891AC0060F53D /* AppDelegate.swift in Sources */,
 				2A3096111CFB9248006F7768 /* APCLabel.swift in Sources */,
 				2AB711381D077F4000EB3A7F /* APCCommonStyles.swift in Sources */,
+				2A0FC8CF1D21EAD7005E96F0 /* APCKeyedArchiver.swift in Sources */,
 				2A0F96301CFA1DDF002E70E6 /* APCButton.swift in Sources */,
 				2AE801391D025D8900D3C0EC /* UICollectionViewCell+AnimateSize.swift in Sources */,
 				2AB7112F1D077E9800EB3A7F /* APCScreenListCellStyle.swift in Sources */,
 				2A0828C81CF8A77900E5CD36 /* APCScreenCollectionViewCell.swift in Sources */,
 				2AB711311D077E9800EB3A7F /* APCLabelCellStyle.swift in Sources */,
 				2A72A7C21D050A3B00878A7D /* APCLabelCollectionViewCellDelegate.swift in Sources */,
+				2AFD40311D20832800D8E37A /* APCInterfaceObjectViewIndex.swift in Sources */,
 				2A8DF1971CFE510400273853 /* APCButtonViewControllerDelegate.swift in Sources */,
 				2A8A91BA1D00AB5F00913962 /* APCButtonCollectionViewCell.swift in Sources */,
 				2A72A7C41D050AC500878A7D /* APCImageCollectionViewCellDelegate.swift in Sources */,
 				2A8DF17A1CFE223B00273853 /* APCWatchAppAction.swift in Sources */,
+				2AD3AF011D1F16FF00DA8BE6 /* APCMoveDirection.swift in Sources */,
 				2A0828CD1CF8A95000E5CD36 /* APCScreen.swift in Sources */,
+				2A0FC8CD1D21EAAF005E96F0 /* APCKeyedUnarchiver.swift in Sources */,
 				2AB711331D077E9800EB3A7F /* APCImageCellStyle.swift in Sources */,
 				2A8C4B521D047E4D000C6DF7 /* UITextView+TrimText.swift in Sources */,
 				2A8A91BE1D00AB5F00913962 /* APCInterfaceObjectListViewController.swift in Sources */,
 				2AB711341D077E9800EB3A7F /* APCButtonCellStyle.swift in Sources */,
-				2ACD3C4A1D01D864004378D2 /* APCCollectionViewFlowLayout.swift in Sources */,
 				2A8DF1951CFE497C00273853 /* APCScreenViewController.swift in Sources */,
 				2A28CFAE1D03B26800F98720 /* UITextField+TrimText.swift in Sources */,
+				2AFD402F1D20525700D8E37A /* APCCollectionViewFlowLayout.swift in Sources */,
 				2A0828CA1CF8A77900E5CD36 /* APCScreenListViewController.swift in Sources */,
 				2A0828CF1CF8AA1100E5CD36 /* APCScreenList.swift in Sources */,
+				2AFD402D1D204FDE00D8E37A /* APCConstants.swift in Sources */,
 				2A3096151CFB9268006F7768 /* APCImage.swift in Sources */,
 				2A8A91BF1D00AB5F00913962 /* APCLabelCollectionViewCell.swift in Sources */,
 				2AB7112E1D077E9800EB3A7F /* APCScreenListStyle.swift in Sources */,
@@ -607,9 +650,9 @@
 				2A8A91C81D00AB6A00913962 /* APCButtonViewController.swift in Sources */,
 				2A8DF19B1CFF1FFD00273853 /* APCImageViewControllerDelegate.swift in Sources */,
 				2AB711321D077E9800EB3A7F /* APCInterfaceObjectListStyle.swift in Sources */,
+				2AFD402B1D203E9400D8E37A /* UIImage+Resize.swift in Sources */,
 				2A8A91CE1D00AB6A00913962 /* APCInterfaceObjectsViewController.swift in Sources */,
 				2A8A91BC1D00AB5F00913962 /* APCImageCollectionViewCell.swift in Sources */,
-				2A8DF1A01CFF2EF900273853 /* NSCoding+Archive.swift in Sources */,
 				2A0F96351CFA1EFE002E70E6 /* APCInterfaceObjectList.swift in Sources */,
 				2A8DF19D1CFF201700273853 /* APCLabelViewControllerDelegate.swift in Sources */,
 				2AF67D5C1CFBC633002888DD /* APCInterfaceObject.swift in Sources */,
@@ -622,21 +665,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A0FC8E21D221282005E96F0 /* APCImageTableRowController.swift in Sources */,
 				2A52391E1CFCB09500A6A7BC /* APCImage.swift in Sources */,
-				2AB711171D061CBE00EB3A7F /* APCWatchAppMode.swift in Sources */,
 				2A30960F1CFB60DD006F7768 /* APCScreen.swift in Sources */,
-				2A7F2D3E1CF7B13500CB06F5 /* APCNotificationController.swift in Sources */,
-				2A8DF1731CFE1A5800273853 /* APCLabelTableRowController.swift in Sources */,
-				2A7F2D3C1CF7B13500CB06F5 /* APCExtensionDelegate.swift in Sources */,
+				2A0FC8E51D221282005E96F0 /* APCTableRowController.swift in Sources */,
 				2A52391F1CFCB09800A6A7BC /* APCLabel.swift in Sources */,
+				2A0FC8D01D21EBBD005E96F0 /* APCKeyedUnarchiver.swift in Sources */,
 				2AEB26A11CFA759700B02B2C /* APCButton.swift in Sources */,
-				2A8DF1751CFE1A7500273853 /* APCButtonTableRowController.swift in Sources */,
-				2A8DF1771CFE1A9100273853 /* APCImageTableRowController.swift in Sources */,
-				2A7F2D3A1CF7B13500CB06F5 /* APCTemplateInterfaceController.swift in Sources */,
-				2A8A91D01D01390D00913962 /* APCTableRowController.swift in Sources */,
+				2A0FC8D51D221268005E96F0 /* ExtensionDelegate.swift in Sources */,
+				2A0FC8E61D221282005E96F0 /* APCTemplateInterfaceController.swift in Sources */,
 				2AF67D5D1CFBC6D1002888DD /* APCInterfaceObject.swift in Sources */,
 				2A30960E1CFB60D9006F7768 /* APCInterfaceObjectList.swift in Sources */,
+				2A0FC8E41D221282005E96F0 /* APCNotificationController.swift in Sources */,
+				2A0FC8E01D221282005E96F0 /* APCButtonTableRowController.swift in Sources */,
+				2A0FC8E11D221282005E96F0 /* APCButtonTableRowControllerDelegate.swift in Sources */,
 				2A8DF17B1CFE223B00273853 /* APCWatchAppAction.swift in Sources */,
+				2A0FC8E31D221282005E96F0 /* APCLabelTableRowController.swift in Sources */,
+				2AFD40321D2097BA00D8E37A /* APCConstants.swift in Sources */,
 				2AB711151D05EFFB00EB3A7F /* APCScreenList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,7 +799,8 @@
 		2A7F2D451CF7B13500CB06F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "AppCreator WatchKit Extension/Info.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "AppCreator WatchKit Extension/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.AppCreator.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -768,7 +814,8 @@
 		2A7F2D461CF7B13500CB06F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "AppCreator WatchKit Extension/Info.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "AppCreator WatchKit Extension/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.AppCreator.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -783,6 +830,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = AppCreator_WatchKit_Extension;
 				INFOPLIST_FILE = "AppCreator WatchKit App/Info.plist";
@@ -799,6 +847,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = AppCreator_WatchKit_Extension;
 				INFOPLIST_FILE = "AppCreator WatchKit App/Info.plist";
@@ -816,6 +865,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AppCreator/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -831,6 +881,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AppCreator/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -8,8 +8,7 @@
 
 import UIKit
 
-class APCInterfaceObjectListViewController:
-    UIViewController,
+class APCInterfaceObjectListViewController : UIViewController,
     UICollectionViewDataSource,
     UICollectionViewDelegateFlowLayout,
     APCImageCollectionViewCellDelegate,
@@ -22,9 +21,6 @@ class APCInterfaceObjectListViewController:
     let buttonCellReuseIdentifier : String
     let imageCellReuseIdentifier : String
     let labelCellReuseIdentifier : String
-
-    var movingCell : UICollectionViewCell?
-    var movingCellInitalCenter : CGPoint?
 
     var objectList : APCInterfaceObjectList?
     
@@ -47,8 +43,6 @@ class APCInterfaceObjectListViewController:
     {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.blackColor()
-        
         self.collectionView.backgroundColor = UIColor.blackColor()
         self.collectionView.showsVerticalScrollIndicator = false
         
@@ -56,7 +50,7 @@ class APCInterfaceObjectListViewController:
         self.collectionView.registerNib(APCImageCollectionViewCell.nib, forCellWithReuseIdentifier: self.imageCellReuseIdentifier)
         self.collectionView.registerNib(APCLabelCollectionViewCell.nib, forCellWithReuseIdentifier: self.labelCellReuseIdentifier)
         
-        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        if let layout : UICollectionViewFlowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         {
             layout.itemSize = CGSize(width: CGRectGetWidth(self.collectionView.bounds) - 2.0 * self.style.cellMargin,
                                      height: 0.0)
@@ -66,23 +60,21 @@ class APCInterfaceObjectListViewController:
                                                bottom: self.style.cellMargin,
                                                right: self.style.cellMargin)
             
-            layout.minimumInteritemSpacing = self.style.cellMargin
-            layout.minimumLineSpacing = self.style.cellMargin
+            layout.minimumInteritemSpacing = 0.0
+            layout.minimumLineSpacing = self.style.lineSpacing
         }
         
-        if let list = self.objectList
+        if let list : APCInterfaceObjectList = self.objectList
         {
-            list.addArrayObserver(self, context: &self.context)
+            list.addObjectsObserver(self, context: &self.context)
         }
-
-        self.collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(APCInterfaceObjectListViewController.handleLongPress)))
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
-        if let indexSet = change?["indexes"] as? NSIndexSet,
-            let changeRaw = change?["kind"] as? UInt,
-            let keyValueChange : NSKeyValueChange = NSKeyValueChange(rawValue: changeRaw)
+        if let changeRaw : UInt = change?[APCConstants.kindKey] as? UInt,
+            keyValueChange : NSKeyValueChange = NSKeyValueChange(rawValue: changeRaw),
+            indexSet : NSIndexSet = change?[APCConstants.indexesKey] as? NSIndexSet
         {
             switch keyValueChange
             {
@@ -90,92 +82,31 @@ class APCInterfaceObjectListViewController:
                 break
                 
             case NSKeyValueChange.Insertion:
-                if let objectList = self.objectList where objectList.isPerformingMove == false
+                let indexPath =  NSIndexPath(forRow: indexSet.firstIndex, inSection: 0)
+                self.collectionView.insertItemsAtIndexPaths([indexPath])
+                
+                self.collectionView.selectItemAtIndexPath(indexPath,
+                                                          animated: false,
+                                                          scrollPosition: UICollectionViewScrollPosition.None)
+                
+                if let list = self.objectList,
+                    object = list[indexPath.row]
                 {
-                    let indexPath =  NSIndexPath(forRow: indexSet.firstIndex, inSection: 0)
-                    self.collectionView.insertItemsAtIndexPaths([indexPath])
-                    
-                    self.collectionView.selectItemAtIndexPath(indexPath,
-                                                              animated: false,
-                                                              scrollPosition: UICollectionViewScrollPosition.None)
-                    
-                    if let list = self.objectList,
-                        let object = list[indexPath.row]
-                    {
-                        list.selectedObject = object
-                    }
+                    list.selectedObject = object
                 }
                 
             case NSKeyValueChange.Removal:
-                if let objectList = self.objectList where objectList.isPerformingMove == false
+                let indexPath =  NSIndexPath(forRow: indexSet.firstIndex, inSection: 0)
+                self.collectionView.deleteItemsAtIndexPaths([indexPath])
+
+                if let list = self.objectList
                 {
-                    let indexPath =  NSIndexPath(forRow: indexSet.firstIndex, inSection: 0)
-                    
-                    if let selectedIndexPath = self.collectionView.indexPathsForSelectedItems()?[0],
-                        let list = self.objectList
-                    {
-                        if selectedIndexPath == indexPath
-                        {
-                            list.selectedObject = nil
-                        }
-                    }
-                    
-                    self.collectionView.deleteItemsAtIndexPaths([indexPath])
+                    list.selectedObject = nil
                 }
-                
+                                
             case NSKeyValueChange.Replacement:
                 break
             }
-        }
-    }
-    
-    func handleLongPress(gesture: UILongPressGestureRecognizer)
-    {
-        switch(gesture.state)
-        {
-        case UIGestureRecognizerState.Began:
-            if let indexPath = self.collectionView.indexPathForItemAtPoint(gesture.locationInView(self.collectionView)),
-                let movingCell = self.collectionView.cellForItemAtIndexPath(indexPath)
-            {
-                self.movingCell = movingCell
-                self.movingCellInitalCenter = movingCell.center
-                
-                self.collectionView.selectItemAtIndexPath(indexPath,
-                                                          animated: true,
-                                                          scrollPosition: UICollectionViewScrollPosition.None)
-                
-                movingCell.animateExpansion()
-                
-                self.collectionView.beginInteractiveMovementForItemAtIndexPath(indexPath)
-            }
-            
-        case UIGestureRecognizerState.Changed:
-            
-            let visibleContentFrame : CGRect = CGRect(origin: self.collectionView.contentOffset,
-                                                      size: self.collectionView.bounds.size)
-            
-            if visibleContentFrame.contains(gesture.locationInView(self.collectionView)) == true
-            {
-                self.collectionView.updateInteractiveMovementTargetPosition(gesture.locationInView(gesture.view))
-            }
-            else
-            {
-                self.collectionView.endInteractiveMovement()                
-            }
-            
-        case UIGestureRecognizerState.Ended:
-            self.collectionView.endInteractiveMovement()
-
-            if let cell = self.movingCell where cell.center == self.movingCellInitalCenter
-            {
-                cell.animateContraction()
-            }
-
-            self.movingCell = nil
-            self.movingCellInitalCenter = CGPointZero
-
-        default:
-            self.collectionView.cancelInteractiveMovement()
         }
     }
     
@@ -200,20 +131,20 @@ class APCInterfaceObjectListViewController:
         if let object : APCInterfaceObject = self.objectList?[indexPath.row]
         {
             if let button = object as? APCButton,
-                let buttonCell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.buttonCellReuseIdentifier, forIndexPath: indexPath) as? APCButtonCollectionViewCell
+                buttonCell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.buttonCellReuseIdentifier, forIndexPath: indexPath) as? APCButtonCollectionViewCell
             {
                 buttonCell.refresh(button: button)
                 objectCell = buttonCell
             }
             else if let image = object as? APCImage,
-                let imageCell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.imageCellReuseIdentifier, forIndexPath: indexPath) as? APCImageCollectionViewCell
+                imageCell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.imageCellReuseIdentifier, forIndexPath: indexPath) as? APCImageCollectionViewCell
             {
                 imageCell.refresh(image: image)
                 imageCell.delegate = self
                 objectCell = imageCell
             }
             else if let label = object as? APCLabel,
-                let labelCell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.labelCellReuseIdentifier, forIndexPath: indexPath) as? APCLabelCollectionViewCell
+                labelCell = self.collectionView.dequeueReusableCellWithReuseIdentifier(self.labelCellReuseIdentifier, forIndexPath: indexPath) as? APCLabelCollectionViewCell
             {
                 labelCell.refresh(label: label)
                 labelCell.delegate = self
@@ -222,11 +153,6 @@ class APCInterfaceObjectListViewController:
         }
         
         return objectCell
-    }
-    
-    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
-    {
-        
     }
     
     // MARK: UICollectionViewDelegate
@@ -240,51 +166,28 @@ class APCInterfaceObjectListViewController:
         }
     }
     
-    func collectionView(collectionView: UICollectionView, targetIndexPathForMoveFromItemAtIndexPath originalIndexPath: NSIndexPath, toProposedIndexPath proposedIndexPath: NSIndexPath) -> NSIndexPath
-    {
-        let originalIndex = originalIndexPath.row
-        let proposedIndex = proposedIndexPath.row
-        
-        if let list = self.objectList
-        {
-            if (originalIndex != proposedIndex)
-            {
-                if (list.move(objectAtIndex: originalIndex, toIndex: proposedIndex) == false)
-                {
-                    print("falied to move object")
-                }
-            }
-        }
-        
-        return proposedIndexPath
-    }
-    
-    func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool
-    {
-        return false
-    }
-    
     // MARK: UICollectionViewDelegateFlowLayout
-    
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
         var size : CGSize = CGSizeZero
         
         if let object = self.objectList?[indexPath.row]
         {
+            let width : CGFloat = CGRectGetWidth(self.collectionView.bounds) - 2.0 * self.style.cellMargin
+            
             if object is APCButton
             {
-                size = APCButtonCollectionViewCell.size(CGRectGetWidth(self.collectionView.bounds) - 2.0 * self.style.cellMargin)
+                size = APCButtonCollectionViewCell.size(width: width)
             }
-            else if let image = object as? APCImage
+            else if let image = object as? APCImage,
+                uiImage = image.uiImage
             {
-                size = APCImageCollectionViewCell.size(CGRectGetWidth(self.collectionView.bounds) - 2.0 * self.style.cellMargin,
-                                                       uiImage: image.uiImage!)
+                size = APCImageCollectionViewCell.size(width: width, uiImage: uiImage)
             }
             else if let label = object as? APCLabel
             {
-                size = APCLabelCollectionViewCell.size(CGRectGetWidth(self.collectionView.bounds) - 2.0 * self.style.cellMargin,
-                                                       text: label.text)
+                size = APCLabelCollectionViewCell.size(width: width, text: label.text)
             }
         }
         
@@ -293,13 +196,13 @@ class APCInterfaceObjectListViewController:
 
     // MARK: APCImageCollectionViewCellDelegate
     
-    func imageCollectionViewCellDidUpdateText(cell: APCImageCollectionViewCell)
+    func imageCollectionViewCellDidUpdateImage(cell: APCImageCollectionViewCell)
     {
         self.collectionView.performBatchUpdates(
         {
             self.collectionView.collectionViewLayout.invalidateLayout()
         },
-                                                completion: nil)
+                                               completion: nil)
     }
     
     // MARK: APCLabelCollectionViewCellDelegate
@@ -310,7 +213,7 @@ class APCInterfaceObjectListViewController:
         {
             self.collectionView.collectionViewLayout.invalidateLayout()
         },
-                                                completion: nil)
+                                              completion: nil)
     }
     
     // MARK:
@@ -319,7 +222,7 @@ class APCInterfaceObjectListViewController:
     {
         if let list = self.objectList
         {
-            list.removeArrayObserver(self)
+            list.removeObjectsObserver(self)
         }
     }
 }

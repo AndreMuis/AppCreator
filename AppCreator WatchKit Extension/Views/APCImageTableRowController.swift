@@ -11,13 +11,13 @@ import WatchKit
 
 class APCImageTableRowController : NSObject, APCTableRowController
 {
-    @IBOutlet var imageOutlet : WKInterfaceImage!
+    @IBOutlet var interfaceImage : WKInterfaceImage!
     
     var image : APCImage?
     {
         didSet
         {
-            self.imageOutlet.setImage(self.image?.uiImage)
+            self.interfaceImage.setImage(self.image?.uiImage)
         }
     }
 

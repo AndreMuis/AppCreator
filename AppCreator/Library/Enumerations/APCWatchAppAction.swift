@@ -1,5 +1,5 @@
 //
-//  APCInterfaceObjectListAction.swift
+//  APCWatchAppAction.swift
 //  AppCreator
 //
 //  Created by Andre Muis on 5/31/16.

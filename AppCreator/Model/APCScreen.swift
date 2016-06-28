@@ -14,7 +14,7 @@ class APCScreen : NSObject, NSCoding
     dynamic var title : String
     var interfaceObjectList : APCInterfaceObjectList
     
-    init(title : String)
+    init(title: String)
     {
         self.id = NSUUID()
         self.title = title
@@ -23,7 +23,7 @@ class APCScreen : NSObject, NSCoding
         super.init()
     }
 
-    init(id : NSUUID, title : String)
+    init(id: NSUUID, title: String, interfaceObjectList: APCInterfaceObjectList)
     {
         self.id = id
         self.title = title
@@ -34,24 +34,22 @@ class APCScreen : NSObject, NSCoding
 
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let id = decoder.decodeObjectForKey("id") as? NSUUID,
-            title = decoder.decodeObjectForKey("title") as? String,
-            interfaceObjectList = decoder.decodeObjectForKey("interfaceObjectList") as? APCInterfaceObjectList
+        guard let id : NSUUID = decoder.decodeObjectForKey(APCConstants.idKeyPath) as? NSUUID,
+            title : String = decoder.decodeObjectForKey(APCConstants.titleKeyPath) as? String,
+            interfaceObjectList : APCInterfaceObjectList = decoder.decodeObjectForKey(APCConstants.interfaceObjectListKeyPath) as? APCInterfaceObjectList
             else
         {
             return nil
         }
         
-        self.init(id: id, title: title)
-        self.interfaceObjectList = interfaceObjectList
-
+        self.init(id: id, title: title, interfaceObjectList: interfaceObjectList)
     }
 
     func encodeWithCoder(coder: NSCoder)
     {
-        coder.encodeObject(self.id, forKey: "id")
-        coder.encodeObject(self.title, forKey: "title")
-        coder.encodeObject(self.interfaceObjectList, forKey: "interfaceObjectList")
+        coder.encodeObject(self.id, forKey: APCConstants.idKeyPath)
+        coder.encodeObject(self.title, forKey: APCConstants.titleKeyPath)
+        coder.encodeObject(self.interfaceObjectList, forKey: APCConstants.interfaceObjectListKeyPath)
     }
 }
 

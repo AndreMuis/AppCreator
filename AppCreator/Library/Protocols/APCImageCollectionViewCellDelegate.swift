@@ -8,5 +8,5 @@
 
 protocol APCImageCollectionViewCellDelegate
 {
-    func imageCollectionViewCellDidUpdateText(cell : APCImageCollectionViewCell)
+    func imageCollectionViewCellDidUpdateImage(cell : APCImageCollectionViewCell)
 }

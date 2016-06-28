@@ -12,20 +12,24 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
 {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var moveUpButton: UIButton!
+    @IBOutlet weak var moveDownButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
 
     var delegate : APCImageViewControllerDelegate?
+    
     var image : APCImage?
     {
         didSet
         {
-            self.imageView.image = self.image?.uiImage ?? UIImage(named: "NoPhoto")
+            self.imageView.image = self.image?.uiImage ?? UIImage(named: APCConstants.noPhotoImageName)
 
             self.saveButton.enabled = self.image != nil ? true : false
+            self.moveUpButton.enabled = self.image != nil ? true : false
+            self.moveDownButton.enabled = self.image != nil ? true : false
             self.deleteButton.enabled = self.image != nil ? true : false
         }
     }
-    var imageFileURL : String?
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -38,19 +42,23 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
         
         self.delegate = nil
         self.image = nil
-        self.imageFileURL = nil
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.imageView.image = UIImage(named: "NoPhoto")
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+
+        self.imageView.image = UIImage(named: APCConstants.noPhotoImageName)
         
         self.saveButton.enabled = false
+        self.moveUpButton.enabled = false
+        self.moveDownButton.enabled = false
         self.deleteButton.enabled = false
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(APCImageViewController.handleTap))
+        let gestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                                action: #selector(APCImageViewController.handleTap))
         
         self.imageView.userInteractionEnabled = true
         self.imageView.addGestureRecognizer(gestureRecognizer)
@@ -58,11 +66,11 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func addButtonTapped(sender: AnyObject)
     {
-        if self.imageView.image != UIImage(named: "NoPhoto")
+        if self.imageView.image != UIImage(named: APCConstants.noPhotoImageName)
         {
-            if let delegate = self.delegate,
-                let uiImage = self.imageView.image,
-                let image = APCImage(uiImage: uiImage)
+            if let delegate : APCImageViewControllerDelegate = self.delegate,
+                uiImage : UIImage = self.imageView.image,
+                image : APCImage = APCImage(uiImage: uiImage)
             {
                 delegate.imageViewController(self, addImage: image)
             }
@@ -71,20 +79,43 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
 
     @IBAction func saveButtonTapped(sender: AnyObject)
     {
-        if let image = self.image,
-            let uiImage = self.imageView.image
+        if let image : APCImage = self.image,
+            uiImage : UIImage = self.imageView.image,
+            imageData : NSData = UIImagePNGRepresentation(uiImage)
         {
-            if image.updateUIImage(uiImage) == false
+            if imageData.writeToURL(image.fileURL, atomically: true) == true
             {
-                print("unable to update uiImage on an APCImage object")
+                image.uiImage = uiImage
             }
+            else
+            {
+                print("Unable to save UIImage data to a file.")
+            }
+        }
+    }
+    
+    @IBAction func moveUpButtonTapped(sender: AnyObject)
+    {
+        if let delegate : APCImageViewControllerDelegate = self.delegate,
+            image : APCImage = self.image
+        {
+            delegate.imageViewController(self, moveImage: image, moveDirection: APCMoveDirection.Up)
+        }
+    }
+    
+    @IBAction func moveDownButtonTapped(sender: AnyObject)
+    {
+        if let delegate : APCImageViewControllerDelegate  = self.delegate,
+            image : APCImage = self.image
+        {
+            delegate.imageViewController(self, moveImage: image, moveDirection: APCMoveDirection.Down)
         }
     }
     
     @IBAction func deleteButtonTapped(sender: AnyObject)
     {
-        if let delegate = self.delegate,
-            image = self.image
+        if let delegate : APCImageViewControllerDelegate  = self.delegate,
+            image : APCImage = self.image
         {
             delegate.imageViewController(self, deleteImage: image)
         }
@@ -101,6 +132,10 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
             
             self.presentViewController(picker, animated: true, completion: nil)
         }
+        else
+        {
+            print("Image picker \"photo library\" source type is not available.")
+        }
     }
     
     // MARK: UIImagePickerControllerDelegate
@@ -109,10 +144,11 @@ class APCImageViewController: UIViewController, UIImagePickerControllerDelegate,
     {
         if let uiImage : UIImage = info[UIImagePickerControllerEditedImage] as? UIImage
         {
-            self.imageView.image = uiImage
-            
-            picker.dismissViewControllerAnimated(true, completion: nil)
+            self.imageView.image = uiImage.resizedJPEGImage(maxSideLength: APCConstants.appleWatchMaxScreenWidth,
+                                                            jpegCompressionQuality: APCConstants.jpegCompressionQuality)
         }
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)

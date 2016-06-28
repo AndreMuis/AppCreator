@@ -21,7 +21,7 @@ class APCButton : NSObject, APCInterfaceObject
         self.pushToScreenId = nil
     }
 
-    init(id : NSUUID, title : String, pushToScreenId : NSUUID)
+    init(id : NSUUID, title : String, pushToScreenId : NSUUID?)
     {
         self.id = id
         self.title = title
@@ -30,25 +30,26 @@ class APCButton : NSObject, APCInterfaceObject
     
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let id = decoder.decodeObjectForKey("id") as? NSUUID,
-            let title = decoder.decodeObjectForKey("title") as? String,
-            let pushToScreenId = decoder.decodeObjectForKey("pushToScreenId") as? NSUUID
+        guard let id = decoder.decodeObjectForKey(APCConstants.idKeyPath) as? NSUUID,
+            title = decoder.decodeObjectForKey(APCConstants.titleKeyPath) as? String
             else
         {
             return nil
         }
+        
+        let pushToScreenId : NSUUID? = decoder.decodeObjectForKey(APCConstants.pushToScreenIdKeyPath) as? NSUUID
         
         self.init(id: id, title: title, pushToScreenId: pushToScreenId)
     }
     
     func encodeWithCoder(coder: NSCoder)
     {
-        coder.encodeObject(self.id, forKey: "id")
-        coder.encodeObject(self.title, forKey: "title")
+        coder.encodeObject(self.id, forKey: APCConstants.idKeyPath)
+        coder.encodeObject(self.title, forKey: APCConstants.titleKeyPath)
         
         if let screenId = self.pushToScreenId
         {
-            coder.encodeObject(screenId, forKey: "pushToScreenId")
+            coder.encodeObject(screenId, forKey: APCConstants.pushToScreenIdKeyPath)
         }
     }
 }

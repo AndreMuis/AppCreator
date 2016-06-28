@@ -8,13 +8,19 @@
 
 import UIKit
 
-class APCButtonViewController : UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
+class APCButtonViewController :
+    UIViewController,
+    UITextFieldDelegate,
+    UIPickerViewDataSource,
+    UIPickerViewDelegate
 {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var moveUpButton: UIButton!
+    @IBOutlet weak var moveDownButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
-    
+
     var delegate : APCButtonViewControllerDelegate?
     var pushToScreens : [APCScreen]!
 
@@ -25,14 +31,15 @@ class APCButtonViewController : UIViewController, UIPickerViewDataSource, UIPick
             self.titleTextField.text = self.button?.title ?? ""
             
             self.saveButton.enabled = self.button != nil ? true : false
+            self.moveUpButton.enabled = self.button != nil ? true : false
+            self.moveDownButton.enabled = self.button != nil ? true : false
             self.deleteButton.enabled = self.button != nil ? true : false
             
             if let pushToScreenId : NSUUID = self.button?.pushToScreenId,
-                let pushToScreen : APCScreen = self.pushToScreens.filter({$0.id == pushToScreenId}).first,
-                let pushToScreenIndex = self.pushToScreens.indexOf(pushToScreen)
+                pushToScreen : APCScreen = self.pushToScreens.filter({$0.id == pushToScreenId}).first,
+                pushToScreenIndex : Array.Index = self.pushToScreens.indexOf(pushToScreen)
             {
-                let row = pushToScreenIndex + 1
-                
+                let row : Int = pushToScreenIndex + 1
                 self.pickerView.selectRow(row, inComponent: 0, animated: true)
             }
             else
@@ -40,6 +47,13 @@ class APCButtonViewController : UIViewController, UIPickerViewDataSource, UIPick
                 self.pickerView.selectRow(0, inComponent: 0, animated: true)
             }
         }
+    }
+    
+    var titleTextFieldBottomMargin : CGFloat
+    {
+        let margin : CGFloat = CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(self.titleTextField.frame)
+        
+        return margin
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -53,20 +67,25 @@ class APCButtonViewController : UIViewController, UIPickerViewDataSource, UIPick
         
         self.delegate = nil
         self.pushToScreens = [APCScreen]()
+        self.button = nil
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        
         self.saveButton.enabled = false
+        self.moveUpButton.enabled = false
+        self.moveDownButton.enabled = false
         self.deleteButton.enabled = false
 
         let screenList : APCScreenList = (UIApplication.sharedApplication().delegate as? AppDelegate)!.screenList
         
         if let selectedScreen : APCScreen = screenList.selectedScreen
         {
-            self.pushToScreens = screenList.allScreens.filter({$0.id != selectedScreen.id})
+            self.pushToScreens = screenList.allScreens(excludingScreen: selectedScreen)
         }
     }
     
@@ -126,16 +145,40 @@ class APCButtonViewController : UIViewController, UIPickerViewDataSource, UIPick
         }
     }
     
+    @IBAction func moveUpButtonTapped(sender: AnyObject)
+    {
+        if let delegate = self.delegate,
+            button = self.button
+        {
+            delegate.buttonViewController(self, moveButton: button, moveDirection: APCMoveDirection.Up)
+        }
+    }
+    
+    @IBAction func moveDownButtonTapped(sender: AnyObject)
+    {
+        if let delegate = self.delegate,
+            button = self.button
+        {
+            delegate.buttonViewController(self, moveButton: button, moveDirection: APCMoveDirection.Down)
+        }
+    }
+    
     @IBAction func deleteButtonTapped(sender: AnyObject)
     {
-        if self.titleTextField.trimmedText.isEmpty == false
+        if let delegate = self.delegate,
+            button = self.button
         {
-            if let delegate = self.delegate,
-                button = self.button
-            {
-                delegate.buttonViewController(self, deleteButton: button)
-            }
+            delegate.buttonViewController(self, deleteButton: button)
         }
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        self.titleTextField.resignFirstResponder()
+        
+        return true
     }
     
     // MARK: UIPickerViewDataSource
@@ -158,7 +201,7 @@ class APCButtonViewController : UIViewController, UIPickerViewDataSource, UIPick
         
         if row == 0
         {
-            title = "No Screen"
+            title = APCConstants.noScreenTitle
         }
         else if let screen : APCScreen = self.pushToScreens[row - 1]
         {

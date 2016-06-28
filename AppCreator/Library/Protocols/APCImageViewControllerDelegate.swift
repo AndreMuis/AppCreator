@@ -10,5 +10,7 @@ protocol APCImageViewControllerDelegate
 {
     func imageViewController(viewController : APCImageViewController, addImage image : APCImage)
     
+    func imageViewController(viewController : APCImageViewController, moveImage image : APCImage, moveDirection : APCMoveDirection)
+
     func imageViewController(viewController : APCImageViewController, deleteImage image : APCImage)
 }

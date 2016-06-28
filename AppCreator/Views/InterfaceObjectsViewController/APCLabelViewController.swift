@@ -12,10 +12,12 @@ class APCLabelViewController: UIViewController
 {
     @IBOutlet weak var textTextView : UITextView!
     @IBOutlet weak var saveButton : UIButton!
+    @IBOutlet weak var moveUpButton: UIButton!
+    @IBOutlet weak var moveDownButton: UIButton!
     @IBOutlet weak var deleteButton : UIButton!
 
-    var style : APCLabelViewStyle!
-    
+    let style : APCLabelViewStyle
+
     var delegate : APCLabelViewControllerDelegate?
 
     var label : APCLabel?
@@ -25,38 +27,45 @@ class APCLabelViewController: UIViewController
             self.textTextView.text = self.label?.text ?? ""
             
             self.saveButton.enabled = self.label != nil ? true : false
+            self.moveUpButton.enabled = self.label != nil ? true : false
+            self.moveDownButton.enabled = self.label != nil ? true : false
             self.deleteButton.enabled = self.label != nil ? true : false
         }
     }
 
+    var textTextViewBottomMargin : CGFloat
+    {
+        let margin : CGFloat = CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(self.textTextView.frame)
+        
+        return margin
+    }
+    
     required init?(coder aDecoder: NSCoder)
     {
-        super.init(coder: aDecoder)
+        self.style = APCLabelViewStyle()
 
-        initCommon()
+        super.init(coder: aDecoder)
     }
     
     override init(nibName: String?, bundle: NSBundle?)
     {
-        super.init(nibName: nibName, bundle: bundle)
-        
-        initCommon()
-    }
-    
-    func initCommon()
-    {
         self.style = APCLabelViewStyle()
-        
         self.delegate = nil
+
+        super.init(nibName: nibName, bundle: bundle)
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+
         self.textTextView.backgroundColor = self.style.textTextViewBackgroundColor
         
         self.saveButton.enabled = false
+        self.moveUpButton.enabled = false
+        self.moveDownButton.enabled = false
         self.deleteButton.enabled = false
     }
 
@@ -84,10 +93,28 @@ class APCLabelViewController: UIViewController
         }
     }
     
+    @IBAction func moveUpButtonTapped(sender: AnyObject)
+    {
+        if let delegate = self.delegate,
+            label = self.label
+        {
+            delegate.labelViewController(self, moveLabel: label, moveDirection: APCMoveDirection.Up)
+        }
+    }
+    
+    @IBAction func moveDownButtonTapped(sender: AnyObject)
+    {
+        if let delegate = self.delegate,
+            label = self.label
+        {
+            delegate.labelViewController(self, moveLabel: label, moveDirection: APCMoveDirection.Down)
+        }
+    }
+    
     @IBAction func deleteButtonTapped(sender: AnyObject)
     {
         if let delegate = self.delegate,
-        let label = self.label
+            label = self.label
         {
             delegate.labelViewController(self, deleteLabel: label)
         }

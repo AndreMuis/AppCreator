@@ -27,8 +27,8 @@ class APCLabel: NSObject, APCInterfaceObject
     
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let id = decoder.decodeObjectForKey("id") as? NSUUID,
-            let text = decoder.decodeObjectForKey("text") as? String
+        guard let id : NSUUID = decoder.decodeObjectForKey(APCConstants.idKeyPath) as? NSUUID,
+            text : String  = decoder.decodeObjectForKey(APCConstants.textKeyPath) as? String
             else
         {
             return nil
@@ -39,7 +39,7 @@ class APCLabel: NSObject, APCInterfaceObject
     
     func encodeWithCoder(coder: NSCoder)
     {
-        coder.encodeObject(self.id, forKey: "id")
-        coder.encodeObject(self.text, forKey: "text")
+        coder.encodeObject(self.id, forKey: APCConstants.idKeyPath)
+        coder.encodeObject(self.text, forKey: APCConstants.textKeyPath)
     }
 }

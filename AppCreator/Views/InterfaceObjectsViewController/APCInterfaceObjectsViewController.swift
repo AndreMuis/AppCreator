@@ -1,5 +1,5 @@
 //
-//  APCObjectsViewController.swift
+//  APCInterfaceObjectsViewController.swift
 //  AppCreator
 //
 //  Created by Andre Muis on 5/31/16.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class APCInterfaceObjectsViewController :
-    UIViewController,
+class APCInterfaceObjectsViewController : UIViewController,
     APCButtonViewControllerDelegate,
     APCImageViewControllerDelegate,
     APCLabelViewControllerDelegate
@@ -21,9 +20,35 @@ class APCInterfaceObjectsViewController :
     let imageViewController : APCImageViewController
     let labelViewController : APCLabelViewController
     
-    var session : APCSession
+    var textElementBottomMargin : CGFloat
+    {
+        var margin : CGFloat
+        
+        switch self.segmentedControl.selectedSegmentIndex
+        {
+        case APCInterfaceObjectViewIndex.Label.rawValue:
+            margin = self.labelViewController.textTextViewBottomMargin
+            
+        case APCInterfaceObjectViewIndex.Button.rawValue:
+            margin = self.buttonViewController.titleTextFieldBottomMargin
+
+        default:
+            margin = 0
+            
+            print("Segmented control selected segment index not handled. index = \(self.segmentedControl.selectedSegmentIndex)")
+        }
+
+        return margin
+    }
+    
+    let session : APCSession
     var objectList : APCInterfaceObjectList?
 
+    var selectedObjectViewIndex : Int
+    {
+        return self.segmentedControl.selectedSegmentIndex
+    }
+    
     required init?(coder aDecoder: NSCoder)
     {
         self.buttonViewController = APCButtonViewController(nibName: String(APCButtonViewController.self), bundle: nil)
@@ -31,6 +56,7 @@ class APCInterfaceObjectsViewController :
         self.labelViewController = APCLabelViewController(nibName: String(APCLabelViewController.self), bundle: nil)
         
         self.session = (UIApplication.sharedApplication().delegate as? AppDelegate)!.session
+        self.objectList = nil
         
         super.init(coder: aDecoder)
     }
@@ -52,44 +78,51 @@ class APCInterfaceObjectsViewController :
         self.segmentedControl.selectedSegmentIndex = 0
         self.showObjectView()
         
-        if let list = self.objectList
+        if let list :APCInterfaceObjectList = self.objectList
         {
-            list.addObserver(self, forKeyPath: "selectedObject", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+            list.addObserver(self,
+                             forKeyPath: APCConstants.selectedObjectKeyPath,
+                             options: NSKeyValueObservingOptions([.New]),
+                             context: &context)
         }
     }
-
+    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
         if (context == &self.context)
         {
-            if let object = self.objectList?.selectedObject
+            if let object : APCInterfaceObject = self.objectList?.selectedObject
             {
-                if let button = object as? APCButton
+                if let button : APCButton = object as? APCButton
                 {
                     self.buttonViewController.button = button
                     self.imageViewController.image = nil
                     self.labelViewController.label = nil
                     
-                    self.segmentedControl.selectedSegmentIndex = 2
+                    self.segmentedControl.selectedSegmentIndex = APCInterfaceObjectViewIndex.Button.rawValue
                     self.showObjectView()
                 }
-                else if let image = object as? APCImage
+                else if let image : APCImage = object as? APCImage
                 {
                     self.buttonViewController.button = nil
                     self.imageViewController.image = image
                     self.labelViewController.label = nil
                     
-                    self.segmentedControl.selectedSegmentIndex = 1
+                    self.segmentedControl.selectedSegmentIndex = APCInterfaceObjectViewIndex.Image.rawValue
                     self.showObjectView()
                 }
-                else if let label = object as? APCLabel
+                else if let label : APCLabel = object as? APCLabel
                 {
                     self.buttonViewController.button = nil
                     self.imageViewController.image = nil
                     self.labelViewController.label = label
                     
-                    self.segmentedControl.selectedSegmentIndex = 0
+                    self.segmentedControl.selectedSegmentIndex = APCInterfaceObjectViewIndex.Label.rawValue
                     self.showObjectView()
+                }
+                else
+                {
+                    print("Interface object type not handled. Interface object = \(object)")
                 }
             }
             else
@@ -106,6 +139,20 @@ class APCInterfaceObjectsViewController :
         self.addChildViewController(viewController)
         self.containerView.addSubview(viewController.view)
         viewController.didMoveToParentViewController(self)
+        
+        let views : [String : UIView] = ["view" : viewController.view]
+        
+        let horizontalConstraints : [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[view]-0-|",
+                                                                                                          options: [],
+                                                                                                          metrics: nil,
+                                                                                                          views: views)
+        
+        let verticalConstraints : [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|",
+                                                                                                        options: [],
+                                                                                                        metrics: nil,
+                                                                                                        views: views)
+        
+        self.containerView.addConstraints(horizontalConstraints + verticalConstraints)
     }
     
     @IBAction func segmentedControlValueChanged(sender: AnyObject)
@@ -117,17 +164,17 @@ class APCInterfaceObjectsViewController :
     {
         switch self.segmentedControl.selectedSegmentIndex
         {
-        case 0:
+        case APCInterfaceObjectViewIndex.Label.rawValue:
             self.containerView.bringSubviewToFront(self.labelViewController.view)
             
-        case 1:
+        case APCInterfaceObjectViewIndex.Image.rawValue:
             self.containerView.bringSubviewToFront(self.imageViewController.view)
             
-        case 2:
+        case APCInterfaceObjectViewIndex.Button.rawValue:
             self.containerView.bringSubviewToFront(self.buttonViewController.view)
             
         default:
-            print("selected segment index not handled ")
+            print("Selected segment index not handled. selectedSegmentIndex = \(self.segmentedControl.selectedSegmentIndex)")
         }
     }
     
@@ -141,12 +188,20 @@ class APCInterfaceObjectsViewController :
         }
     }
     
+    func buttonViewController(viewController: APCButtonViewController, moveButton button: APCButton, moveDirection: APCMoveDirection)
+    {
+        self.moveObject(button, moveDirection: moveDirection)
+    }
+    
     func buttonViewController(viewController: APCButtonViewController, deleteButton button: APCButton)
     {
-        if let list = self.objectList,
-            let index : Int = list.indexOfObject(button)
+        if let list : APCInterfaceObjectList  = self.objectList,
+            index : Int = list.indexOfObject(button)
         {
-            list.remove(objectAtIndex: index)
+            if list.remove(objectAtIndex: index) == false
+            {
+                print("Unable to remove interface object. index = \(index)")
+            }
         }
     }
     
@@ -160,12 +215,21 @@ class APCInterfaceObjectsViewController :
         }
     }
     
+    func imageViewController(viewController: APCImageViewController, moveImage image: APCImage, moveDirection: APCMoveDirection)
+    {
+        self.moveObject(image, moveDirection: moveDirection)
+    }
+
     func imageViewController(viewController: APCImageViewController, deleteImage image: APCImage)
     {
         if let list = self.objectList,
-            let index : Int = list.indexOfObject(image)
+            index : Int = list.indexOfObject(image)
         {
-            list.remove(objectAtIndex: index)
+            if list.remove(objectAtIndex: index) == false
+            {
+                print("Unable to remove interface object. index = \(index)")
+            }
+
         }
     }
     
@@ -179,22 +243,60 @@ class APCInterfaceObjectsViewController :
         }
     }
     
+    func labelViewController(viewController: APCLabelViewController, moveLabel label: APCLabel, moveDirection: APCMoveDirection)
+    {
+        self.moveObject(label, moveDirection: moveDirection)
+    }
+
     func labelViewController(viewController: APCLabelViewController, deleteLabel label: APCLabel)
     {
         if let list = self.objectList,
-            let index : Int = list.indexOfObject(label)
+            index : Int = list.indexOfObject(label)
         {
-            list.remove(objectAtIndex: index)
+            if list.remove(objectAtIndex: index) == false
+            {
+                print("Unable to remove interface object. index = \(index)")
+            }
         }
     }
 
     // MARK:
     
+    func moveObject(object: APCInterfaceObject, moveDirection: APCMoveDirection)
+    {
+        if let list = self.objectList,
+            index : Int = list.indexOfObject(object)
+        {
+            switch moveDirection
+            {
+            case APCMoveDirection.Up:
+                if index >= 1
+                {
+                    if list.move(objectAtIndex: index, toIndex: index - 1) == false
+                    {
+                        print("Unable to move interface object. fromIndex = \(index), toIndex = \(index - 1)")
+                    }
+                }
+                
+            case APCMoveDirection.Down:
+                if index < list.count - 1
+                {
+                    if list.move(objectAtIndex: index, toIndex: index + 1) == false
+                    {
+                        print("Unable to move interface object. fromIndex = \(index), toIndex = \(index + 1)")
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK:
+
     deinit
     {
         if let list = self.objectList
         {
-            list.removeArrayObserver(self)
+            list.removeObjectsObserver(self)
         }
     }
 }

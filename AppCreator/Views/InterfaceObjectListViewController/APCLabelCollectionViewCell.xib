@@ -16,7 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="220" height="50"/>
                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
@@ -37,7 +36,7 @@
             <connections>
                 <outlet property="textLabel" destination="zpY-kG-YoU" id="Ur9-5O-Tld"/>
             </connections>
-            <point key="canvasLocation" x="448" y="646"/>
+            <point key="canvasLocation" x="486" y="952"/>
         </collectionViewCell>
     </objects>
 </document>

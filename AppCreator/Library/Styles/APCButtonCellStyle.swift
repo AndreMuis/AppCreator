@@ -16,7 +16,9 @@ struct APCButtonCellStyle
     let backgroundColor : UIColor = UIColor(white: 0.3, alpha: 1.0)
     let selectedBackgroundColor : UIColor = UIColor(white: 0.5, alpha: 1.0)
     
-    static let height : CGFloat = 50.0
+    static let aspectRatio : CGFloat = 4.0
+    
+    let font : UIFont = UIFont.systemFontOfSize(26.0)
 }
 
 

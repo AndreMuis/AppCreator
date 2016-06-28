@@ -13,7 +13,6 @@ class APCScreenCollectionViewCell: UICollectionViewCell
     @IBOutlet weak var titleLabel: UILabel!
 
     let style : APCScreenListCellStyle
-
     var screen : APCScreen?
     
     static var nib : UINib
@@ -26,6 +25,7 @@ class APCScreenCollectionViewCell: UICollectionViewCell
     required init?(coder aDecoder: NSCoder)
     {
         self.style = APCScreenListCellStyle()
+        self.screen = nil
         
         super.init(coder: aDecoder)
     }
@@ -64,7 +64,7 @@ class APCScreenCollectionViewCell: UICollectionViewCell
         
         if let screen = self.screen
         {
-            screen.removeObserver(self, forKeyPath: "name")
+            screen.removeObserver(self, forKeyPath: APCConstants.titleKeyPath)
         }
     }
 
@@ -74,14 +74,14 @@ class APCScreenCollectionViewCell: UICollectionViewCell
         
         self.titleLabel.text = screen.title
         
-        screen.addObserver(self, forKeyPath: "name", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+        screen.addObserver(self, forKeyPath: APCConstants.titleKeyPath, options: NSKeyValueObservingOptions([.New]), context: &context)
     }
     
     deinit
     {
         if let screen = self.screen
         {
-            screen.removeObserver(self, forKeyPath: "name")
+            screen.removeObserver(self, forKeyPath: APCConstants.titleKeyPath)
         }
     }
 }

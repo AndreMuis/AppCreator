@@ -11,7 +11,6 @@ import Foundation
 class APCScreenList : NSObject, NSCoding
 {
     private var screens : [APCScreen]
-
     var initialScreenId : NSUUID?
     var selectedScreen : APCScreen?
     
@@ -19,32 +18,39 @@ class APCScreenList : NSObject, NSCoding
     {
         self.screens = [APCScreen]()
         self.initialScreenId = nil
+        self.selectedScreen = nil
         
         super.init()
     }
     
-    init(screens : [APCScreen], rootScreenId : NSUUID)
+    init(screens : [APCScreen], initialScreenId: NSUUID?)
     {
         self.screens = screens
-        self.initialScreenId = rootScreenId
+        self.initialScreenId = initialScreenId
+        self.selectedScreen = nil
     }
     
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let screens = decoder.decodeObjectForKey("screens") as? [APCScreen],
-            let rootScreenId = decoder.decodeObjectForKey("initialScreenId") as? NSUUID
+        guard let screens = decoder.decodeObjectForKey(APCConstants.screensKeyPath) as? [APCScreen]
             else
         {
             return nil
         }
         
-        self.init(screens: screens, rootScreenId: rootScreenId)
+        let initialScreenId : NSUUID? = decoder.decodeObjectForKey(APCConstants.initialScreenIdKeyPath) as? NSUUID
+
+        self.init(screens: screens, initialScreenId: initialScreenId)
     }
     
     func encodeWithCoder(coder: NSCoder)
     {
-        coder.encodeObject(self.screens, forKey: "screens")
-        coder.encodeObject(self.initialScreenId, forKey: "initialScreenId")
+        coder.encodeObject(self.screens, forKey: APCConstants.screensKeyPath)
+        
+        if let screenId = self.initialScreenId
+        {
+            coder.encodeObject(screenId, forKey: APCConstants.initialScreenIdKeyPath)
+        }
     }
     
     var count : Int
@@ -52,18 +58,13 @@ class APCScreenList : NSObject, NSCoding
         return self.screens.count
     }
     
-    var allScreens : [APCScreen]
-    {
-        return self.screens
-    }
-    
-    subscript(index : Int) -> APCScreen?
+    subscript(index: Int) -> APCScreen?
     {
         get
         {
             var screen : APCScreen? = nil
             
-            if 0..<self.screens.count ~= index
+            if 0 ..< self.screens.count ~= index
             {
                 screen = self.screens[index]
             }
@@ -72,14 +73,21 @@ class APCScreenList : NSObject, NSCoding
         }
     }
 
-    func screenWithId(id : NSUUID) -> APCScreen?
+    func screenWithId(id: NSUUID) -> APCScreen?
     {
         let screen : APCScreen? = self.screens.filter({$0.id == id}).first
         
         return screen
     }
 
-    func indexWithId(id : NSUUID) -> Int?
+    func allScreens(excludingScreen screen: APCScreen) -> [APCScreen]
+    {
+        let screens : [APCScreen] = self.screens.filter({$0.id != screen.id})
+        
+        return screens
+    }
+    
+    func indexWithId(id: NSUUID) -> Int?
     {
         var index : Int?
         
@@ -91,19 +99,18 @@ class APCScreenList : NSObject, NSCoding
         return index
     }
     
-    func add(screen screen : APCScreen)
+    func add(screen: APCScreen)
     {
         self.screens.append(screen)
     }
     
-    func move(objectAtIndex fromIndex : Int, toIndex: Int) -> Bool
+    func move(fromIndex fromIndex: Int, toIndex: Int) -> Bool
     {
         if 0 ..< self.screens.count ~= fromIndex && 0 ..< self.screens.count ~= toIndex
         {
             let object = self.screens[fromIndex]
             
             self.screens.removeAtIndex(fromIndex)
-            
             self.screens.insert(object, atIndex: toIndex)
             
             return true
@@ -114,7 +121,7 @@ class APCScreenList : NSObject, NSCoding
         }
     }
     
-    func remove(objectAtIndex index : Int) -> Bool
+    func remove(index index: Int) -> Bool
     {
         if 0 ..< self.screens.count ~= index
         {

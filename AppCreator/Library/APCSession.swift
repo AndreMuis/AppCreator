@@ -10,45 +10,55 @@ import WatchConnectivity
 
 class APCSession : NSObject, WCSessionDelegate
 {
-    var session : WCSession!
+    let session : WCSession?
 
     override init()
     {
-        super.init()
-        
-        self.session = WCSession.defaultSession()
-
         if WCSession.isSupported()
         {
-            self.session.delegate = self
+            self.session = WCSession.defaultSession()
+        }
+        else
+        {
+            self.session = nil
+        }
+            
+        super.init()
+        
+        if WCSession.isSupported()
+        {
+            self.session!.delegate = self
         }
     }
     
-    private var arrayContext = 0
+    private var objectsContext = 0
     private var selectedInterfaceObjectContext = 0
     private var interfaceObjectContext = 0
     
-    func addObservers(list : APCInterfaceObjectList)
+    func addObservers(list: APCInterfaceObjectList)
     {
-        list.addArrayObserver(self, context: &self.arrayContext)
+        list.addObjectsObserver(self, context: &self.objectsContext)
         
-        list.addObserver(self, forKeyPath: "selectedObject", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.selectedInterfaceObjectContext)
+        list.addObserver(self,
+                         forKeyPath: APCConstants.selectedObjectKeyPath,
+                         options: NSKeyValueObservingOptions([.New, .Old]),
+                         context: &self.selectedInterfaceObjectContext)
     }
 
-    func removeObservers(list : APCInterfaceObjectList)
+    func removeObservers(list: APCInterfaceObjectList)
     {
-        list.removeArrayObserver(self)
+        list.removeObjectsObserver(self)
         
-        list.removeObserver(self, forKeyPath: "selectedObject")
+        list.removeObserver(self, forKeyPath: APCConstants.selectedObjectKeyPath)
     }
 
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
     {
-        if (context == &self.arrayContext)
+        if (context == &self.objectsContext)
         {
-            if let indexSet = change?["indexes"] as? NSIndexSet,
-                let changeRaw = change?["kind"] as? UInt,
-                let keyValueChange : NSKeyValueChange = NSKeyValueChange(rawValue: changeRaw)
+            if let changeRaw : UInt = change?[APCConstants.kindKey] as? UInt,
+                keyValueChange : NSKeyValueChange = NSKeyValueChange(rawValue: changeRaw),
+                indexSet : NSIndexSet = change?[APCConstants.indexesKey] as? NSIndexSet
             {
                 switch keyValueChange
                 {
@@ -56,14 +66,14 @@ class APCSession : NSObject, WCSessionDelegate
                     break
                     
                 case NSKeyValueChange.Insertion:
-                    if let objects = change?["new"] as? [APCInterfaceObject],
+                    if let objects : [APCInterfaceObject] = change?[APCConstants.newKey] as? [APCInterfaceObject],
                         object : APCInterfaceObject = objects[0]
                     {
                         self.insertInterfaceObject(object, atIndex: indexSet.firstIndex)
                     }
                     
                 case NSKeyValueChange.Removal:
-                    if let objects = change?["old"] as? [APCInterfaceObject],
+                    if let objects : [APCInterfaceObject] = change?[APCConstants.oldKey] as? [APCInterfaceObject],
                         object : APCInterfaceObject = objects[0]
                     {
                         self.deleteInterfaceObject(object)
@@ -76,61 +86,72 @@ class APCSession : NSObject, WCSessionDelegate
         }
         else if (context == &self.selectedInterfaceObjectContext)
         {
-            if let button = change?["old"] as? APCButton
+            if let button = change?[APCConstants.oldKey] as? APCButton
             {
-                button.removeObserver(self, forKeyPath: "title")
+                button.removeObserver(self, forKeyPath: APCConstants.titleKeyPath)
             }
             
-            if let button = change?["new"] as? APCButton
+            if let button = change?[APCConstants.newKey] as? APCButton
             {
-                button.addObserver(self, forKeyPath: "title", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.interfaceObjectContext)
+                button.addObserver(self,
+                                   forKeyPath: APCConstants.titleKeyPath,
+                                   options: NSKeyValueObservingOptions([.New]),
+                                   context: &self.interfaceObjectContext)
             }
             
-            if let image = change?["old"] as? APCImage
+            if let image = change?[APCConstants.oldKey] as? APCImage
             {
-                image.removeObserver(self, forKeyPath: "uiImage")
+                image.removeObserver(self, forKeyPath: APCConstants.uiImageKeyPath)
             }
             
-            if let image = change?["new"] as? APCImage
+            if let image = change?[APCConstants.newKey] as? APCImage
             {
-                image.addObserver(self, forKeyPath: "uiImage", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.interfaceObjectContext)
+                image.addObserver(self,
+                                  forKeyPath: APCConstants.uiImageKeyPath,
+                                  options: NSKeyValueObservingOptions([.New]),
+                                  context: &self.interfaceObjectContext)
             }
 
-            if let label = change?["old"] as? APCLabel
+            if let label = change?[APCConstants.oldKey] as? APCLabel
             {
-                label.removeObserver(self, forKeyPath: "text")
+                label.removeObserver(self, forKeyPath: APCConstants.textKeyPath)
             }
 
-            if let label = change?["new"] as? APCLabel
+            if let label = change?[APCConstants.newKey] as? APCLabel
             {
-                label.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions([.New, .Old]), context: &self.interfaceObjectContext)
+                label.addObserver(self,
+                                  forKeyPath: APCConstants.textKeyPath,
+                                  options: NSKeyValueObservingOptions([.New]),
+                                  context: &self.interfaceObjectContext)
             }
         }
-        else
+        else if (context == &self.interfaceObjectContext)
         {
             if let object = object as? APCInterfaceObject
             {
                 self.modifyInterfaceObject(object)
             }
         }
+        else
+        {
+            print("KVO context not handled. context = \(context)")
+        }
     }
     
     func activate()
     {
-        self.session.activateSession()
+        if let session = self.session
+        {
+            session.activateSession()
+        }
     }
 
-    func sessionReachabilityDidChange(session: WCSession)
-    {
-        print("reachable = \(self.session.reachable)")
-    }
-    
-    func refreshScreen(screen : APCScreen)
+    func refreshScreen(screen: APCScreen)
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCWatchAppAction.RefreshScreen.rawValue,
-                "screenData" : screen.archivedData()
+                APCConstants.actionKey : APCWatchAppAction.RefreshScreen.rawValue,
+                APCConstants.screenDataKey : APCKeyedArchiver.archivedDataWithRootObject(screen)
             ]
         
         self.sendMessage(message)
@@ -140,74 +161,75 @@ class APCSession : NSObject, WCSessionDelegate
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCWatchAppAction.ClearScreen.rawValue
-        ]
+                APCConstants.actionKey : APCWatchAppAction.ClearScreen.rawValue
+            ]
         
         self.sendMessage(message)
     }
     
-    func insertInterfaceObject(object : APCInterfaceObject, atIndex index : Int)
+    func insertInterfaceObject(object: APCInterfaceObject, atIndex index: Int)
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCWatchAppAction.InsertInterfaceObject.rawValue,
-                "objectData" : object.archivedData(),
-                "index" : index
+                APCConstants.actionKey : APCWatchAppAction.InsertInterfaceObject.rawValue,
+                APCConstants.objectDataKey : APCKeyedArchiver.archivedDataWithRootObject(object),
+                APCConstants.indexKey : index
             ]
 
         self.sendMessage(message)
     }
     
-    func modifyInterfaceObject(object : APCInterfaceObject)
+    func modifyInterfaceObject(object: APCInterfaceObject)
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCWatchAppAction.ModifyInterfaceObject.rawValue,
-                "objectData" : object.archivedData()
+                APCConstants.actionKey : APCWatchAppAction.ModifyInterfaceObject.rawValue,
+                APCConstants.objectDataKey : APCKeyedArchiver.archivedDataWithRootObject(object)
             ]
         
         self.sendMessage(message)
     }
 
-    func deleteInterfaceObject(object : APCInterfaceObject)
+    func deleteInterfaceObject(object: APCInterfaceObject)
     {
         let message : [String : AnyObject] =
             [
-                "action" : APCWatchAppAction.DeleteInterfaceObject.rawValue,
-                "objectData" : object.archivedData()
+                APCConstants.actionKey : APCWatchAppAction.DeleteInterfaceObject.rawValue,
+                APCConstants.objectDataKey : APCKeyedArchiver.archivedDataWithRootObject(object)
             ]
         
         self.sendMessage(message)
     }
 
-    func runWatchApp(screenList : APCScreenList)
+    func runWatchApp(screenList: APCScreenList)
     {
         let message : [String : AnyObject] =
-        [
-            "action" : APCWatchAppAction.Run.rawValue,
-            "screenListData" : screenList.archivedData()
-        ]
+            [
+                APCConstants.actionKey : APCWatchAppAction.Run.rawValue,
+                APCConstants.screenListDataKey : APCKeyedArchiver.archivedDataWithRootObject(screenList)
+            ]
         
         self.sendMessage(message)
     }
     
     func sendMessage(message : [String : AnyObject])
     {
-        self.session.sendMessage(message, replyHandler:
-            { (reply) in
-                
-                if let imageIdAsString = reply["transferFileWithImageIdAsString"] as? String,
-                    let imageId : NSUUID = NSUUID(UUIDString: imageIdAsString)
-                {
-                    let image : APCImage = APCImage(id: imageId)
-                    
-                    self.session.transferFile(image.fileURL, metadata: ["imageIdAsString" : image.id.UUIDString])
+        if let session = self.session
+        {
+            session.sendMessage(message, replyHandler:
+                { (reply) in
+                    if let imageIdAsString : String = reply[APCConstants.transferFileWithImageIdAsStringKey] as? String,
+                        imageId : NSUUID = NSUUID(UUIDString: imageIdAsString)
+                    {
+                        let fileURL : NSURL = APCImage.getFileURL(id: imageId)
+                        
+                        session.transferFile(fileURL, metadata: [APCConstants.imageIdAsStringKey : imageIdAsString])
+                    }
+                })
+                { (error) in
+                    print(error)
                 }
-            
-            })
-            { (error) in
-                print(error)
-            }
+        }
     }
 }
 

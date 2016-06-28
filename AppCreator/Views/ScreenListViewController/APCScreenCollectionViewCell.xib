@@ -16,10 +16,9 @@
                         <rect key="frame" x="8" y="39" width="84" height="21"/>
                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" priority="750" constant="21" id="q3P-Xd-mXT"/>
+                            <constraint firstAttribute="height" constant="21" id="q3P-Xd-mXT"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
@@ -33,7 +32,6 @@
             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="75j-jM-Nud" secondAttribute="trailing" constant="8" id="Nf4-Ee-9ST"/>
-                <constraint firstAttribute="bottom" secondItem="75j-jM-Nud" secondAttribute="bottom" constant="40" id="blg-9o-jKg"/>
                 <constraint firstItem="75j-jM-Nud" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="gE1-wU-2Am"/>
                 <constraint firstItem="75j-jM-Nud" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="nND-Zh-7ss"/>
             </constraints>

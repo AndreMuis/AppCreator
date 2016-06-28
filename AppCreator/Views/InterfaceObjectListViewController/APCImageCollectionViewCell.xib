@@ -36,7 +36,7 @@
                 <outlet property="imageView" destination="Fg8-Nd-R6h" id="UUU-In-Ccg"/>
                 <outlet property="overlayView" destination="ldt-0A-48R" id="Ho2-2m-Xhv"/>
             </connections>
-            <point key="canvasLocation" x="321" y="734.5"/>
+            <point key="canvasLocation" x="262" y="879.5"/>
         </collectionViewCell>
     </objects>
 </document>

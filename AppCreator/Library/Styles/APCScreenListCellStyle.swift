@@ -12,5 +12,5 @@ struct APCScreenListCellStyle
 {
     let backgroundColor : UIColor = UIColor.whiteColor()
     
-    let selectedBackgroundColor : UIColor = UIColor(white: 0.9, alpha: 1.0)
+    let selectedBackgroundColor : UIColor = UIColor(white: 0.82, alpha: 1.0)
 }

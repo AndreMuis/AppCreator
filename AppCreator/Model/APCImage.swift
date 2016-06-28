@@ -11,29 +11,20 @@ import UIKit
 class APCImage: NSObject, APCInterfaceObject
 {
     let id : NSUUID
-    
-    var fileURL : NSURL
-    {
-        let documentDirectoryURLs : [NSURL] = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory,
-                                                                                              inDomains: NSSearchPathDomainMask.UserDomainMask)
-        
-        let documentDirectoryURL : NSURL = documentDirectoryURLs[0]
-        
-        let url = documentDirectoryURL.URLByAppendingPathComponent("\(self.id.UUIDString).png")
-        
-        return url
-    }
-    
+    let fileURL : NSURL
     dynamic var uiImage : UIImage?
     
     init?(uiImage : UIImage)
     {
-        self.id = NSUUID()
+        let id : NSUUID = NSUUID()
+        
+        self.id = id
+        self.fileURL = APCImage.getFileURL(id: id)
         self.uiImage = uiImage
         
         super.init()
 
-        if let imageData = UIImagePNGRepresentation(uiImage)
+        if let imageData : NSData = UIImagePNGRepresentation(uiImage)
         {
             if imageData.writeToURL(self.fileURL, atomically: true) == false
             {
@@ -49,10 +40,11 @@ class APCImage: NSObject, APCInterfaceObject
     init(id : NSUUID)
     {
         self.id = id
+        self.fileURL = APCImage.getFileURL(id: id)
         
         super.init()
 
-        if let imageData = NSData(contentsOfURL: self.fileURL)
+        if let imageData : NSData = NSData(contentsOfURL: self.fileURL)
         {
             self.uiImage = UIImage(data: imageData)
         }
@@ -60,7 +52,7 @@ class APCImage: NSObject, APCInterfaceObject
     
     required convenience init?(coder decoder: NSCoder)
     {
-        guard let id = decoder.decodeObjectForKey("id") as? NSUUID
+        guard let id : NSUUID = decoder.decodeObjectForKey(APCConstants.idKeyPath) as? NSUUID
             else
         {
             return nil
@@ -71,24 +63,19 @@ class APCImage: NSObject, APCInterfaceObject
     
     func encodeWithCoder(coder: NSCoder)
     {
-        coder.encodeObject(self.id, forKey: "id")
+        coder.encodeObject(self.id, forKey: APCConstants.idKeyPath)
     }
 
-    func updateUIImage(uiImage : UIImage) -> Bool
+    static func getFileURL(id id: NSUUID) -> NSURL
     {
-        var success : Bool = false
- 
-        if let imageData = UIImagePNGRepresentation(uiImage)
-        {
-            if imageData.writeToURL(self.fileURL, atomically: true) == true
-            {
-                self.uiImage = uiImage
-                
-                success = true
-            }
-        }
+        let documentDirectoryURLs : [NSURL] = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory,
+                                                                                              inDomains: NSSearchPathDomainMask.UserDomainMask)
         
-        return success
+        let documentDirectoryURL : NSURL = documentDirectoryURLs[0]
+        
+        let url = documentDirectoryURL.URLByAppendingPathComponent("\(id.UUIDString).png")
+        
+        return url
     }
 }
 

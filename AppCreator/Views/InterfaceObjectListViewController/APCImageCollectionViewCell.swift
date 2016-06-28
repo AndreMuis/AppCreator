@@ -8,7 +8,7 @@
 
 import UIKit
 
-class APCImageCollectionViewCell: UICollectionViewCell
+class APCImageCollectionViewCell : UICollectionViewCell
 {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var overlayView: UIView!
@@ -20,7 +20,7 @@ class APCImageCollectionViewCell: UICollectionViewCell
     
     static var nib : UINib
     {
-        let nib : UINib = UINib(nibName: String(self), bundle: nil)
+        let nib : UINib = UINib(nibName: String(APCImageCollectionViewCell.self), bundle: nil)
         
         return nib
     }
@@ -39,7 +39,7 @@ class APCImageCollectionViewCell: UICollectionViewCell
     {
         didSet
         {
-            if (self.selected == true)
+            if self.selected == true
             {
                 self.overlayView.hidden = false
             }
@@ -50,21 +50,6 @@ class APCImageCollectionViewCell: UICollectionViewCell
         }
     }
 
-    override var highlighted : Bool
-    {
-        didSet
-        {
-            if (self.highlighted == true)
-            {
-                self.overlayView.hidden = false
-            }
-            else if (self.selected == false)
-            {
-                self.overlayView.hidden = true
-            }
-        }
-    }
-    
     override func awakeFromNib()
     {
         super.awakeFromNib()
@@ -79,13 +64,13 @@ class APCImageCollectionViewCell: UICollectionViewCell
     {
         if (context == &self.context)
         {
-            if let image = self.image
+            if let image : APCImage = self.image
             {
                 self.imageView.image = image.uiImage
                 
-                if let delegate = self.delegate
+                if let delegate : APCImageCollectionViewCellDelegate = self.delegate
                 {
-                    delegate.imageCollectionViewCellDidUpdateText(self)
+                    delegate.imageCollectionViewCellDidUpdateImage(self)
                 }
             }
         }
@@ -95,53 +80,35 @@ class APCImageCollectionViewCell: UICollectionViewCell
     {
         super.prepareForReuse()
 
-        if let image = self.image
+        if let image : APCImage = self.image
         {
-            image.removeObserver(self, forKeyPath: "uiImage")
+            image.removeObserver(self, forKeyPath: APCConstants.uiImageKeyPath)
         }
     }
     
-    static func size(width : CGFloat, uiImage : UIImage) -> CGSize
+    static func size(width width: CGFloat, uiImage: UIImage) -> CGSize
     {
-        var size : CGSize = CGSizeZero
+        let height : CGFloat = width * (uiImage.size.height / uiImage.size.width)
+        
+        let size : CGSize = CGSize(width: width, height: height)
 
-        let topLevelObjects : [AnyObject] = NSBundle.mainBundle().loadNibNamed(String(APCImageCollectionViewCell.self), owner: nil, options: nil)
-        
-        if let cell : APCImageCollectionViewCell = topLevelObjects[0] as? APCImageCollectionViewCell,
-            let image = APCImage(uiImage: uiImage)
-            {
-                cell.refresh(image: image)
-                
-                cell.imageView.addConstraint(NSLayoutConstraint(item: cell.imageView,
-                                                                attribute: NSLayoutAttribute.Height,
-                                                                relatedBy: NSLayoutRelation.Equal,
-                                                                toItem: cell.imageView,
-                                                                attribute: NSLayoutAttribute.Width,
-                                                                multiplier: uiImage.size.height / uiImage.size.width,
-                                                                constant: 0.0))
-                
-                size = cell.systemLayoutSizeFittingSize(CGSize(width: width, height: 10000.0),
-                                                        withHorizontalFittingPriority: UILayoutPriorityRequired,
-                                                        verticalFittingPriority: UILayoutPriorityDefaultLow)
-            }
-        
         return size
     }
     
-    func refresh(image image : APCImage)
+    func refresh(image image: APCImage)
     {
         self.image = image
         
         self.imageView.image = image.uiImage
         
-        image.addObserver(self, forKeyPath: "uiImage", options: NSKeyValueObservingOptions([.New, .Old]), context: &context)
+        image.addObserver(self, forKeyPath: APCConstants.uiImageKeyPath, options: NSKeyValueObservingOptions([.New]), context: &context)
     }
    
     deinit
     {
         if let image = self.image
         {
-            image.removeObserver(self, forKeyPath: "uiImage")
+            image.removeObserver(self, forKeyPath: APCConstants.uiImageKeyPath)
         }
     }
 }

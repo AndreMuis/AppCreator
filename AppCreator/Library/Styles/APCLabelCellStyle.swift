@@ -14,6 +14,8 @@ struct APCLabelCellStyle
 
     let backgroundColor : UIColor = UIColor(white: 0.3, alpha: 1.0)
     let selectedBackgroundColor : UIColor = UIColor(white: 0.5, alpha: 1.0)
+    
+    static let font : UIFont = UIFont.systemFontOfSize(26.0)
 }
 
 

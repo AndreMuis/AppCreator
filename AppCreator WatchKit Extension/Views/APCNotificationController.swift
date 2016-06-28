@@ -1,5 +1,5 @@
 //
-//  NotificationController.swift
+//  APCNotificationController.swift
 //  AppCreator WatchKit Extension
 //
 //  Created by Andre Muis on 5/26/16.
@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 
-class NotificationController: WKUserNotificationInterfaceController
+class APCNotificationController: WKUserNotificationInterfaceController
 {
     override init()
     {

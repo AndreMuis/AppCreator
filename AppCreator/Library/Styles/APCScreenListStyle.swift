@@ -10,10 +10,8 @@ import UIKit
 
 struct APCScreenListStyle
 {
-    let backgroundColor : UIColor = UIColor(white: 0.8, alpha: 1.0)
+    let backgroundColor : UIColor = UIColor(white: 0.88, alpha: 1.0)
 
     let cellMargin : CGFloat = 20.0
-    
-    let screenTitleTextFieldToKeyboardSpacing : CGFloat = 15.0
 }
 

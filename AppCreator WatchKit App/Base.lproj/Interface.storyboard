@@ -12,34 +12,42 @@
                     <items>
                         <table alignment="left" id="HR4-2B-6xK" userLabel="table">
                             <items>
-                                <tableRow identifier="APCButtonTableRowController" id="BLN-88-Rni" customClass="APCButtonTableRowController" customModule="AppCreator_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="XBG-yx-dES">
+                                <tableRow identifier="APCButtonTableRowController" selectable="NO" id="BLN-88-Rni" customClass="APCButtonTableRowController" customModule="AppCreator_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" radius="5" id="XBG-yx-dES" userLabel="group">
                                         <items>
-                                            <button width="136" alignment="left" title="Button" enabled="NO" id="RQN-Us-5ED" userLabel="buttonOutlet"/>
+                                            <button width="1" alignment="left" id="RQN-Us-5ED" userLabel="interfaceButton">
+                                                <connections>
+                                                    <action selector="tap" destination="BLN-88-Rni" id="CJD-HP-Ff9"/>
+                                                </connections>
+                                            </button>
                                         </items>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
-                                        <outlet property="buttonOutlet" destination="RQN-Us-5ED" id="nRU-7K-Xz3"/>
+                                        <outlet property="interfaceButton" destination="RQN-Us-5ED" id="B7b-X0-xgX"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="APCImageTableRowController" id="Pof-7I-nCW" customClass="APCImageTableRowController" customModule="AppCreator_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="asw-bN-WdJ">
+                                <tableRow identifier="APCImageTableRowController" selectable="NO" id="Pof-7I-nCW" customClass="APCImageTableRowController" customModule="AppCreator_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" radius="0.0" id="asw-bN-WdJ" userLabel="group">
                                         <items>
-                                            <imageView alignment="left" id="x6p-Hh-hXB" userLabel="imageOutlet"/>
+                                            <imageView alignment="left" id="x6p-Hh-hXB" userLabel="interfaceImage"/>
                                         </items>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
-                                        <outlet property="imageOutlet" destination="x6p-Hh-hXB" id="UfT-7X-YkN"/>
+                                        <outlet property="interfaceImage" destination="x6p-Hh-hXB" id="Ott-Kr-ppG"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="APCLabelTableRowController" id="85m-Mv-hj5" customClass="APCLabelTableRowController" customModule="AppCreator_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="p1t-ek-eat">
+                                <tableRow identifier="APCLabelTableRowController" selectable="NO" id="85m-Mv-hj5" customClass="APCLabelTableRowController" customModule="AppCreator_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" radius="0.0" id="p1t-ek-eat" userLabel="group">
                                         <items>
-                                            <label width="1" alignment="left" text="Label" numberOfLines="0" id="wNO-ru-3Jd" userLabel="labelOutlet"/>
+                                            <label width="1" alignment="left" text="Label" textAlignment="left" numberOfLines="0" id="wNO-ru-3Jd" userLabel="interfaceLabel"/>
                                         </items>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
-                                        <outlet property="labelOutlet" destination="wNO-ru-3Jd" id="u0g-ad-fX4"/>
+                                        <outlet property="group" destination="p1t-ek-eat" id="Yfj-zF-Q91"/>
+                                        <outlet property="interfaceLabel" destination="wNO-ru-3Jd" id="66w-wI-x3F"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -51,13 +59,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="289"/>
-        </scene>
-        <!--tmp-->
-        <scene sceneID="25v-RJ-g71">
-            <objects>
-                <controller identifier="tmp" id="04T-We-f0w"/>
-            </objects>
-            <point key="canvasLocation" x="504" y="289"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

@@ -27,7 +27,7 @@ class APCScreen : NSObject, NSCoding
     {
         self.id = id
         self.title = title
-        self.interfaceObjectList = APCInterfaceObjectList()
+        self.interfaceObjectList = interfaceObjectList
         
         super.init()
     }

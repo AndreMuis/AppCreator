@@ -52,7 +52,7 @@ class APCInterfaceObjectListViewController : UIViewController,
         
         if let layout : UICollectionViewFlowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         {
-            layout.itemSize = CGSize(width: CGRectGetWidth(self.collectionView.bounds) - 2.0 * self.style.cellMargin,
+            layout.itemSize = CGSize(width: CGRectGetWidth(self.view.bounds) - 2.0 * self.style.cellMargin,
                                      height: 0.0)
             
             layout.sectionInset = UIEdgeInsets(top: self.style.cellMargin,

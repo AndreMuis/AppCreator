@@ -121,18 +121,20 @@ class APCScreenList : NSObject, NSCoding
         }
     }
     
-    func remove(index index: Int) -> Bool
+    func remove(index index: Int) -> APCScreen?
     {
+        var removedScreen : APCScreen?
+        
         if 0 ..< self.screens.count ~= index
         {
-            self.screens.removeAtIndex(index)
-            
-            return true
+            removedScreen = self.screens.removeAtIndex(index)
         }
         else
         {
-            return false
+            removedScreen = nil
         }
+        
+        return removedScreen
     }
 }
 

@@ -36,17 +36,23 @@ class APCTemplateInterfaceController: WKInterfaceController,
                 if let session : WCSession = self.extensionDelegate.session
                 {
                     session.delegate = self
+                    session.activateSession()   
                 }
             }
         }
         else
         {
             if let context : [String : AnyObject] = context as? [String : AnyObject],
-                screen : APCScreen = context[APCConstants.screensKeyPath] as? APCScreen
+                screen : APCScreen = context[APCConstants.screenKey] as? APCScreen
             {
                 self.refresh(screen)
             }
         }
+    }
+    
+    override func willActivate()
+    {
+        self.extensionDelegate.session?.activateSession()
     }
 
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void)
@@ -162,7 +168,8 @@ class APCTemplateInterfaceController: WKInterfaceController,
                 {
                     self.extensionDelegate.screenList = screenList
                     
-                    if let screen : APCScreen = screenList[0]
+                    if let initialScreenId : NSUUID = screenList.initialScreenId,
+                        screen : APCScreen = screenList.screenWithId(initialScreenId)
                     {
                         self.popToRootController()
                         self.refresh(screen)

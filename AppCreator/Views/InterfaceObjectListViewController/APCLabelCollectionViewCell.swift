@@ -83,12 +83,13 @@ class APCLabelCollectionViewCell: UICollectionViewCell
     static func size(width width : CGFloat, text : String) -> CGSize
     {
         let label : UILabel = UILabel()
-        label.text = text
+        label.numberOfLines = 0
         label.font = APCLabelCellStyle.font
+        label.text = text
         
-        let height : CGFloat = label.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        let sizeThatFits : CGSize = label.sizeThatFits(CGSize(width: width, height: 10000.0))
         
-        let size = CGSize(width: width, height: height)
+        let size : CGSize = CGSize(width: width, height: sizeThatFits.height)
         
         return size
     }

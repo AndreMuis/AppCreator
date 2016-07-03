@@ -869,7 +869,7 @@
 				INFOPLIST_FILE = AppCreator/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.AppCreator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.WatchAppCreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -885,7 +885,7 @@
 				INFOPLIST_FILE = AppCreator/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.AppCreator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.WatchAppCreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

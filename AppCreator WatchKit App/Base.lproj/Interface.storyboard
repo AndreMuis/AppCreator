@@ -46,7 +46,6 @@
                                         <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
-                                        <outlet property="group" destination="p1t-ek-eat" id="Yfj-zF-Q91"/>
                                         <outlet property="interfaceLabel" destination="wNO-ru-3Jd" id="66w-wI-x3F"/>
                                     </connections>
                                 </tableRow>

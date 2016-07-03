@@ -61,7 +61,7 @@ class APCScreenListViewController: UIViewController,
         
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         {
-            let cellWidth = (CGRectGetWidth(self.collectionView.bounds) - 3.0 * self.style.cellMargin) / 2.0
+            let cellWidth : CGFloat = (CGRectGetWidth(self.view.bounds) - 3.0 * self.style.cellMargin) / 2.0
             
             layout.itemSize = CGSize(width: cellWidth,
                                      height: cellWidth)
@@ -75,9 +75,6 @@ class APCScreenListViewController: UIViewController,
             layout.minimumLineSpacing = self.style.cellMargin
         }
 
-        self.initialScreenSwitch.enabled = false
-        self.initialScreenSwitch.on = false
-        
         self.saveButton.enabled = false
         self.deleteButton.enabled = false
 
@@ -94,7 +91,7 @@ class APCScreenListViewController: UIViewController,
         
         self.collectionView.addGestureRecognizer(longPressGestureRecognizer)
 
-        
+
         NSNotificationCenter.defaultCenter().addObserver(self,
                                                          selector: #selector(keyboardWillShow),
                                                          name: UIKeyboardWillShowNotification,
@@ -104,11 +101,6 @@ class APCScreenListViewController: UIViewController,
                                                          selector: #selector(keyboardWillHide),
                                                          name: UIKeyboardWillHideNotification,
                                                          object: nil)
-    
-    
-        
-        self.screenList.add(APCScreen(title: "Screen 1"))
-    
     }
 
     // MARK: UICollectionViewDataSource
@@ -154,7 +146,6 @@ class APCScreenListViewController: UIViewController,
             
             self.screenTitleTextField.text = screen.title
             
-            self.initialScreenSwitch.enabled = true
             if screen.id == self.screenList.initialScreenId
             {
                 self.initialScreenSwitch.on = true
@@ -245,8 +236,11 @@ class APCScreenListViewController: UIViewController,
             self.collectionView.insertItemsAtIndexPaths([indexPath])
             
             self.collectionView.selectItemAtIndexPath(indexPath,
-                                                      animated: false,
-                                                      scrollPosition: UICollectionViewScrollPosition.None)
+                                                      animated: true,
+                                                      scrollPosition: UICollectionViewScrollPosition.Bottom)
+            
+            self.saveButton.enabled = true
+            self.deleteButton.enabled = true
         }
     }
     
@@ -266,6 +260,10 @@ class APCScreenListViewController: UIViewController,
                     {
                         self.screenList.initialScreenId = screen.id
                     }
+                    else if self.initialScreenSwitch.on == false && self.screenList.initialScreenId == screen.id
+                    {
+                        self.screenList.initialScreenId = nil
+                    }
                 }
             }
         }
@@ -277,7 +275,7 @@ class APCScreenListViewController: UIViewController,
         {
             let indexPath = indexPaths[0]
             
-            if self.screenList.remove(index: indexPath.row) == true
+            if let removedScreen : APCScreen = self.screenList.remove(index: indexPath.row)
             {
                 self.screenList.selectedScreen = nil
                 
@@ -285,18 +283,14 @@ class APCScreenListViewController: UIViewController,
                 
                 self.screenTitleTextField.text = ""
                 
-                self.initialScreenSwitch.enabled = false
                 self.initialScreenSwitch.on = false
                 
                 self.saveButton.enabled = false
                 self.deleteButton.enabled = false
                 
-                if let screen : APCScreen = self.screenList[indexPath.row]
+                if self.screenList.initialScreenId == removedScreen.id
                 {
-                    if screen.id == self.screenList.initialScreenId
-                    {
-                        self.screenList.initialScreenId = nil
-                    }
+                    self.screenList.initialScreenId = nil
                 }
             }
             else

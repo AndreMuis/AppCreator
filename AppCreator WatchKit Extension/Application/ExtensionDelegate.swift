@@ -32,13 +32,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate
 
     func applicationDidFinishLaunching()
     {
-        if WCSession.isSupported()
-        {
-            if let session = self.session
-            {
-                session.activateSession()
-            }
-        }
     }
 
     func applicationDidBecomeActive()
